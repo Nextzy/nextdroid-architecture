@@ -55,11 +55,6 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
 }
 
 androidExtensions {
@@ -73,6 +68,7 @@ dependencies {
     })
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation project(":Library")
+    debugImplementation project(":Example")
     implementation 'com.android.support:multidex:1.0.2'
 
     testImplementation 'junit:junit:4.12'
