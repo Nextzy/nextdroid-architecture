@@ -1,7 +1,8 @@
-package com.nextzy.nextdroidapp
+package com.nextzy.nextdroidapp.module.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.nextzy.nextdroidapp.R
 
 class MainActivity : AppCompatActivity() {
 
