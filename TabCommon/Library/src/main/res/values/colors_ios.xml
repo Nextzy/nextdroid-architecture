@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="ios_red_light">#FF8680</color>
+    <color name="ios_red">#FF3B30</color>
+    <color name="ios_red_dark">#B10900</color>
+
+    <color name="ios_orange_light">#FFBF64</color>
+    <color name="ios_orange">#FF9500</color>
+    <color name="ios_orange_dark">#C67400</color>
+
+    <color name="ios_yellow_light">#FFE064</color>
+    <color name="ios_yellow">#FFCC00</color>
+    <color name="ios_yellow_dark">#C69F00</color>
+
+    <color name="ios_green_light">#A4F3B2</color>
+    <color name="ios_green">#4CD964</color>
+    <color name="ios_green_dark">#04BF25</color>
+
+    <color name="ios_teal_blue_light">#B8E8FD</color>
+    <color name="ios_teal_blue">#5AC8FA</color>
+    <color name="ios_teal_blue_dark">#0AA6EA</color>
+
+    <color name="ios_blue_light">#3A96FC</color>
+    <color name="ios_blue">#007AFF</color>
+    <color name="ios_blue_dark">#0056B6</color>
+
+    <color name="ios_purple_light">#A5A4F0</color>
+    <color name="ios_purple">#5856D6</color>
+    <color name="ios_purple_dark">#3B38C8</color>
+
+    <color name="ios_pink_light">#FF8AA1</color>
+    <color name="ios_pink">#FF2D55</color>
+    <color name="ios_pink_dark">#FE0032</color>
+
+
+    <color name="ios_gray_custom">#EFEFF4</color>
+    <color name="ios_gray_light">#E5E5EA</color>
+    <color name="ios_gray_light_2">#D1D1D6</color>
+    <color name="ios_gray_mid">#C7C7CC</color>
+    <color name="ios_gray">#8E8E93</color>
+
+
+</resources>
