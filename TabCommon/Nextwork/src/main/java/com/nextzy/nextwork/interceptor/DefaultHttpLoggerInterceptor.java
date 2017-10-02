@@ -3,7 +3,7 @@ package com.nextzy.nextwork.interceptor;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
- * Created by trusttanapruk on 8/1/2016.
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 
 public final class DefaultHttpLoggerInterceptor {

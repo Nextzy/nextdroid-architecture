@@ -1,5 +1,4 @@
 /** Add module here **/
-
 includeFlat 'TabCommon'
 
 List<Module> myModuleList = new ArrayList<>()
@@ -9,6 +8,7 @@ myModuleList.with {
     add(new Module(name: ":Example", path: "../Example"))
     add(new Module(name: ":Library", path: "../TabCommon/Library"))
     add(new Module(name: ":Nextwork", path: "../TabCommon/Nextwork"))
+    add(new Module(name: ":Setting", path: "../TabCommon/Setting"))
 }
 
 myModuleList.forEach {

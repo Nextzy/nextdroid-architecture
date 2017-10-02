@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
-import th.co.thekhaeng.waterlibrary.R;
+import com.nextzy.library.R;
+
 
 /**
  * Created by TheKhaeng.

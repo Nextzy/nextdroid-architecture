@@ -15,7 +15,7 @@ import java.util.List;
  * Created by「 The Khaeng 」on 20 Aug 2017 :)
  */
 
-public abstract class BaseMvvmIndividualListAdapter<VH extends BaseViewHolder, VM extends BaseListAdapterViewModel>
+public abstract class BaseMvvmIndividualListAdapter<VH extends BaseViewHolder<Object>, VM extends BaseListAdapterViewModel>
         extends BaseMvvmListAdapter<VH,VM>{
 
 

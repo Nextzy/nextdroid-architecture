@@ -2,7 +2,7 @@ package com.nextzy.library.base.mvvm.layer2ViewModel
 
 
 /**
- * Created by TheKhaeng on 12/18/2016.
- */
+* Created by「 The Khaeng 」on 02 Oct 2017 :)
+*/
 
 abstract class BaseDialogViewModel : BaseViewModel()

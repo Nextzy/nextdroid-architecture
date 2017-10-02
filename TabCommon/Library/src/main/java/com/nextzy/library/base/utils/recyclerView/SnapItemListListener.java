@@ -6,10 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
+import com.nextzy.library.base.view.holder.base.BaseItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import th.co.thekhaeng.waterlibrary.java.base.view.holder.base.BaseItem;
 
 /**
  * Created by thekhaeng on 5/7/2017 AD.

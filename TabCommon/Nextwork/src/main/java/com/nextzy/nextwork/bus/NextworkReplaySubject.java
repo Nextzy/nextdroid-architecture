@@ -1,9 +1,10 @@
 package com.nextzy.nextwork.bus;
 
-import rx.Observable;
-import rx.subjects.ReplaySubject;
-import rx.subjects.SerializedSubject;
-import rx.subjects.Subject;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.Predicate;
+import io.reactivex.subjects.ReplaySubject;
+import io.reactivex.subjects.Subject;
 
 /**
  * Created by「 The Khaeng 」on 18 Sep 2017 :)
@@ -15,8 +16,8 @@ public class NextworkReplaySubject{
 
     //SerializedSubject is very important - we want to be able to post/subscribe items
     //on different threads - http://reactivex.io/RxJava/javadoc/rx/subjects/SerializedSubject.html
-    private Subject<Object, Object> rxBus =
-            new SerializedSubject<>( ReplaySubject.createWithSize( DEFAULT_CACHE_SIZE ) );
+    private Subject<Object> rxBus = ReplaySubject.createWithSize( DEFAULT_CACHE_SIZE );
+
 
     private NextworkReplaySubject(){
     }
@@ -39,8 +40,8 @@ public class NextworkReplaySubject{
     }
 
     public void clearCache(){
-        rxBus.onCompleted();
-        rxBus = new SerializedSubject<>( ReplaySubject.createWithSize( DEFAULT_CACHE_SIZE ) );
+        rxBus.onComplete();
+        rxBus = ReplaySubject.createWithSize( DEFAULT_CACHE_SIZE );
     }
 
     /**
@@ -60,7 +61,12 @@ public class NextworkReplaySubject{
      * @return
      */
     public <T extends Object> Observable<T> observe( final Class<T> eventType ){
-        return rxBus.filter( eventType::isInstance ).cast( eventType );
+        return rxBus.filter( new Predicate<Object>(){
+            @Override
+            public boolean test( Object obj ) throws Exception{
+                return eventType.isInstance( obj );
+            }
+        } ).cast( eventType );
     }
 
 

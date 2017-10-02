@@ -3,6 +3,10 @@ package com.nextzy.nextwork.engine;
 import android.util.Log;
 
 import com.google.gson.GsonBuilder;
+import com.nextzy.nextwork.BuildConfig;
+import com.nextzy.nextwork.cookie.NextworkWebkitCookieJar;
+import com.nextzy.nextwork.interceptor.DefaultHttpLoggerInterceptor;
+import com.nextzy.nextwork.interceptor.NextworkInterceptor;
 
 import java.io.IOException;
 import java.net.Proxy;
@@ -24,13 +28,9 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
-import th.co.thekhaeng.waterlibrary.BuildConfig;
-import th.co.thekhaeng.waterlibrary.java.base.nextwork.cookie.NextworkWebkitCookieJar;
-import th.co.thekhaeng.waterlibrary.java.base.nextwork.interceptor.DefaultHttpLoggerInterceptor;
-import th.co.thekhaeng.waterlibrary.java.base.nextwork.interceptor.NextworkInterceptor;
 
 /**
- * Created by TheKhaeng on 1/6/2017 AD.
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 
 public abstract class NextworkApiCreator<T> {

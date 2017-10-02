@@ -6,7 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by Akexorcist on 3/26/2017 AD.
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 
 public class BackgroundThreadTransformer<T> implements SingleTransformer<T, T> {

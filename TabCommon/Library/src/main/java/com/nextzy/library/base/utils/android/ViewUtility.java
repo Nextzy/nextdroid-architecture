@@ -19,56 +19,11 @@ import android.view.WindowManager;
 
 import java.lang.reflect.Method;
 
-import codetail.graphics.drawables.RippleDrawable;
 
 /**
  * Utility methods for working with Views.
  */
 public class ViewUtility {
-
-    public static RippleDrawable createRipple( @ColorInt int color,
-                                               @FloatRange(from = 0f, to = 1f) float alpha,
-                                               boolean bounded) {
-        color = ColorUtility.modifyAlpha(color, alpha);
-
-        // TODO: Use RippleDrawable support library if it available.
-        return new RippleDrawable(ColorStateList.valueOf(color), null,
-                bounded ? new ColorDrawable(Color.WHITE) : null);
-    }
-
-    public static RippleDrawable createRipple( Palette palette,
-                                               @FloatRange(from = 0f, to = 1f) float darkAlpha,
-                                               @FloatRange(from = 0f, to = 1f) float lightAlpha,
-                                               @ColorInt int fallbackColor,
-                                               boolean bounded) {
-        int rippleColor = fallbackColor;
-        if (palette != null) {
-            // try the named swatches in preference order
-            if (palette.getVibrantSwatch() != null) {
-                rippleColor =
-                        ColorUtility.modifyAlpha(palette.getVibrantSwatch().getRgb(), darkAlpha);
-
-            } else if (palette.getLightVibrantSwatch() != null) {
-                rippleColor = ColorUtility.modifyAlpha(palette.getLightVibrantSwatch().getRgb(),
-                        lightAlpha);
-            } else if (palette.getDarkVibrantSwatch() != null) {
-                rippleColor = ColorUtility.modifyAlpha(palette.getDarkVibrantSwatch().getRgb(),
-                        darkAlpha);
-            } else if (palette.getMutedSwatch() != null) {
-                rippleColor = ColorUtility.modifyAlpha(palette.getMutedSwatch().getRgb(), darkAlpha);
-            } else if (palette.getLightMutedSwatch() != null) {
-                rippleColor = ColorUtility.modifyAlpha(palette.getLightMutedSwatch().getRgb(),
-                        lightAlpha);
-            } else if (palette.getDarkMutedSwatch() != null) {
-                rippleColor =
-                        ColorUtility.modifyAlpha(palette.getDarkMutedSwatch().getRgb(), darkAlpha);
-            }
-        }
-
-        // TODO: Use RippleDrawable support library if it available.
-        return new RippleDrawable(ColorStateList.valueOf(rippleColor), null,
-                bounded ? new ColorDrawable(Color.WHITE) : null);
-    }
 
     public static void setLightStatusBar(@NonNull View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

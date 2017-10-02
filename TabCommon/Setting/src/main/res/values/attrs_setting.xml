@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BaseSettingStyle">
+        <attr name="st_font" format="reference|string"/>
+        <attr name="st_title" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="DefaultSettingStyle">
+        <attr name="st_icon" format="reference"/>
+        <attr name="st_key" format="reference|string"/>
+        <attr name="st_dependencyKey" format="reference|string"/>
+        <attr name="st_persistent" format="boolean"/>
+        <attr name="st_enabled" format="boolean"/>
+        <attr name="st_divider" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="PreferenceCategoryStyle">
+        <attr name="st_titleColor" format="reference"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="TwoStateSettingStyle">
+        <attr name="st_subTitleOn" format="reference|string"/>
+        <attr name="st_subTitleOff" format="reference|string"/>
+        <attr name="st_reverseDependencyState" format="boolean"/>
+        <attr name="st_checked" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="DialogSettingStyle">
+        <attr name="st_dialogTitle" format="reference|string"/>
+        <attr name="st_dialogMessage" format="reference|string"/>
+        <attr name="st_dialogIcon" format="reference"/>
+        <attr name="st_positiveButtonText" format="reference|reference|string"/>
+        <attr name="st_negativeButtonText" format="reference|reference|string"/>
+    </declare-styleable>
+
+    <declare-styleable name="ListSettingStyle">
+        <attr name="st_entries" format="reference|string"/>
+        <attr name="st_entryValues" format="reference|string"/>
+        <attr name="st_subTitle" format="reference|string"/>
+    </declare-styleable>
+
+    <declare-styleable name="RingtoneSettingStyle">
+        <attr name="st_ringtoneType" format="integer"/>
+        <attr name="st_showDefault" format="boolean"/>
+        <attr name="st_showSilent" format="boolean"/>
+    </declare-styleable>
+</resources>

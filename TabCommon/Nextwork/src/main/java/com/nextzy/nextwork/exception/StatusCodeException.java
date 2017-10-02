@@ -1,7 +1,7 @@
 package com.nextzy.nextwork.exception;
 
 /**
- * Created by thekhaeng on 5/10/2017 AD.
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 
 public abstract class StatusCodeException extends Exception {

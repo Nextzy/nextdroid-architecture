@@ -2,6 +2,7 @@ package com.nextzy.nextdroidapp
 
 import android.support.multidex.MultiDexApplication
 import cat.ereza.customactivityoncrash.config.CaocConfig
+import com.nextzy.setting.view.util.InitSetting
 import com.orhanobut.hawk.Hawk
 
 /**

@@ -35,7 +35,7 @@ class OpenActivityTransaction(
         return this
     }
 
-    fun setBundle(bundle: Bundle): OpenActivityTransaction {
+    fun setBundle(bundle: Bundle?): OpenActivityTransaction {
         this.bundle = bundle
         return this
     }
@@ -62,7 +62,7 @@ class OpenActivityTransaction(
         return this
     }
 
-    fun open(activity: Activity, targetClass: Class<*>) {
+    fun open(activity: Activity?, targetClass: Class<*>) {
         val intent = Intent(activity, targetClass)
         bundle?.let { intent.putExtras(it) }
         if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
@@ -77,16 +77,16 @@ class OpenActivityTransaction(
         }
 
         if (requestCode == NO_ASSIGN) {
-            activity.startActivity(intent, options?.toBundle())
+            activity?.startActivity(intent, options?.toBundle())
         } else {
-            activity.startActivityForResult(intent, requestCode, options?.toBundle())
+            activity?.startActivityForResult(intent, requestCode, options?.toBundle())
         }
 
-        if (isFinish && !isFinishAll) activity.finish()
+        if (isFinish && !isFinishAll) activity?.finish()
         if (isFinishAll) ActivityCompat.finishAffinity(activity)
 
         if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
-            activity.overridePendingTransition(enterAnimId, exitAnimId)
+            activity?.overridePendingTransition(enterAnimId, exitAnimId)
         }
 
         sharedElement = null
@@ -94,8 +94,8 @@ class OpenActivityTransaction(
     }
 
 
-    fun open(fragment: Fragment, targetClass: Class<*>) {
-        val intent = Intent(fragment.context, targetClass)
+    fun open(fragment: Fragment?, targetClass: Class<*>) {
+        val intent = Intent(fragment?.context, targetClass)
         if (bundle != null) intent.putExtras(bundle!!)
         if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
             intent.putExtra(KEY_FINISH, isFinish || isFinishAll)
@@ -104,21 +104,21 @@ class OpenActivityTransaction(
         var options: ActivityOptionsCompat? = null
         sharedElement?.let {
             options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    fragment.activity,
+                    fragment?.activity,
                     *sharedElement!!)
         }
 
         if (requestCode == NO_ASSIGN) {
-            fragment.startActivity(intent, options?.toBundle())
+            fragment?.startActivity(intent, options?.toBundle())
         } else {
-            fragment.startActivityForResult(intent, requestCode, options?.toBundle())
+            fragment?.startActivityForResult(intent, requestCode, options?.toBundle())
         }
 
-        if (isFinish && !isFinishAll) fragment.activity.finish()
-        if (isFinishAll) ActivityCompat.finishAffinity(fragment.activity)
+        if (isFinish && !isFinishAll) fragment?.activity?.finish()
+        if (isFinishAll) ActivityCompat.finishAffinity(fragment?.activity)
 
         if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
-            fragment.activity.overridePendingTransition(enterAnimId, exitAnimId)
+            fragment?.activity?.overridePendingTransition(enterAnimId, exitAnimId)
         }
 
 

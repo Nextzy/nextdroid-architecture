@@ -1,5 +1,6 @@
 package com.nextzy.library.base.delegate
 
+import android.app.Activity
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.Lifecycle.Event.ON_DESTROY
 import android.arch.lifecycle.LifecycleObserver
@@ -19,7 +20,7 @@ class ActivityHelperDelegate
 
     private var fragment: WeakReference<Fragment>? = null
     private var lifecycle: Lifecycle? = null
-    private var activity: WeakReference<FragmentActivity>? = null
+    private var activity: WeakReference<Activity>? = null
 
     constructor(activity: FragmentActivity) {
         this.activity = WeakReference(activity)
@@ -84,7 +85,7 @@ class ActivityHelperDelegate
     }
 
 
-    private fun getActivity(): FragmentActivity? {
+    private fun getActivity(): Activity? {
         return activity?.get()
     }
 

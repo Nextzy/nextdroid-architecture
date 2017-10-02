@@ -1,8 +1,6 @@
 package com.nextzy.nextwork.bus;
 
-import android.support.annotation.NonNull;
-
-import rx.Subscriber;
+import io.reactivex.functions.Consumer;
 
 
 /**
@@ -10,7 +8,6 @@ import rx.Subscriber;
  */
 
 public class NextworkBus{
-    private static Subscriber subscriber;
 
     private static String objectName;
     private static NextworkSubscriber subscriberCallBack;
@@ -26,21 +23,19 @@ public class NextworkBus{
         if( !getName( object ).equals( objectName ) ) clear();
 
         subscriberCallBack = callback;
-        subscriber = newSubscriber();
         objectName = getName( object );
 
         NextworkReplaySubject.getInstance()
                 .observe()
-                .subscribe( subscriber );
+                .subscribe(
+                        newConsumeSuccess(),
+                        newConsumeException() );
     }
+
 
     public static void unregister(){
         objectName = null;
         subscriberCallBack = null;
-        if( subscriber != null && !subscriber.isUnsubscribed() ){
-            subscriber.unsubscribe();
-            subscriber = null;
-        }
     }
 
     public static void clear(){
@@ -53,31 +48,33 @@ public class NextworkBus{
         return object.getClass().getSimpleName();
     }
 
-    @NonNull
-    private static Subscriber newSubscriber(){
-        return new Subscriber(){
+    private static Consumer<Throwable> newConsumeException(){
+        return new Consumer<Throwable>(){
             @Override
-            public void onCompleted(){
-                // do nothing
-            }
-
-            @Override
-            public void onError( Throwable error ){
+            public void accept( Throwable throwable ) throws Exception{
                 if( subscriberCallBack != null ){
-                    subscriberCallBack.onResponseError( error );
-                }
-            }
-
-            @Override
-            public void onNext( Object object ){
-                if( object instanceof Throwable ){
-                    onError( (Throwable) object );
-                }else{
-                    if( subscriberCallBack != null ){
-                        subscriberCallBack.onResponseSuccess( object );
-                    }
+                    subscriberCallBack.onResponseError( throwable );
                 }
             }
         };
     }
+
+    private static Consumer<Object> newConsumeSuccess(){
+        return new Consumer<Object>(){
+            @Override
+            public void accept( Object o ) throws Exception{
+                if( o instanceof Throwable ){
+                    if( subscriberCallBack != null ){
+                        subscriberCallBack.onResponseError( (Throwable) o );
+                    }
+                }else{
+                    if( subscriberCallBack != null ){
+                        subscriberCallBack.onResponseSuccess( o );
+                    }
+                }
+
+            }
+        };
+    }
+
 }

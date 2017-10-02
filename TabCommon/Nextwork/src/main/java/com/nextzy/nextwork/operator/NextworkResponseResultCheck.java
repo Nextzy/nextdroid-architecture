@@ -1,13 +1,14 @@
 package com.nextzy.nextwork.operator;
 
 
+import com.nextzy.nextwork.reponse.NextworkResponse;
+
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
-import th.co.thekhaeng.waterlibrary.java.base.nextwork.reponse.NextworkResponse;
 
 
 /**
- * Created by thekhaeng on 5/10/2017 AD.
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 
 public abstract class NextworkResponseResultCheck<T extends NextworkResponse, E extends Throwable>

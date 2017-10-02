@@ -7,7 +7,7 @@ import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 
-import th.co.thekhaeng.waterlibrary.java.base.utils.android.ViewSizeUtility;
+import com.nextzy.library.base.utils.android.ViewSizeUtility;
 
 
 /**
@@ -15,8 +15,6 @@ import th.co.thekhaeng.waterlibrary.java.base.utils.android.ViewSizeUtility;
  */
 
 public abstract class BaseView extends View {
-
-    private ViewSizeUtility viewSizeUtil;
 
     public BaseView(Context context) {
         super(context);
@@ -40,10 +38,6 @@ public abstract class BaseView extends View {
     }
 
     private void init() {
-        viewSizeUtil = new ViewSizeUtility();
     }
 
-    public void getSize(ViewSizeUtility.OnGetViewSizeListener listener) {
-        viewSizeUtil.getSize(this, listener);
-    }
 }

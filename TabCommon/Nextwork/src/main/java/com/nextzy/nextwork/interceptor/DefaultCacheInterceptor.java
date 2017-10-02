@@ -8,7 +8,7 @@ import okhttp3.Interceptor;
 import okhttp3.Response;
 
 /**
- * Created by thekhaeng on 5/10/2017 AD.
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 
 public final class DefaultCacheInterceptor implements Interceptor {

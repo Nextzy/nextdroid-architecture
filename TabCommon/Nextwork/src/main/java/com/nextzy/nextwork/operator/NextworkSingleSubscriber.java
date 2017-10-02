@@ -1,14 +1,15 @@
 package com.nextzy.nextwork.operator;
 
 
+import com.nextzy.nextwork.bus.NextworkReplaySubject;
+
 import io.reactivex.SingleObserver;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import th.co.thekhaeng.waterlibrary.java.base.nextwork.bus.NextworkReplaySubject;
 
 
 /**
- * Created by thekhaeng on 5/10/2017 AD.
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 
 public class NextworkSingleSubscriber<T> implements SingleObserver<T> {

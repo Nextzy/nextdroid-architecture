@@ -12,7 +12,7 @@ import android.view.WindowManager;
 import java.lang.reflect.Method;
 
 /**
- * Created by thekhaeng on 2/14/2017 AD.
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 
 public class AndroidUtility {

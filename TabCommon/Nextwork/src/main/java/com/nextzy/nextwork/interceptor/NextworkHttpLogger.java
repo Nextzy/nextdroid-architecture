@@ -9,7 +9,7 @@ import com.google.gson.JsonSyntaxException;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
- * Created by trusttanapruk on 8/22/2016.
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 public final class NextworkHttpLogger implements HttpLoggingInterceptor.Logger {
     private static final String TAG = NextworkHttpLogger.class.getSimpleName();

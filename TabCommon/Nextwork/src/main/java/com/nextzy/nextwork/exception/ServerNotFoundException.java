@@ -1,7 +1,7 @@
 package com.nextzy.nextwork.exception;
 
 /**
- * Created by TheKhaeng on 9/16/2016.
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 public class ServerNotFoundException extends StatusCodeException {
 

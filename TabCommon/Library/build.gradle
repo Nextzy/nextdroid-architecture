@@ -26,6 +26,12 @@ android {
         }
     }
 
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 androidExtensions {
@@ -39,6 +45,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     api project(":Nextwork")
+    api project(":Setting")
 
     //========================= kotlin ===========================================================//
     api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -86,17 +93,6 @@ dependencies {
     api "io.reactivex.rxjava2:rxjava:$ver.rxJavaVersion"
     api "io.reactivex.rxjava2:rxandroid:$ver.rxAndroidVersion"
 
-    //========================= Network ==========================================================//
-    api "com.squareup.retrofit2:retrofit:$ver.retrofit"
-    api "com.squareup.retrofit2:adapter-rxjava2:$ver.retrofit"
-    api "com.squareup.retrofit2:converter-gson:$ver.retrofit"
-    api "com.squareup.okhttp3:okhttp:$ver.okhttp3Logging"
-    api "com.squareup.okhttp3:logging-interceptor:$ver.okhttp3Logging"
-    api('com.squareup.retrofit2:converter-simplexml:+') {
-        exclude module: "stax-api"
-        exclude module: "stax"
-        exclude module: "xpp3"
-    }
 
     //========================= Log ==============================================================//
     api 'com.orhanobut:logger:1.15'

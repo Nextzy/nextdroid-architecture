@@ -7,7 +7,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by trusttanapruk on 8/1/2016.
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 
 public final class NextworkInterceptor implements Interceptor {

@@ -21,7 +21,7 @@ import okhttp3.CookieJar;
 import okhttp3.HttpUrl;
 
 /**
- * Created by trusttanapruk on 10/27/2016.
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 
 public class NextworkWebkitCookieJar extends CookieManager implements CookieJar {
