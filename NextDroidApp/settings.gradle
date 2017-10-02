@@ -1,0 +1,36 @@
+/** Add module here **/
+
+includeFlat 'TabCommon'
+
+List<Module> myModuleList = new ArrayList<>()
+myModuleList.with {
+    add(new Module(name: ":NextDroidApp", path: ":app"))
+
+    add(new Module(name: ":Library", path: "../TabCommon/Library"))
+    add(new Module(name: ":Nextwork", path: "../TabCommon/Nextwork"))
+}
+
+myModuleList.forEach {
+    addProject(it.getName(), it.getPath())
+}
+
+/** Method call **/
+void addProject(String name, String path) {
+    include name
+    if (path != null) {
+        if( path == ":app"){
+            project(name).projectDir = new File('app')
+        }else{
+            project(name).projectDir = new File(settingsDir, path)
+        }
+    }
+}
+
+class Module {
+    String name
+    String path
+}
+
+
+
+

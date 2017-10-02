@@ -1,0 +1,120 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: "$project.rootDir/tools/config.gradle"
+apply from: "$project.rootDir/tools/improve_speed.gradle"
+apply from: "$project.rootDir/tools/script-java-code-coverage.gradle"
+
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion config.minimumSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+androidExtensions {
+    experimental = true
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    api project(":Nextwork")
+
+    //========================= kotlin ===========================================================//
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    api "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$kotlin_version"
+
+    //========================= Google Android ===================================================//
+    api 'com.android.support.constraint:constraint-layout:1.0.2'
+    api "com.android.support:appcompat-v7:$ver.androidSupport"
+    api "com.android.support:recyclerview-v7:$ver.androidSupport"
+    api "com.android.support:gridlayout-v7:$ver.androidSupport"
+    api "com.android.support:design:$ver.androidSupport"
+    api "com.android.support:cardview-v7:$ver.androidSupport"
+    api "com.android.support:palette-v7:$ver.androidSupport"
+    api "android.arch.lifecycle:runtime:$ver.lifecycleArch"
+    api "android.arch.lifecycle:extensions:$ver.lifecycleArch"
+    annotationProcessor "android.arch.lifecycle:compiler:$ver.lifecycleArch"
+
+    //========================= Other ============================================================//
+    api 'cat.ereza:customactivityoncrash:2.1.0'
+    api "com.orhanobut:hawk:$ver.hawk"
+    api "com.jakewharton.timber:timber:$ver.timber"
+    api "com.karumi:dexter:$ver.dexter"
+    api('com.hwangjr.rxbus:rxbus:1.0.5') {
+        exclude group: 'com.jakewharton.timber', module: 'timber'
+    }
+
+
+    //========================= Decorator ========================================================//
+    api 'com.github.bumptech.glide:glide:3.8.0'
+    api 'jp.wasabeef:glide-transformations:2.0.2'
+
+    api('com.github.thekhaeng:sliding-menu:1.0.1@aar') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
+
+    api('com.github.thekhaeng:material-design-guideline:1.0.3') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    api "com.github.castorflex.smoothprogressbar:library-circular:1.1.0"
+    api 'me.relex:circleindicator:1.2.2@aar'
+    api 'com.github.danimahardhika:cafebar:1.1.5'
+
+    //========================= Rx java ==========================================================//
+    api "io.reactivex.rxjava2:rxjava:$ver.rxJavaVersion"
+    api "io.reactivex.rxjava2:rxandroid:$ver.rxAndroidVersion"
+
+    //========================= Network ==========================================================//
+    api "com.squareup.retrofit2:retrofit:$ver.retrofit"
+    api "com.squareup.retrofit2:adapter-rxjava2:$ver.retrofit"
+    api "com.squareup.retrofit2:converter-gson:$ver.retrofit"
+    api "com.squareup.okhttp3:okhttp:$ver.okhttp3Logging"
+    api "com.squareup.okhttp3:logging-interceptor:$ver.okhttp3Logging"
+    api('com.squareup.retrofit2:converter-simplexml:+') {
+        exclude module: "stax-api"
+        exclude module: "stax"
+        exclude module: "xpp3"
+    }
+
+    //========================= Log ==============================================================//
+    api 'com.orhanobut:logger:1.15'
+    api "com.jakewharton.timber:timber:$ver.timber"
+    api 'com.facebook.stetho:stetho:1.5.0'
+
+
+    //========================= Test ==============================================================//
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.powermock:powermock-module-junit4:$ver.powermock"
+    testImplementation "org.powermock:powermock-module-junit4-rule:$ver.powermock"
+    testImplementation "org.powermock:powermock-api-mockito:$ver.powermock"
+    testImplementation "org.hamcrest:hamcrest-core:$ver.hamcrest"
+    testImplementation "org.hamcrest:hamcrest-library:$ver.hamcrest"
+    testImplementation "org.hamcrest:hamcrest-integration:$ver.hamcrest"
+
+    androidTestImplementation "com.android.support:support-annotations:$ver.androidSupport"
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test:rules:1.0.1'
+}
+

@@ -1,0 +1,14 @@
+android {
+    // ./gradlew <your-app>:assembleDevelopmentDebug -PdevBuild
+    if (project.hasProperty('devBuild')) {
+        splits.abi.enable = false
+        splits.density.enable = false
+        aaptOptions.cruncherEnabled = false
+    }
+
+    buildTypes {
+        debug{
+            ext.alwaysUpdateBuildId = false // for io.fabric
+        }
+    }
+}
