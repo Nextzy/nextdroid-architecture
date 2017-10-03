@@ -3,6 +3,7 @@ package com.nextzy.library.extension
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.wifi.WifiManager
 import android.os.storage.StorageManager
 import android.provider.Settings
@@ -13,8 +14,6 @@ import java.util.*
 /**
  * Created by「 The Khaeng 」on 03 Oct 2017 :)
  */
-
-val sdkVersion: Int = android.os.Build.VERSION.SDK_INT
 
 val Context.androidID: String
     @SuppressLint("HardwareIds")
@@ -29,6 +28,12 @@ fun Context.getMacAddress(): String {
     if ("02:00:00:00:00:00" != macAddress) return macAddress
 
     return "please open wifi"
+}
+
+fun Context.hasCamera(): Boolean {
+    val pm = this.packageManager
+    return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
+            || pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)
 }
 
 fun Context.isSDCardEnable(): Boolean {

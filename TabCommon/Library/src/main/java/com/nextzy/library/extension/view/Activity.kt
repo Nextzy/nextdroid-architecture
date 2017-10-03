@@ -2,6 +2,7 @@ package com.nextzy.library.extension.view
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Point
 import android.util.DisplayMetrics
@@ -18,6 +19,15 @@ import java.util.concurrent.TimeUnit
  */
 
 const val DEFAULT_DELAY = 1000
+
+fun Activity.restart() {
+    val intent = this.intent
+    this.overridePendingTransition(0, 0)
+    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+    this.finish()
+    this.overridePendingTransition(0, 0)
+    this.startActivity(intent)
+}
 
 fun Activity.screenShot(isDeleteStatusBar: Boolean = false): Bitmap {
     val decorView = this.window.decorView
