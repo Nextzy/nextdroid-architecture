@@ -7,7 +7,7 @@ import android.util.TypedValue
 import android.widget.TextView
 import com.nextzy.library.R
 import com.nextzy.library.extension.findFont
-import com.nextzy.library.extension.pxToSp
+import com.nextzy.library.extension.view.pxToSp
 import java.util.*
 
 

@@ -1,13 +1,58 @@
-package com.nextzy.library.extension
+package com.nextzy.library.extension.view
 
+import android.content.res.Resources
 import android.graphics.Rect
 import android.support.annotation.Px
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 
 /**
  * Created by「 The Khaeng 」on 03 Oct 2017 :)
  */
+
+interface OnGetViewSizeListener {
+    fun onSize(width: Int, height: Int)
+}
+
+
+fun View?.getSize(listener: OnGetViewSizeListener?) {
+    this?.viewTreeObserver?.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+        override
+        fun onPreDraw(): Boolean {
+            this@getSize.viewTreeObserver.removeOnPreDrawListener(this)
+            listener?.onSize(this@getSize.width, this@getSize.height)
+            return false
+        }
+    })
+}
+
+fun pxToDp(px: Float): Float {
+    val metrics = Resources.getSystem().displayMetrics
+    val dp = px / (metrics.densityDpi / 160f)
+    return Math.round(dp).toFloat()
+}
+
+fun dpToPx(dp: Float): Float {
+    val metrics = Resources.getSystem().displayMetrics
+    val px = dp * (metrics.densityDpi / 160f)
+    return Math.round(px).toFloat()
+}
+
+fun pxToSp(px: Float): Float {
+    val metrics = Resources.getSystem().displayMetrics
+    val dp = px / (metrics.scaledDensity / 160f)
+    return Math.round(dp).toFloat()
+}
+
+fun spToPx(dp: Float): Float {
+    val metrics = Resources.getSystem().displayMetrics
+    val px = dp * (metrics.scaledDensity / 160f)
+    return Math.round(px).toFloat()
+}
+
+
+
  fun View?.isViewIntersect(otherView: View?): Boolean {
     if (this == null || otherView == null) return false
 

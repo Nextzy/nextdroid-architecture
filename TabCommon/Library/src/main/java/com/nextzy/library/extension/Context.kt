@@ -1,14 +1,19 @@
 package com.nextzy.library.extension
 
+import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Point
 import android.graphics.Typeface
 import android.os.Build
+import android.support.annotation.DimenRes
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
 import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.Display
 import android.view.WindowManager
+import android.widget.Toast
 import timber.log.Timber
 import java.io.File
 import java.util.*
@@ -20,6 +25,14 @@ import java.util.*
 
 private val cachedFontMap = hashMapOf<String, Typeface>()
 
+fun Context.getFloatDimen(@DimenRes resId: Int): Float {
+    val outValue = TypedValue()
+    this.resources.getValue(resId, outValue, true)
+    return outValue.float
+}
+
+fun Context?.toast(message: CharSequence, duration: Int)
+        = Toast.makeText(this, message, duration).show()
 
 fun Context.getStringResByName(name: String): String {
     return this.resources.getString(this.resources.getIdentifier(
@@ -115,4 +128,5 @@ val Context?.deviceScreenSize: Point
         point.y = resolutionY
         return point
     }
+
 
