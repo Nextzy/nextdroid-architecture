@@ -2,7 +2,7 @@ package com.nextzy.nextdroidapp
 
 import android.support.multidex.MultiDexApplication
 import cat.ereza.customactivityoncrash.config.CaocConfig
-import com.nextzy.setting.view.util.InitSetting
+import com.nextzy.nextdroidapp.module.crash.CrashActivity
 import com.orhanobut.hawk.Hawk
 
 /**
@@ -21,8 +21,8 @@ abstract class MainApplication : MultiDexApplication() {
                     .showRestartButton(false) //default: true
                     .trackActivities(true) //default: false
                     .minTimeBetweenCrashesMs(0) //default: 3000
-//                    .restartActivity(CrashActivity::class.java) //default: null (your app's launch activity)
-//                    .errorActivity(CrashActivity::class.java)
+                    .restartActivity(CrashActivity::class.java) //default: null (your app's launch activity)
+                    .errorActivity(CrashActivity::class.java)
     }
 
     override
