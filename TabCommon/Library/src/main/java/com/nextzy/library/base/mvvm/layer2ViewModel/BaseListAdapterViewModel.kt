@@ -18,7 +18,7 @@ class BaseListAdapterViewModel
 
     val isEmpty: Boolean = itemList.isEmpty()
 
-    fun getItemList(): List<Any> = itemList
+    fun getItemList(): MutableList<Any> = itemList
 
     fun getItemViewType(position: Int): Int {
         return if (getItem(position) is BaseItem) {
