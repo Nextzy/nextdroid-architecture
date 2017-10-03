@@ -27,8 +27,6 @@ abstract class BaseViewHolder<I>(parent: ViewGroup, layout: Int)
 
     val recyclerView: RecyclerView = parent as RecyclerView
 
-    var item: I? = null
-
     val layoutManager: RecyclerView.LayoutManager = recyclerView.layoutManager
 
     val context: Context = itemView.context
@@ -37,7 +35,7 @@ abstract class BaseViewHolder<I>(parent: ViewGroup, layout: Int)
         bindView(itemView)
     }
 
-    protected fun bindView(view: View) {}
+    open fun bindView(view: View) {}
 
 
     abstract fun onBind(item: I)

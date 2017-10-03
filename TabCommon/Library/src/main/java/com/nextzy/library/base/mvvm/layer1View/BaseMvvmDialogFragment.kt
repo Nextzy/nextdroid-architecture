@@ -4,6 +4,7 @@ import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.DialogInterface
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.annotation.DimenRes
 import android.support.v4.app.DialogFragment
@@ -204,7 +205,7 @@ abstract class BaseMvvmDialogFragment<VM : BaseDialogViewModel>
         }
     }
 
-    fun onRestoreInstanceState(savedInstanceState: Bundle) {
+    open fun onRestoreInstanceState(savedInstanceState: Bundle) {
         this.requestCode = savedInstanceState.getInt(KEY_REQUEST_CODE, -1)
     }
 
@@ -273,15 +274,15 @@ abstract class BaseMvvmDialogFragment<VM : BaseDialogViewModel>
 
     abstract fun bindView(view: View)
 
-    fun setupInstance() {}
+    open fun setupInstance() {}
 
-    fun setupView() {}
+    open fun setupView() {}
 
-    fun onRestoreView(savedInstanceState: Bundle) {}
+    open fun onRestoreView(savedInstanceState: Bundle) {}
 
-    fun onRestoreArgument(bundle: Bundle) {}
+    open fun onRestoreArgument(bundle: Bundle) {}
 
-    fun initialize() {}
+    open fun initialize() {}
 
     /* ============================== Persist =================================================== */
     override
@@ -344,4 +345,8 @@ abstract class BaseMvvmDialogFragment<VM : BaseDialogViewModel>
         return settingDelegate.getPersistedBoolean(key, defaultValue)
     }
 
+    override
+    fun getSharedPreferences(): SharedPreferences {
+        return settingDelegate.sharedPreferences
+    }
 }

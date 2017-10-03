@@ -1,27 +1,15 @@
 package com.nextzy.library.base.mvvm.layer1View
 
-import android.content.Intent
 import android.content.SharedPreferences
-import android.content.res.Resources
 import android.os.Bundle
-import android.support.annotation.Px
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-
-import com.nextzy.library.R
-import com.nextzy.library.base.delegate.ActivityHelper
-import com.nextzy.library.base.delegate.ActivityHelperDelegate
-import com.nextzy.library.base.delegate.FragmentHelper
-import com.nextzy.library.base.delegate.FragmentHelperDelegate
-import com.nextzy.library.base.delegate.OpenActivityTransaction
-import com.nextzy.library.base.delegate.OpenFragmentTransaction
+import com.nextzy.library.base.delegate.*
 import com.nextzy.library.base.mvvm.exception.NotSetLayoutException
 import com.nextzy.library.base.utils.android.ScreenOrientationHelper
 import com.nextzy.setting.view.util.SettingPreferenceDelegate
 import com.nextzy.setting.view.util.SettingPreferenceInterface
-
-import io.reactivex.functions.Action
 import timber.log.Timber
 
 
@@ -170,31 +158,31 @@ abstract class BaseActivity
         Timber.d("onRestoreInstanceStateBeforeView: savedInstanceState=" + savedInstanceState)
     }
 
-    fun onRestoreView(savedInstanceState: Bundle) {
+    open fun onRestoreView(savedInstanceState: Bundle) {
         Timber.d("onRestoreView: savedInstanceState=" + savedInstanceState)
     }
 
-    fun onRestoreArgument(bundle: Bundle) {
+    open fun onRestoreArgument(bundle: Bundle) {
         Timber.d("onRestoreArgument: bundle=" + bundle)
     }
 
-    fun createActivityTransaction(): OpenActivityTransaction {
+    open fun createActivityTransaction(): OpenActivityTransaction {
         return activityOpener.createTransaction()
     }
 
-    fun createFragmentTransaction(): OpenFragmentTransaction {
+    open fun createFragmentTransaction(): OpenFragmentTransaction {
         return fragmentDelegate.createTransaction()
     }
 
     abstract fun setupLayoutView(): Int
 
-    fun bindView() {}
+    open fun bindView() {}
 
-    protected fun setupInstance() {}
+    open fun setupInstance() {}
 
-    fun setupView() {}
+    open fun setupView() {}
 
-    fun initialize() {}
+    open fun initialize() {}
 
     /* ============================ Open Activity ======================================== */
 
@@ -325,5 +313,11 @@ abstract class BaseActivity
     override
     fun getPersistedBoolean(key: String, defaultValue: Boolean): Boolean {
         return settingDelegate.getPersistedBoolean(key, defaultValue)
+    }
+
+
+    override
+    fun getSharedPreferences(): SharedPreferences {
+        return settingDelegate.sharedPreferences
     }
 }

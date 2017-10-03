@@ -1,5 +1,6 @@
 package com.nextzy.library.base.mvvm.layer1View
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -130,23 +131,23 @@ abstract class BaseFragment
         helper.onSaveInstanceState(outState)
     }
 
-    fun onRestoreInstanceState(savedInstanceState: Bundle) {
+    open fun onRestoreInstanceState(savedInstanceState: Bundle) {
         Timber.d("onRestoreInstanceState: savedInstanceState=" + savedInstanceState)
     }
 
-    fun onRestoreView(savedInstanceState: Bundle) {
+    open fun onRestoreView(savedInstanceState: Bundle) {
         Timber.d("onRestoreView: savedInstanceState=" + savedInstanceState)
     }
 
-    fun createActivityTransaction(): OpenActivityTransaction {
+    open fun createActivityTransaction(): OpenActivityTransaction {
         return activityOpener.createTransaction()
     }
 
-    fun createFragmentTransaction(): OpenFragmentTransaction {
+    open fun createFragmentTransaction(): OpenFragmentTransaction {
         return fragmentDelegate.createTransaction()
     }
 
-    fun onRestoreArgument(bundle: Bundle) {
+    open fun onRestoreArgument(bundle: Bundle) {
         Timber.d("onRestoreArgument: bundle=" + bundle)
     }
 
@@ -165,19 +166,19 @@ abstract class BaseFragment
 
     }
 
-    fun onBackPressed(): Boolean {
+    open fun onBackPressed(): Boolean {
         return true
     }
 
     abstract fun setupLayoutView(): Int
 
-    fun bindView(view: View?) {}
+    open fun bindView(view: View?) {}
 
-    fun setupInstance() {}
+    open fun setupInstance() {}
 
-    fun setupView() {}
+    open fun setupView() {}
 
-    fun initialize() {}
+    open fun initialize() {}
 
     /* ============================ Open Activity ======================================== */
     override
@@ -307,6 +308,11 @@ abstract class BaseFragment
     override
     fun getPersistedBoolean(key: String, defaultValue: Boolean): Boolean {
         return settingDelegate.getPersistedBoolean(key, defaultValue)
+    }
+
+    override
+    fun getSharedPreferences(): SharedPreferences {
+        return settingDelegate.sharedPreferences
     }
 }
 

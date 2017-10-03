@@ -194,7 +194,7 @@ abstract class BaseMvvmBottomSheetFragment<VM : BaseDialogViewModel>
         outState?.putInt(KEY_REQUEST_CODE, requestCode)
     }
 
-    fun onRestoreInstanceState(savedInstanceState: Bundle) {
+    open fun onRestoreInstanceState(savedInstanceState: Bundle) {
         this.requestCode = savedInstanceState.getInt(KEY_REQUEST_CODE, -1)
     }
 
@@ -242,21 +242,17 @@ abstract class BaseMvvmBottomSheetFragment<VM : BaseDialogViewModel>
 
     abstract fun bindView(view: View)
 
-    fun setupInstance() {}
+    open fun setupInstance() {}
 
-    fun setupView() {}
+    open fun setupView() {}
 
-    fun onRestoreArgument(bundle: Bundle) {}
+    open fun onRestoreArgument(bundle: Bundle) {}
 
-    fun initialize() {}
+    open fun initialize() {}
 
     override
     fun setSnackbarTargetView(target: View) {
         snackbarDelegate.setSnackbarTargetView(target)
-    }
-
-    fun showSnackbarCustom(colorId: Int, iconId: Int, message: String) {
-        snackbarDelegate.showSnackbarCustom(colorId, iconId, message)
     }
 
     override
@@ -368,6 +364,11 @@ abstract class BaseMvvmBottomSheetFragment<VM : BaseDialogViewModel>
     override
     fun getPersistedBoolean(key: String, defaultValue: Boolean): Boolean {
         return settingDelegate.getPersistedBoolean(key, defaultValue)
+    }
+
+    override
+    fun getSharedPreferences(): SharedPreferences {
+        return settingDelegate.sharedPreferences
     }
 
 }

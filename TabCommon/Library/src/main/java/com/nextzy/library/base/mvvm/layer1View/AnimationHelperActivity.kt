@@ -88,7 +88,7 @@ abstract class AnimationHelperActivity
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    protected fun setTaskDescription(label: String, icon: Bitmap, colorPrimary: Int) {
+    protected fun setTaskDescription(label: String, icon: Bitmap?, colorPrimary: Int) {
         val taskDesc = ActivityManager.TaskDescription(
                 label,
                 icon,

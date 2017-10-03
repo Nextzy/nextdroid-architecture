@@ -8,12 +8,10 @@ import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-
 import com.nextzy.library.base.mvvm.exception.ViewModelNotNullException
 import com.nextzy.library.base.mvvm.exception.ViewModelNotSetupException
 import com.nextzy.library.base.mvvm.layer2ViewModel.BaseViewModel
 import com.nextzy.library.base.view.holder.base.BaseViewHolder
-
 import java.lang.ref.WeakReference
 
 
@@ -44,21 +42,20 @@ abstract class BaseMvvmListAdapter<VH : BaseViewHolder<*>, VM : BaseViewModel> :
             return null
         }
 
-    val viewModel: VM?
+    val viewModel: VM
         get() {
             if (setupViewModel() == null) throw ViewModelNotSetupException()
-            if (fragment != null) {
-                return ViewModelProviders.of(fragment?.get()!!)
+            return if (fragment != null) {
+                ViewModelProviders.of(fragment?.get()!!)
                         .get(setupViewModel())
-            } else if (activity != null) {
-                return ViewModelProviders.of(activity?.get()!!)
+            } else {
+                ViewModelProviders.of(activity?.get()!!)
                         .get(setupViewModel())
             }
-            return null
         }
 
     interface OnClickHolderItemListener<in VH> {
-        fun onClickHolder(v: VH, item: Any?, position: Int)
+        fun onClickHolder(v: VH, position: Int)
     }
 
     constructor(activity: FragmentActivity) {
@@ -110,14 +107,11 @@ abstract class BaseMvvmListAdapter<VH : BaseViewHolder<*>, VM : BaseViewModel> :
         }
     }
 
-
     private fun setOnClickItem(holder: VH): View.OnClickListener {
         return View.OnClickListener { v ->
             listener?.onClickHolder(
                     holder,
-                    holder.item,
-                    holder.adapterPosition
-                                   )
+                    holder.adapterPosition )
         }
     }
 
