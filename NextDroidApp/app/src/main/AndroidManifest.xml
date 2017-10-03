@@ -13,10 +13,16 @@
         <activity android:name="com.nextzy.nextdroidapp.module.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".module.splashScreen.SplashScreenActivity">
+        </activity>
+
+        <activity android:name=".module.crash.CrashActivity">
+        </activity>
+
     </application>
 
 </manifest>

@@ -56,14 +56,14 @@ abstract class AnimationHelperActivity
 
     }
 
-    fun setOverridePendingStartTransition() {
+    open fun setOverridePendingStartTransition() {
         this.overridePendingTransition(
                 R.anim.slide_right_in,
                 R.anim.slide_right_out)
 
     }
 
-    fun setOverridePendingEndTransition() {
+    open fun setOverridePendingEndTransition() {
         this.overridePendingTransition(
                 R.anim.slide_left_in,
                 R.anim.slide_left_out)
