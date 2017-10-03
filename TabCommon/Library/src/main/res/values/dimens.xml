@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottle_text_view_capacity_height">42dp</dimen>
+    <dimen name="bottle_text_view_title_height">42dp</dimen>
+
+    <dimen name="menu_header_icon_profile_size">72dp</dimen>
+    <dimen name="menu_height">52dp</dimen>
+
+    <dimen name="default_button_height">40dp</dimen>
+
+    <dimen name="default_icon_padding">6dp</dimen>
+
+    <item name="default_alpha_primary_dark_theme" format="float" type="dimen">@dimen/md_alpha_text_primary_dark</item>
+    <item name="default_alpha_secondary_dark_theme" format="float" type="dimen">@dimen/md_alpha_text_secondary_dark</item>
+    <item name="default_alpha_disable_dark_theme" format="float" type="dimen">@dimen/md_alpha_text_disable_dark</item>
+    <item name="default_alpha_divider_dark_theme" format="float" type="dimen">@dimen/md_alpha_divider_dark</item>
+
+    <item name="default_alpha_primary_light_theme"  format="float" type="dimen">@dimen/md_alpha_text_primary_light</item>
+    <item name="default_alpha_secondary_light_theme" format="float" type="dimen">@dimen/md_alpha_text_secondary_light</item>
+    <item name="default_alpha_disable_light_theme" format="float" type="dimen">@dimen/md_alpha_text_disable_light</item>
+    <item name="default_alpha_divider_light_theme" format="float" type="dimen">@dimen/md_alpha_divider_light</item>
+
+    <item name="default_alpha_icon_active_dark_theme" format="float" type="dimen">@dimen/md_alpha_icon_active_dark</item>
+    <item name="default_alpha_icon_inactive_dark_theme" format="float" type="dimen">@dimen/md_alpha_icon_inactive_dark</item>
+    <item name="default_alpha_icon_active_light_theme" format="float" type="dimen">@dimen/md_alpha_icon_active_light</item>
+    <item name="default_alpha_icon_inactive_light_theme" format="float" type="dimen">@dimen/md_alpha_icon_inactive_light</item>
+
+    <dimen name="default_text_display_4">@dimen/md_text_size_display_4_light</dimen>
+    <dimen name="default_text_display_3">@dimen/md_text_size_display_3_regular</dimen>
+    <dimen name="default_text_display_2">@dimen/md_text_size_display_2_regular</dimen>
+    <dimen name="default_text_display_1">@dimen/md_text_size_display_1_regular</dimen>
+    <dimen name="default_text_headline">@dimen/md_text_headline_regular</dimen>
+    <dimen name="default_text_title">@dimen/md_text_title_medium</dimen>
+    <dimen name="default_text_subheading">@dimen/md_text_subheading_regular</dimen>
+    <dimen name="default_text_body">@dimen/md_text_body_regular</dimen>
+    <dimen name="default_text_caption">@dimen/md_text_caption_regular</dimen>
+    <dimen name="default_text_button">@dimen/md_text_button_medium</dimen>
+
+
+    <dimen name="my_course_image_width">200dp</dimen>
+    <dimen name="my_course_image_height">125dp</dimen>
+    <dimen name="progress_height">8dp</dimen>
+
+    <dimen name="margin_content_detail">@dimen/default_padding_margin_extra_large</dimen>
+
+    <dimen name="menu_padding_margin">20dp</dimen>
+    <dimen name="menu_icon_size">36dp</dimen>
+    <dimen name="menu_icon_padding">6dp</dimen>
+    <dimen name="menu_rate_height">42dp</dimen>
+    <dimen name="dialog_width">280dp</dimen>
+    <dimen name="default_bottle_height">400dp</dimen>
+    <dimen name="default_corner">30dp</dimen>
+</resources>

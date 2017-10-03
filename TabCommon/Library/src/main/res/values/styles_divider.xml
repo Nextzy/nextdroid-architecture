@@ -1,0 +1,39 @@
+<resources>
+
+    <style name="Divider"/>
+
+    <style name="Divider.LightTheme"/>
+
+    <style name="Divider.LightTheme.Disable">
+        <item name="android:background">@color/default_text_color_divider_black</item>
+    </style>
+
+    <style name="Divider.LightTheme.Disable.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/default_divider_size</item>
+    </style>
+
+
+    <style name="Divider.LightTheme.Disable.Vertical">
+        <item name="android:layout_width">@dimen/default_divider_size</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="Divider.LightTheme.Divider">
+        <item name="android:background">@color/default_text_color_divider_black</item>
+    </style>
+
+    <style name="Divider.LightTheme.Divider.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/default_divider_size</item>
+    </style>
+
+
+    <style name="Divider.LightTheme.Divider.Vertical">
+        <item name="android:layout_width">@dimen/default_divider_size</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+
+
+</resources>

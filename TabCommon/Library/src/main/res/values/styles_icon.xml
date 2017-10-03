@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Icon">
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_width">@dimen/default_icon_size</item>
+        <item name="android:layout_height">@dimen/default_icon_size</item>
+    </style>
+
+    <style name="Icon.Small">
+        <item name="android:layout_width">@dimen/default_icon_size_small</item>
+        <item name="android:layout_height">@dimen/default_icon_size_small</item>
+    </style>
+    <style name="Icon.ExtraSmall">
+        <item name="android:layout_width">@dimen/default_icon_size_extra_small</item>
+        <item name="android:layout_height">@dimen/default_icon_size_extra_small</item>
+    </style>
+
+    <style name="Icon.Large">
+        <item name="android:layout_width">@dimen/default_icon_size_large</item>
+        <item name="android:layout_height">@dimen/default_icon_size_large</item>
+    </style>
+
+    <style name="Icon.Click">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:padding">6dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="Icon.Click.Toolbar">
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:layout_marginStart">4dp</item>
+    </style>
+
+    <style name="Icon.Click.Small">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">28dp</item>
+    </style>
+
+    <style name="Icon.Click.Large">
+        <item name="android:layout_width">44dp</item>
+        <item name="android:layout_height">44dp</item>
+    </style>
+
+</resources>

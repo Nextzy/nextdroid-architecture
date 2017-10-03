@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="icon_dark">@color/default_color_black_alpha_60</color>
+    <color name="icon_light">@color/md_white</color>
+
+    <color name="grey">#40808080</color>
+    <color name="grey_light">#fff5f5f5</color>
+
+    <color name="inline_action_icon">@color/md_grey600</color>
+
+    <color name="background_activity_white">@color/md_white</color>
+
+    <color name="black">#FF000000</color>
+    <color name="background_light">@color/md_white</color>
+    <color name="background_dark">#303030</color>
+    <color name="background_overlay_light">@color/default_color_black_alpha_30</color>
+    <color name="background_overlay">@color/default_color_black_alpha_50</color>
+    <color name="background_overlay_dark">@color/default_color_black_alpha_70</color>
+
+    <color name="default_icon_color_active_white_no_transparent">@color/md_icon_color_active_dark_theme_no_transparent</color>
+    <color name="default_icon_color_inactive_white_no_transparent">@color/md_icon_color_inactive_dark_theme_no_transparent</color>
+    <color name="default_icon_color_active_black_no_transparent">@color/md_icon_color_active_light_theme_no_transparent</color>
+    <color name="default_icon_color_inactive_black_no_transparent">@color/md_icon_color_inactive_light_theme_no_transparent</color>
+
+    <color name="default_icon_color_active_white">@color/md_icon_color_active_dark_theme</color>
+    <color name="default_icon_color_inactive_white">@color/md_icon_color_inactive_dark_theme</color>
+    <color name="default_icon_color_active_black">@color/md_icon_color_active_light_theme</color>
+    <color name="default_icon_color_inactive_black">@color/md_icon_color_inactive_light_theme</color>
+
+    <color name="default_text_color_primary_white">@color/md_text_color_primary_dark_theme</color> <!--100% white-->
+    <color name="default_text_color_secondary_white">@color/md_text_color_secondary_dark_theme</color> <!--70% white-->
+    <color name="default_text_color_disabled_white">@color/md_text_color_disabled_dark_theme</color> <!--50% white-->
+    <color name="default_text_color_divider_white">@color/md_text_color_divider_dark_theme</color> <!--12% white-->
+
+    <color name="default_text_color_primary_black">@color/md_text_color_primary_light_theme</color> <!--87% black-->
+    <color name="default_text_color_secondary_black">@color/md_text_color_secondary_light_theme</color> <!--54% black-->
+    <color name="default_text_color_disabled_black">@color/md_text_color_disabled_light_theme</color> <!--38% black-->
+    <color name="default_text_color_divider_black">@color/md_text_color_divider_light_theme</color> <!--12% black-->
+</resources>
