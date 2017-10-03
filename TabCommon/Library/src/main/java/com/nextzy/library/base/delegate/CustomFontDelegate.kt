@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.TextView
 import com.nextzy.library.R
-import com.nextzy.library.base.utils.android.FontUtility
+import com.nextzy.library.extension.findFont
 import com.nextzy.library.extension.pxToSp
 import java.util.*
 
@@ -36,11 +36,13 @@ private constructor(
 
     fun injectProductSansFont(attrs: AttributeSet, context: Context) {
         injectCustomFont(attrs, object : FontInjector {
-            override val normalTypeFace: Typeface
-                get() = FontUtility.findFont(context, "ProductSans-Regular.ttf")
+            override
+            val normalTypeFace: Typeface
+                get() = context.findFont("ProductSans-Regular.ttf")
 
-            override val boldTypeFace: Typeface
-                get() = FontUtility.findFont(context, "ProductSans-Bold.ttf")
+            override
+            val boldTypeFace: Typeface
+                get() = context.findFont("ProductSans-Bold.ttf")
         })
 
     }
