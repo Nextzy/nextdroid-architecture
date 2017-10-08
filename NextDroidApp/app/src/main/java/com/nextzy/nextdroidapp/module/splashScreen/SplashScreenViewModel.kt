@@ -1,6 +1,6 @@
 package com.nextzy.nextdroidapp.module.splashScreen
 
-import com.nextzy.library.customize.mvvm.CustomViewModel
+import com.nextzy.tabcustomize.base.mvvm.CustomViewModel
 
 
 class SplashScreenViewModel : CustomViewModel(){

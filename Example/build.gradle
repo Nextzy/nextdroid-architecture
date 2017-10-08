@@ -39,7 +39,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation project(":Library")
+    implementation project(":Customize")
 
     testImplementation 'junit:junit:4.12'
 }

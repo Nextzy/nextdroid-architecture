@@ -1,6 +1,6 @@
 package com.nextzy.nextdroidapp.module.splashScreen
 
-import com.nextzy.library.customize.mvvm.CustomMvvmActivity
+import com.nextzy.tabcustomize.base.mvvm.CustomMvvmActivity
 import com.nextzy.library.extension.view.delay
 import com.nextzy.nextdroidapp.R
 import com.nextzy.nextdroidapp.module.main.MainActivity

@@ -3,10 +3,10 @@ package com.nextzy.nextdroidapp.module.crash
 import android.content.Intent
 import android.util.Log
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash
-import com.nextzy.library.customize.CustomActivity
 import com.nextzy.nextdroidapp.MainApplication
 import com.nextzy.nextdroidapp.R
 import com.nextzy.nextdroidapp.module.main.MainActivity
+import com.nextzy.tabcustomize.base.CustomActivity
 import kotlinx.android.synthetic.main.activity_crash.btn_restart as btnRestart
 
 
