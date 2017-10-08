@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentActivity
 import android.view.ViewGroup
 import com.nextzy.library.base.mvvm.exception.TypeNotMatchInAdapterException
 import com.nextzy.library.base.view.holder.base.BaseViewHolder
-import com.nextzy.tabcustomize.decorator.adapter.CustomMvvmAdapter
+import com.nextzy.tabcustomize.base.adapter.CustomMvvmAdapter
 import com.nextzy.tabcustomize.template.mvvm.adapter.holder.KotlinMvvmHolder
 import com.nextzy.tabcustomize.template.mvvm.adapter.item.KotlinMvvmCustomItem
 import com.nextzy.tabcustomize.template.mvvm.adapter.operator.KotlinMvvmCreator

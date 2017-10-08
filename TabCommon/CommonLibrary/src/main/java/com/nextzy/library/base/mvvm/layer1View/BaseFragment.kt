@@ -34,7 +34,7 @@ abstract class BaseFragment
 
     override
     fun onCreate(savedInstanceState: Bundle?) {
-        Timber.d("onCreate: savedInstanceState=" + savedInstanceState!!)
+        Timber.d("onCreate: savedInstanceState=" + savedInstanceState)
         activityOpener = ActivityHelperDelegate(this)
         fragmentDelegate = FragmentHelperDelegate(activity)
         fragmentDelegate.setCanCommit(false)
@@ -69,7 +69,7 @@ abstract class BaseFragment
         Timber.d("onCreateView: savedInstanceState=" + savedInstanceState)
         val layoutResId = setupLayoutView()
         if (setupLayoutView() == 0) throw NotSetLayoutException()
-        return inflater!!.inflate(layoutResId, container, false)
+        return inflater?.inflate(layoutResId, container, false)
     }
 
     override
@@ -126,7 +126,7 @@ abstract class BaseFragment
 
     override
     fun onSaveInstanceState(outState: Bundle?) {
-        Timber.d("saveInstanceState: oustState=" + outState!!)
+        Timber.d("saveInstanceState: oustState=" + outState)
         super.onSaveInstanceState(outState)
         helper.onSaveInstanceState(outState)
     }

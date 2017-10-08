@@ -57,7 +57,7 @@ fun Context.findFont(fontPath: String?, defaultFontPath: String? = null): Typefa
     val fontName = File(fontPath).name
     var defaultFontName = ""
     if (!TextUtils.isEmpty(defaultFontPath)) {
-        defaultFontName = File(defaultFontPath!!).name
+        defaultFontName = File(defaultFontPath).name
     }
 
     return if (cachedFontMap.containsKey(fontName)) {

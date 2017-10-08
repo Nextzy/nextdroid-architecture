@@ -3,7 +3,7 @@ package com.nextzy.tabcustomize.template.mvvm.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 
-import com.nextzy.tabcustomize.decorator.adapter.CustomMvvmPagerAdapter
+import com.nextzy.tabcustomize.base.adapter.CustomMvvmPagerAdapter
 
 /**
 * Created by「 The Khaeng 」on 20 Aug 2017 :)

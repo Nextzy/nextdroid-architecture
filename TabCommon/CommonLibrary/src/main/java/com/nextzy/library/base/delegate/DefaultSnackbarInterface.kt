@@ -10,7 +10,7 @@ import android.view.View
 
 interface DefaultSnackbarInterface {
 
-    fun setSnackbarTargetView(target: View)
+    fun setSnackbarTargetView(target: View?)
 
     fun showSnackbarCustom(@ColorRes colorId: Int,
                            @DrawableRes iconId: Int,

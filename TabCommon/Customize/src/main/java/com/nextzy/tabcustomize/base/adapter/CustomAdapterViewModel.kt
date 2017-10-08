@@ -1,4 +1,4 @@
-package com.nextzy.tabcustomize.decorator.adapter
+package com.nextzy.tabcustomize.base.adapter
 
 import com.nextzy.library.base.mvvm.layer2ViewModel.BaseListAdapterViewModel
 

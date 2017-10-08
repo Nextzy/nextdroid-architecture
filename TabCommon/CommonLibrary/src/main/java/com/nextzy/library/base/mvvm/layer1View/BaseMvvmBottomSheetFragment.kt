@@ -251,7 +251,7 @@ abstract class BaseMvvmBottomSheetFragment<VM : BaseDialogViewModel>
     open fun initialize() {}
 
     override
-    fun setSnackbarTargetView(target: View) {
+    fun setSnackbarTargetView(target: View?) {
         snackbarDelegate.setSnackbarTargetView(target)
     }
 

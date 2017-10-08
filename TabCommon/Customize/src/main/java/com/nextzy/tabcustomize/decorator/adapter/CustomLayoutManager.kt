@@ -1,4 +1,4 @@
-package com.nextzy.tabcustomize.base.adapter
+package com.nextzy.tabcustomize.decorator.adapter
 
 import android.content.Context
 import android.util.AttributeSet

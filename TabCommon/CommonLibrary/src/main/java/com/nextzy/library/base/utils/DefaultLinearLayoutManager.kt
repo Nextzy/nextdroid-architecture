@@ -61,12 +61,12 @@ open class DefaultLinearLayoutManager : LinearLayoutManager {
     override
     fun smoothScrollToPosition(recyclerView: RecyclerView,
                                         state: RecyclerView.State?, position: Int) {
-        smoothScroller!!.targetPosition = position
+        smoothScroller?.targetPosition = position
         startSmoothScroll(smoothScroller)
     }
 
     fun scrollWindowToCenterItem(pos: Int) {
-        smoothScroller!!.targetPosition = pos
+        smoothScroller?.targetPosition = pos
         startSmoothScroll(smoothScroller)
     }
 

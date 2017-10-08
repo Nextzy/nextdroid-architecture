@@ -147,7 +147,7 @@ abstract class AnimationHelperActivity
     protected fun startIntroAnimation() {}
 
     override
-    fun setSnackbarTargetView(target: View) {
+    fun setSnackbarTargetView(target: View?) {
         snackbarDelegate.setSnackbarTargetView(target)
     }
 

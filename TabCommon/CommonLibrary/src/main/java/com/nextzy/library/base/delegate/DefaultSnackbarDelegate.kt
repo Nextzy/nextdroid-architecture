@@ -47,7 +47,7 @@ class DefaultSnackbarDelegate : DefaultSnackbarInterface {
 
 
     override
-    fun setSnackbarTargetView(target: View) {
+    fun setSnackbarTargetView(target: View?) {
         this.targetView = target
     }
 

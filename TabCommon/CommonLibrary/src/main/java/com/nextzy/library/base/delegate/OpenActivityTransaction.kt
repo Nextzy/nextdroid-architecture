@@ -96,7 +96,7 @@ class OpenActivityTransaction(
 
     fun open(fragment: Fragment?, targetClass: Class<*>) {
         val intent = Intent(fragment?.context, targetClass)
-        if (bundle != null) intent.putExtras(bundle!!)
+        bundle?.let{ intent.putExtras(it) }
         if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
             intent.putExtra(KEY_FINISH, isFinish || isFinishAll)
         }

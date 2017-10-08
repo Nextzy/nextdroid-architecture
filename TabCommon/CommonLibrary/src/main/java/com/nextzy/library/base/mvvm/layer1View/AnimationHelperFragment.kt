@@ -65,7 +65,7 @@ abstract class AnimationHelperFragment
 
 
     override
-    fun setSnackbarTargetView(target: View) {
+    fun setSnackbarTargetView(target: View?) {
         snackbarDelegate.setSnackbarTargetView(target)
     }
 

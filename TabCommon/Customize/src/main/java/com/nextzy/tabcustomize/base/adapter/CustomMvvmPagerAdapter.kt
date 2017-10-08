@@ -1,4 +1,4 @@
-package com.nextzy.tabcustomize.decorator.adapter
+package com.nextzy.tabcustomize.base.adapter
 
 
 import android.support.v4.app.Fragment

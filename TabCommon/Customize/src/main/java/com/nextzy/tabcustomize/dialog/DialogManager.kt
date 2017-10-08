@@ -18,12 +18,12 @@ object DialogManager {
         dismissDialog()
         dialog = LoadingDialog.Builder()
                 .build()
-        dialog!!.show(fragmentManager, TAG)
+        dialog?.show(fragmentManager, TAG)
     }
 
     fun dismissDialog() {
-        if (dialog != null && dialog!!.isAdded) {
-            dialog!!.dismiss()
+        if (dialog?.isAdded == true) {
+            dialog?.dismiss()
             dialog = null
         }
     }

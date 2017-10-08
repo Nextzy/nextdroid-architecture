@@ -46,7 +46,6 @@ abstract class BaseDialogFragment
     }
 
 
-
     override
     fun onCreate(savedInstanceState: Bundle?) {
         Timber.d("onCreate: savedInstanceState=" + savedInstanceState)
@@ -72,30 +71,28 @@ abstract class BaseDialogFragment
         try {
             this.listener = context as OnFragmentDialogListener?
         } catch (e: ClassCastException) {
-            Timber.w(context!!.toString() + " isn't implement OnCompleteListener")
+            Timber.w(context.toString() + " isn't implement OnCompleteListener")
         }
 
     }
 
     override
     fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (dialog.window != null) {
-            dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
-            dialog.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        }
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
         dialog.setCanceledOnTouchOutside(true)
         isCancelable = true
         dialog.setOnCancelListener { dialog ->
             setResultCode(Activity.RESULT_CANCELED)
             dismiss()
         }
-        return inflater!!.inflate(setupLayoutView(), container, false)
+        return inflater?.inflate(setupLayoutView(), container, false)
     }
 
     override
     fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        snackbarDelegate.setSnackbarTargetView(view!!)
+        snackbarDelegate.setSnackbarTargetView(view)
         bindView(view)
         setupView()
         if (savedInstanceState == null) {
@@ -112,8 +109,8 @@ abstract class BaseDialogFragment
         if (requestCode != -1 && !isDestroy && !isDismissWithResult) {
             withResult(resultCode, data)
         }
-        if (requestCode != -1 && listener != null) {
-            listener!!.onFragmentDialogResult(requestCode, resultCode, data)
+        if (requestCode != -1) {
+            listener?.onFragmentDialogResult(requestCode, resultCode, data)
         }
     }
 
@@ -139,9 +136,9 @@ abstract class BaseDialogFragment
 
     override
     fun onSaveInstanceState(outState: Bundle?) {
-        Timber.d("saveInstanceState: oustState=" + outState!!)
+        Timber.d("saveInstanceState: oustState=" + outState)
         super.onSaveInstanceState(outState)
-        outState.putInt(KEY_REQUEST_CODE, requestCode)
+        outState?.putInt(KEY_REQUEST_CODE, requestCode)
     }
 
     fun getFloatDimen(@DimenRes resId: Int): Float {
@@ -182,7 +179,7 @@ abstract class BaseDialogFragment
     }
 
     override
-    fun setSnackbarTargetView(target: View) {
+    fun setSnackbarTargetView(target: View?) {
         snackbarDelegate.setSnackbarTargetView(target)
     }
 
@@ -242,7 +239,7 @@ abstract class BaseDialogFragment
 
     abstract fun setupLayoutView(): Int
 
-    abstract fun bindView(view: View)
+    open fun bindView(view: View?){ }
 
     open fun setupInstance() {}
 

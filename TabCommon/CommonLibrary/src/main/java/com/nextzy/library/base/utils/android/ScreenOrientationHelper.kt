@@ -13,7 +13,7 @@ import android.support.v4.app.FragmentActivity
 class ScreenOrientationHelper {
     private var activity: Activity? = null
     private var listener: ScreenOrientationChangeListener? = null
-    private var lastOrientation: Int = 0
+    private var lastOrientation: Int? = 0
 
 
     companion object {
@@ -34,7 +34,9 @@ class ScreenOrientationHelper {
 
     fun onCreate(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
-            lastOrientation = getActivity().resources.configuration.orientation
+            getActivity()?.let {
+                lastOrientation = it.resources.configuration.orientation
+            }
         }
     }
 
@@ -51,23 +53,26 @@ class ScreenOrientationHelper {
     }
 
     private fun restoreLastOrientationState(savedInstanceState: Bundle?) {
-        lastOrientation = savedInstanceState?.getInt(KEY_LAST_ORIENTATION) ?: getActivity().resources.configuration.orientation
+        lastOrientation = savedInstanceState?.getInt(KEY_LAST_ORIENTATION)
+                ?: getActivity()?.let { it.resources.configuration.orientation }
     }
 
     private fun saveLastOrientationState(outState: Bundle?) {
-        outState?.putInt(KEY_LAST_ORIENTATION, lastOrientation)
+        outState?.putInt(KEY_LAST_ORIENTATION, lastOrientation ?: -1)
     }
 
     private fun checkOrientationChanged() {
-        val currentOrientation = getActivity().resources.configuration.orientation
-        if (currentOrientation != lastOrientation) {
-            listener?.onScreenOrientationChanged(currentOrientation)
-            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-                listener?.onScreenOrientationChangedToLandscape()
-            } else if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
-                listener?.onScreenOrientationChangedToPortrait()
+        getActivity()?.let {
+            val currentOrientation = it.resources.configuration.orientation
+            if (currentOrientation != lastOrientation) {
+                listener?.onScreenOrientationChanged(currentOrientation)
+                if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    listener?.onScreenOrientationChangedToLandscape()
+                } else if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+                    listener?.onScreenOrientationChangedToPortrait()
+                }
+                lastOrientation = currentOrientation
             }
-            lastOrientation = currentOrientation
         }
     }
 
@@ -75,8 +80,8 @@ class ScreenOrientationHelper {
         this.listener = listener
     }
 
-    private fun getActivity(): Activity {
+    private fun getActivity(): Activity? {
         if (activity == null) throw IllegalArgumentException("You haven't setActivity(...)")
-        return activity!!
+        return activity
     }
 }

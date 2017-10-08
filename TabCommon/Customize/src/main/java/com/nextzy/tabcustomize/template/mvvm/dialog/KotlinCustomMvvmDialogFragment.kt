@@ -30,7 +30,7 @@ class KotlinCustomMvvmDialogFragment : CustomMvvmDialogFragment<KotlinCustomDial
     fun setupLayoutView(): Int = 0
 
     override
-    fun bindView(view: View) {
+    fun bindView(view: View?) {
 
     }
 
