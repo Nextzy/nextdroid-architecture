@@ -3,7 +3,7 @@ package com.nextzy.tabcustomize.template.mvvm.adapter.holder
 import android.view.ViewGroup
 import com.nextzy.library.R
 import com.nextzy.library.base.view.holder.base.BaseViewHolder
-import com.nextzy.tabcustomize.template.mvvm.adapter.item.KotlinMvvmCustomItem
+import com.nextzy.tabcustomize.template.mvvm.adapter.item.CustomItem
 
 
 /**
@@ -11,10 +11,10 @@ import com.nextzy.tabcustomize.template.mvvm.adapter.item.KotlinMvvmCustomItem
 */
 
 class KotlinMvvmHolder(itemView: ViewGroup)
-    : BaseViewHolder<KotlinMvvmCustomItem>(itemView, R.layout.custom_holder) {
+    : BaseViewHolder<CustomItem>(itemView, R.layout.custom_holder) {
 
     override
-    fun onBind(item: KotlinMvvmCustomItem) {
+    fun onBind(item: CustomItem) {
 
     }
 }

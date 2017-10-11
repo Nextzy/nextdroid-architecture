@@ -34,8 +34,7 @@ class FragmentHelperDelegate(
 
 
     override
-    val currentFragment: Fragment?
-        get() = visibleFragment
+    fun getCurrentFragment(): Fragment? = visibleFragment
 
     init {
         this.fragmentActivity = WeakReference(fragmentActivity)
@@ -160,7 +159,7 @@ class FragmentHelperDelegate(
     /* ============================ Private method ============================================== */
 
     private fun isSameFragment(fragment: Fragment): Boolean {
-        val currentFragment = currentFragment
+        val currentFragment = getCurrentFragment()
         return null != currentFragment && currentFragment.javaClass == fragment.javaClass
     }
 

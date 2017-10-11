@@ -3,6 +3,7 @@ package com.nextzy.nextdroidapp
 import android.support.multidex.MultiDexApplication
 import cat.ereza.customactivityoncrash.config.CaocConfig
 import com.nextzy.nextdroidapp.module.crash.CrashActivity
+import com.nextzy.tabcustomize.base.database.realm.CustomDatabase
 import com.orhanobut.hawk.Hawk
 
 /**
@@ -35,8 +36,7 @@ abstract class MainApplication : MultiDexApplication() {
 
     private fun setupDatabase() {
         Hawk.init(this).build()
-//        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
-//        NextDroidDatabase.instance?.initDatabase(this)
+//        CustomDatabase.instance.initDatabase(this)
     }
 
     private fun setupCrashActivity() {

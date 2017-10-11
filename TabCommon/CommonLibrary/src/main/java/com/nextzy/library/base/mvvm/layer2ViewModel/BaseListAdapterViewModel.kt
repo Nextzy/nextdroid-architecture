@@ -21,9 +21,7 @@ abstract class BaseListAdapterViewModel
     fun getItemList(): MutableList<BaseItem> = itemList
 
     fun getItemViewType(position: Int): Int {
-        return if (getItem(position) is BaseItem) {
-            (getItem(position) as BaseItem).type
-        } else 0
+        return getItem(position).type
     }
 
 

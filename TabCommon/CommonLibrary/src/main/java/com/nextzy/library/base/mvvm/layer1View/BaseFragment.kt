@@ -29,8 +29,6 @@ abstract class BaseFragment
     private lateinit var fragmentDelegate: FragmentHelperDelegate
     private lateinit var settingDelegate: SettingPreferenceDelegate
 
-    override val currentFragment: Fragment? = fragmentDelegate.currentFragment
-
 
     override
     fun onCreate(savedInstanceState: Bundle?) {
@@ -157,6 +155,9 @@ abstract class BaseFragment
     }
 
     override
+    fun getCurrentFragment(): Fragment? = fragmentDelegate.getCurrentFragment()
+
+    override
     fun onScreenOrientationChangedToPortrait() {
 
     }
@@ -179,6 +180,8 @@ abstract class BaseFragment
     open fun setupView() {}
 
     open fun initialize() {}
+
+
 
     /* ============================ Open Activity ======================================== */
     override

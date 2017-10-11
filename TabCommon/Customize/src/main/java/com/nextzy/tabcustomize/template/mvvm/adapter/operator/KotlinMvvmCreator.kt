@@ -2,7 +2,7 @@ package com.nextzy.tabcustomize.template.mvvm.adapter.operator
 
 
 import com.nextzy.library.base.view.holder.base.BaseItem
-import com.nextzy.tabcustomize.template.mvvm.adapter.item.KotlinMvvmCustomItem
+import com.nextzy.tabcustomize.template.mvvm.adapter.item.CustomItem
 import java.util.*
 
 /**
@@ -10,21 +10,21 @@ import java.util.*
 */
 
 object KotlinMvvmCreator {
-    val TYPE_CUSTOM_ITEM = 10
+    const val TYPE_CUSTOM_ITEM = 10
 
     fun createMockItem(): List<BaseItem> {
         val itemList = ArrayList<BaseItem>()
-        itemList.add(KotlinMvvmCustomItem())
-        itemList.add(KotlinMvvmCustomItem())
-        itemList.add(KotlinMvvmCustomItem())
-        itemList.add(KotlinMvvmCustomItem())
-        itemList.add(KotlinMvvmCustomItem())
-        itemList.add(KotlinMvvmCustomItem())
+        itemList.add(CustomItem())
+        itemList.add(CustomItem())
+        itemList.add(CustomItem())
+        itemList.add(CustomItem())
+        itemList.add(CustomItem())
+        itemList.add(CustomItem())
         return itemList
     }
 
-    private fun createCustomItem(): KotlinMvvmCustomItem {
-        return KotlinMvvmCustomItem()
+    private fun createCustomItem(): CustomItem {
+        return CustomItem()
     }
 
 

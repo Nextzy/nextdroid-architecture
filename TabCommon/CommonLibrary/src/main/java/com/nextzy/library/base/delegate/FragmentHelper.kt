@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment
 
 interface FragmentHelper {
 
-    val currentFragment: Fragment?
+    fun getCurrentFragment(): Fragment?
 
     fun bindFragmentContainer(containerLayoutRes: Int)
 

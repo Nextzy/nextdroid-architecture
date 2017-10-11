@@ -14,24 +14,22 @@ import timber.log.Timber
 
 
 /**
-* Created by「 The Khaeng 」on 02 Oct 2017 :)
-*/
+ * Created by「 The Khaeng 」on 02 Oct 2017 :)
+ */
 
 abstract class BaseActivity
     : AppCompatActivity(),
       ActivityHelper,
       FragmentHelper,
       ScreenOrientationHelper.ScreenOrientationChangeListener,
-      SettingPreferenceInterface  {
+      SettingPreferenceInterface {
 
     private val helper = ScreenOrientationHelper()
     private lateinit var activityOpener: ActivityHelperDelegate
     private lateinit var fragmentDelegate: FragmentHelperDelegate
     private lateinit var settingDelegate: SettingPreferenceDelegate
 
-    val rootView: View = window.decorView.rootView
 
-    override val currentFragment: Fragment? = fragmentDelegate.currentFragment
 
     override
     fun onCreate(savedInstanceState: Bundle?) {
@@ -138,13 +136,17 @@ abstract class BaseActivity
 
     }
 
+    override
+    fun getCurrentFragment(): Fragment? = fragmentDelegate.getCurrentFragment()
+
+    fun getRootView(): View = window.decorView.rootView
 
     override
     fun onBackPressed() {
         var isNoMoreFragment = true
-        if (currentFragment != null) {
-            if (currentFragment is BaseFragment) {
-                isNoMoreFragment = (currentFragment as BaseFragment).onBackPressed()
+        if (getCurrentFragment() != null) {
+            if (getCurrentFragment() is BaseFragment) {
+                isNoMoreFragment = (getCurrentFragment() as BaseFragment).onBackPressed()
             }
         }
 

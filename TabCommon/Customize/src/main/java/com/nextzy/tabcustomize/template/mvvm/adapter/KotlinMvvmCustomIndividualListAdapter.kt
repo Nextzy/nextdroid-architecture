@@ -7,7 +7,7 @@ import com.nextzy.library.base.mvvm.exception.TypeNotMatchInAdapterException
 import com.nextzy.library.base.view.holder.base.BaseViewHolder
 import com.nextzy.tabcustomize.base.adapter.CustomMvvmIndividualListAdapter
 import com.nextzy.tabcustomize.template.mvvm.adapter.holder.KotlinMvvmHolder
-import com.nextzy.tabcustomize.template.mvvm.adapter.item.KotlinMvvmCustomItem
+import com.nextzy.tabcustomize.template.mvvm.adapter.item.CustomItem
 import com.nextzy.tabcustomize.template.mvvm.adapter.operator.KotlinMvvmCreator
 
 /**
@@ -56,7 +56,7 @@ class KotlinMvvmCustomIndividualListAdapter
         val i = itemList[pos]
         if (getItemViewType(pos) == KotlinMvvmCreator.TYPE_CUSTOM_ITEM) {
             val viewHolder = vh as KotlinMvvmHolder
-            val item = i as KotlinMvvmCustomItem
+            val item = i as CustomItem
             viewHolder.onBind(item)
         }
     }
