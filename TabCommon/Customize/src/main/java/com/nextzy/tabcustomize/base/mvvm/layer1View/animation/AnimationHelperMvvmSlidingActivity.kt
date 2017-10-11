@@ -1,4 +1,4 @@
-package com.nextzy.library.base.mvvm.layer1View
+package com.nextzy.tabcustomize.base.mvvm.layer1View.animation
 
 import android.app.Activity
 import android.app.ActivityManager
@@ -11,18 +11,19 @@ import android.transition.Transition
 import android.view.Menu
 import android.view.View
 import com.nextzy.library.R
-import com.nextzy.library.base.delegate.DefaultAnimationDelegate
-import com.nextzy.library.base.delegate.DefaultAnimationDelegateListener
+import com.nextzy.tabcustomize.base.delegation.DefaultAnimationDelegate
+import com.nextzy.tabcustomize.base.delegation.DefaultAnimationDelegateListener
 import com.nextzy.library.base.delegate.DefaultSnackbarDelegate
 import com.nextzy.library.base.delegate.DefaultSnackbarInterface
-
+import com.nextzy.library.base.mvvm.layer1View.BaseActivity
+import com.nextzy.library.base.mvvm.layer1View.BaseMvvmSlidingActivity
 
 /**
  * Created by「 The Khaeng 」on 18 Sep 2017 :)
  */
 
-abstract class AnimationHelperActivity
-    : BaseActivity(),
+abstract class AnimationHelperMvvmSlidingActivity
+    : BaseMvvmSlidingActivity(),
       DefaultAnimationDelegateListener,
       DefaultSnackbarInterface {
 

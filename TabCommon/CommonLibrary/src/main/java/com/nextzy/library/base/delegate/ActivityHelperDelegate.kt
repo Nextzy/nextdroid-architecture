@@ -43,7 +43,7 @@ class ActivityHelperDelegate
                      request: Int,
                      data: Bundle?) {
         val openActivityTransaction = createTransaction()
-                .setRequestCode(request)
+                .setBundle(data)
                 .setRequestCode(request)
         open(openActivityTransaction, targetClass)
     }

@@ -2,13 +2,16 @@ package com.nextzy.nextdroidapp.module.main
 
 import android.os.Bundle
 import com.nextzy.nextdroidapp.R
-import com.nextzy.tabcustomize.base.mvvm.CustomMvvmActivity
+import com.nextzy.tabcustomize.base.mvvm.layer1View.CustomMvvmActivity
 
-class MainActivity : CustomMvvmActivity<MainViewModel>() {
+class MainActivity : CustomMvvmActivity() {
+
+    private lateinit var viewModel: MainViewModel
 
     override
-    fun setupViewModel(): Class<MainViewModel>?
-            = MainViewModel::class.java
+    fun setupViewModel(){
+        viewModel = getViewModel( MainViewModel::class.java)
+    }
 
     override
     fun setupLayoutView(): Int = R.layout.activity_main

@@ -3,14 +3,13 @@ package com.nextzy.library.base.mvvm.layer1View
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.nextzy.library.R
-import com.nextzy.library.base.mvvm.layer2ViewModel.BaseViewModel
 import com.thekhaeng.slidingmenu.lib.SlidingMenu
 
 /**
  * Created by「 The Khaeng 」on 27 Aug 2017 :)
  */
 
-abstract class BaseMvvmSlidingActivity<VM : BaseViewModel> : BaseMvvmActivity<VM>() {
+abstract class BaseMvvmSlidingActivity : BaseMvvmActivity() {
 
     lateinit var slidingMenu: SlidingMenu
 

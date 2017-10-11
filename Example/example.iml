@@ -178,6 +178,7 @@
     <orderEntry type="library" name="annotations-13.0" level="project" />
     <orderEntry type="library" scope="TEST" name="javax.inject-1" level="project" />
     <orderEntry type="library" name="gson-2.7" level="project" />
+    <orderEntry type="library" name="pushdown-anim-click-1.0.5" level="project" />
     <orderEntry type="library" name="realm-annotations-3.5.0" level="project" />
     <orderEntry type="library" name="rxandroid-1.2.1" level="project" />
     <orderEntry type="library" name="animated-vector-drawable-26.1.0" level="project" />

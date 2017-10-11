@@ -1,17 +1,19 @@
-package com.nextzy.tabcustomize.base
+package com.nextzy.tabcustomize.base.mvvm.layer1View
 
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import com.nextzy.library.R
-import com.nextzy.library.base.mvvm.layer1View.DialogHelperActivity
+import com.nextzy.tabcustomize.base.mvvm.layer1View.dialog.DialogHelperMvvmActivity
 
 
 /**
 * Created by「 The Khaeng 」on 03 Oct 2017 :)
 */
 
-abstract class CustomActivity : DialogHelperActivity() {
+abstract class CustomMvvmActivity
+    : DialogHelperMvvmActivity() {
+
 
     override
     fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +24,6 @@ abstract class CustomActivity : DialogHelperActivity() {
                     null,
                     ContextCompat.getColor(this, R.color.md_white))
         }
-
     }
 
 }

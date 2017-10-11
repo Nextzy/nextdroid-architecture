@@ -2,26 +2,25 @@ package com.nextzy.tabcustomize.template.mvvm
 
 import android.os.Bundle
 
-import com.nextzy.tabcustomize.base.mvvm.CustomMvvmActivity
+import com.nextzy.tabcustomize.base.mvvm.layer1View.CustomMvvmActivity
 
 
 /**
 * Created by「 The Khaeng 」on 08 Oct 2017 :)
 */
 
-class KotlinMvvmCustomActivity : CustomMvvmActivity<KotlinMvvmCustomViewModel>() {
+class KotlinMvvmCustomActivity : CustomMvvmActivity() {
+
+    private lateinit var viewModel: KotlinMvvmCustomViewModel
 
     override
-    fun setupViewModel(): Class<KotlinMvvmCustomViewModel>?
-            = KotlinMvvmCustomViewModel::class.java
+    fun setupViewModel() {
+        viewModel = getViewModel(KotlinMvvmCustomViewModel::class.java)
+    }
 
     override
     fun setupLayoutView(): Int = 0
 
-    override
-    fun bindView() {
-
-    }
 
     override
     fun setupInstance() {

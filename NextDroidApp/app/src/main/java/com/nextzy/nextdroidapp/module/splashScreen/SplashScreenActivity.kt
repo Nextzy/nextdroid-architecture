@@ -1,24 +1,26 @@
 package com.nextzy.nextdroidapp.module.splashScreen
 
-import com.nextzy.tabcustomize.base.mvvm.CustomMvvmActivity
 import com.nextzy.library.extension.view.delay
 import com.nextzy.nextdroidapp.R
 import com.nextzy.nextdroidapp.module.main.MainActivity
+import com.nextzy.tabcustomize.base.mvvm.layer1View.CustomMvvmActivity
 import io.reactivex.functions.Action
 
 /**
  * Created by「 The Khaeng 」on 18 Sep 2017 :)
  */
 
-class SplashScreenActivity : CustomMvvmActivity<SplashScreenViewModel>() {
+class SplashScreenActivity : CustomMvvmActivity() {
 
-
-    override
-    fun setupViewModel(): Class<SplashScreenViewModel>? = SplashScreenViewModel::class.java
+    private lateinit var viewModel: SplashScreenViewModel
 
     private val ONE_SECOND: Long = 1000
     private val TEN_SECOND: Long = ONE_SECOND * 10
 
+    override
+    fun setupViewModel(){
+        viewModel = getViewModel( SplashScreenViewModel::class.java)
+    }
 
     override
     fun setupLayoutView(): Int = R.layout.activity_splash_screen

@@ -2,14 +2,14 @@ package com.nextzy.tabcustomize.template.mvvm
 
 
 import android.os.Bundle
-import com.nextzy.tabcustomize.base.mvvm.CustomMvvmFragment
+import com.nextzy.tabcustomize.base.mvvm.layer1View.CustomMvvmFragment
 
 
 /**
 * Created by「 The Khaeng 」on 08 Oct 2017 :)
 */
 
-class KotlinMvvmCustomFragment : CustomMvvmFragment<KotlinMvvmCustomViewModel>() {
+class KotlinMvvmCustomFragment : CustomMvvmFragment() {
 
     companion object {
         fun newInstance(): KotlinMvvmCustomFragment {
@@ -21,9 +21,12 @@ class KotlinMvvmCustomFragment : CustomMvvmFragment<KotlinMvvmCustomViewModel>()
     }
 
 
+    private lateinit var viewModelShared: KotlinMvvmCustomViewModel
+
     override
-    fun setupViewModel(): Class<KotlinMvvmCustomViewModel>?
-            = KotlinMvvmCustomViewModel::class.java
+    fun setupViewModel() {
+        viewModelShared = getSharedViewModel(KotlinMvvmCustomViewModel::class.java)
+    }
 
     override
     fun setupLayoutView(): Int = 0

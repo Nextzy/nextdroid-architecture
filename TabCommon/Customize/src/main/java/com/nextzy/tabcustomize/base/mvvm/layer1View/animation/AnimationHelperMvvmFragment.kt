@@ -1,21 +1,22 @@
-package com.nextzy.library.base.mvvm.layer1View
+package com.nextzy.tabcustomize.base.mvvm.layer1View.animation
 
 import android.os.Bundle
 import android.support.transition.Transition
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
-import com.nextzy.library.base.delegate.DefaultAnimationDelegate
-import com.nextzy.library.base.delegate.DefaultAnimationDelegateListener
 import com.nextzy.library.base.delegate.DefaultSnackbarDelegate
 import com.nextzy.library.base.delegate.DefaultSnackbarInterface
+import com.nextzy.library.base.mvvm.layer1View.BaseMvvmFragment
+import com.nextzy.tabcustomize.base.delegation.DefaultAnimationDelegate
+import com.nextzy.tabcustomize.base.delegation.DefaultAnimationDelegateListener
 
 /**
  * Created by「 The Khaeng 」on 18 Sep 2017 :)
  */
 
-abstract class AnimationHelperFragment
-    : BaseFragment(),
+abstract class AnimationHelperMvvmFragment
+    : BaseMvvmFragment(),
       DefaultAnimationDelegateListener,
       DefaultSnackbarInterface {
 
@@ -119,4 +120,3 @@ abstract class AnimationHelperFragment
         snackbarDelegate.showSnackbarInfoDismiss(message)
     }
 }
-

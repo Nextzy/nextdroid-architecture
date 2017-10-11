@@ -1,4 +1,4 @@
-package com.nextzy.library.base.delegate
+package com.nextzy.tabcustomize.base.delegation
 
 import android.support.v4.view.ViewCompat
 import android.view.View
