@@ -26,6 +26,12 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
 }
 
 dependencies {
@@ -33,6 +39,11 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    compile "com.android.support:support-annotations:$ver.androidSupport"
+    implementation "android.arch.lifecycle:runtime:$ver.lifecycleArch"
+    implementation "android.arch.lifecycle:extensions:$ver.lifecycleArch"
+    annotationProcessor "android.arch.lifecycle:compiler:$ver.lifecycleArch"
 
     //========================= Rx java ==========================================================//
     implementation "io.reactivex.rxjava2:rxjava:$ver.rxJavaVersion"
@@ -52,5 +63,4 @@ dependencies {
 
 
     testImplementation 'junit:junit:4.12'
-
 }

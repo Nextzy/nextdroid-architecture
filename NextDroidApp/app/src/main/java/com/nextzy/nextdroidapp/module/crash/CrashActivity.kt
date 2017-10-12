@@ -6,7 +6,7 @@ import cat.ereza.customactivityoncrash.CustomActivityOnCrash
 import com.nextzy.nextdroidapp.MainApplication
 import com.nextzy.nextdroidapp.R
 import com.nextzy.nextdroidapp.module.main.MainActivity
-import com.nextzy.tabcustomize.base.mvvm.layer1View.CustomMvvmActivity
+import com.nextzy.tabcustomize.base.mvvm.CustomMvvmActivity
 import kotlinx.android.synthetic.main.activity_crash.btn_restart as btnRestart
 
 

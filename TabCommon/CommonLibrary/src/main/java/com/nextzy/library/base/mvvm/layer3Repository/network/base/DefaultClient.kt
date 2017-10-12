@@ -8,14 +8,12 @@ import okhttp3.OkHttpClient
  */
 
 class DefaultClient : BaseClient() {
-
-    companion object {
-        lateinit var instance: DefaultClient
-            private set
+    private object Holder {
+        val INSTANCE = DefaultClient()
     }
 
-    init {
-        instance = DefaultClient()
+    companion object {
+        val instance: DefaultClient by lazy { Holder.INSTANCE }
     }
 
     override

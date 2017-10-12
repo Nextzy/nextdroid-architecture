@@ -17,6 +17,7 @@ import java.util.*
  * Created by「 The Khaeng 」on 11 Oct 2017 :)
  */
 
+
 abstract class BaseRealmDatabase {
 
     companion object {
@@ -91,8 +92,6 @@ abstract class BaseRealmDatabase {
     }
 
     /* =========================== Private method =============================================== */
-
-
     private fun <T : RealmObject> save(@Type type: Long,
                                        realmObject: T): Single<T>
             = Single.create { singleEmitter ->
@@ -127,7 +126,6 @@ abstract class BaseRealmDatabase {
             = Single.create<T> { emitter ->
         val looper = looper
         val realm = getRealm()
-
         var result: T? = null
         if (type == SYNC) {
             result = realm.where(cls)
@@ -160,6 +158,7 @@ abstract class BaseRealmDatabase {
         })
     }.subscribeOn(AndroidSchedulers.from(looper))
             .unsubscribeOn(AndroidSchedulers.from(looper))
+
 
 
     private fun <T : RealmObject> queryAll(@Type type: Long,
@@ -257,13 +256,13 @@ abstract class BaseRealmDatabase {
         })
     }
 
-    private fun close(realm: Realm) {
+    protected fun close(realm: Realm) {
         if (!realm.isClosed && !realm.isInTransaction) {
             realm.close()
         }
     }
 
-    private fun <T : RealmObject> isValid(emitter: SingleEmitter<T>, obj: T?): Boolean {
+    protected fun <T : RealmObject> isValid(emitter: SingleEmitter<T>, obj: T?): Boolean {
         if (obj?.isValid == false) {
             emitter.onError(IllegalArgumentException(
                     "Object is invalid."))
@@ -272,7 +271,7 @@ abstract class BaseRealmDatabase {
         return true
     }
 
-    private fun <T : RealmObject> isValid(emitter: SingleEmitter<List<T>>, obj: RealmResults<T>?): Boolean {
+    protected fun <T : RealmObject> isValid(emitter: SingleEmitter<List<T>>, obj: RealmResults<T>?): Boolean {
         if (obj?.isValid == false) {
             emitter.onError(IllegalArgumentException(
                     "Object is invalid."))
@@ -281,7 +280,7 @@ abstract class BaseRealmDatabase {
         return true
     }
 
-    private fun <T : RealmObject> isNotNullObject(emitter: SingleEmitter<T>, obj: T?): Boolean {
+    protected fun <T : RealmObject> isNotNullObject(emitter: SingleEmitter<T>, obj: T?): Boolean {
         if (obj == null) {
             emitter.onError(IllegalStateException(
                     "Object is no longer managed by Realm. Has it been deleted?"))

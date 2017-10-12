@@ -5,7 +5,6 @@ import com.nextzy.library.base.mvvm.layer3Repository.network.interceptor.Permiss
 import com.nextzy.library.base.mvvm.layer3Repository.network.interceptor.UnAuthorizedException
 import com.nextzy.nextwork.exception.StatusCodeException
 import com.nextzy.nextwork.operator.NextworkErrorJsonHandling
-import com.nextzy.nextwork.reponse.NextworkResponse
 import io.reactivex.Single
 import java.util.*
 
@@ -14,7 +13,7 @@ import java.util.*
  * Created by「 The Khaeng 」on 03 Oct 2017 :)
  */
 
-class ErrorJsonHandling<T : NextworkResponse>(typeOfResultClass: Class<T>, serviceName: String)
+class ErrorJsonHandling<T>(typeOfResultClass: Class<T>, serviceName: String)
     : NextworkErrorJsonHandling<T>(typeOfResultClass, serviceName) {
 
     override

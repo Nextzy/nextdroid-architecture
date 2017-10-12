@@ -3,7 +3,7 @@ package com.nextzy.nextdroidapp.module.splashScreen
 import com.nextzy.library.extension.view.delay
 import com.nextzy.nextdroidapp.R
 import com.nextzy.nextdroidapp.module.main.MainActivity
-import com.nextzy.tabcustomize.base.mvvm.layer1View.CustomMvvmActivity
+import com.nextzy.tabcustomize.base.mvvm.CustomMvvmActivity
 import io.reactivex.functions.Action
 
 /**

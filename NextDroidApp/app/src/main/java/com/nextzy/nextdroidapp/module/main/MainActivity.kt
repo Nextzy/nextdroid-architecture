@@ -2,7 +2,7 @@ package com.nextzy.nextdroidapp.module.main
 
 import android.os.Bundle
 import com.nextzy.nextdroidapp.R
-import com.nextzy.tabcustomize.base.mvvm.layer1View.CustomMvvmActivity
+import com.nextzy.tabcustomize.base.mvvm.CustomMvvmActivity
 
 class MainActivity : CustomMvvmActivity() {
 

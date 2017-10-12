@@ -14,7 +14,6 @@ import com.nextzy.library.base.mvvm.layer2ViewModel.bus.rx.EventBusViewModel
  */
 
 abstract class BaseViewModel : ViewModel() {
-
     companion object {
         lateinit var busViewModel: EventBusViewModel
             private set

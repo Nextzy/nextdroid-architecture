@@ -4,7 +4,7 @@ package com.nextzy.tabcustomize.base.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import com.nextzy.library.base.mvvm.layer1View.BaseMvvmPagerAdapter
-import com.nextzy.tabcustomize.base.mvvm.layer1View.CustomViewModel
+import com.nextzy.tabcustomize.base.mvvm.CustomViewModel
 
 
 /**

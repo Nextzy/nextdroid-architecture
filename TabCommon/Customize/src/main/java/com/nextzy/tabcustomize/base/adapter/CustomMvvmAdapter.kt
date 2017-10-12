@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import com.nextzy.library.base.mvvm.layer1View.BaseMvvmListAdapter
 import com.nextzy.library.base.view.holder.base.BaseViewHolder
-import com.nextzy.tabcustomize.base.mvvm.layer1View.CustomViewModel
+import com.nextzy.tabcustomize.base.mvvm.CustomViewModel
 
 
 /**

@@ -7,7 +7,6 @@ import com.nextzy.nextwork.BuildConfig;
 import com.nextzy.nextwork.exception.NoInternetConnectionException;
 import com.nextzy.nextwork.exception.ServerNotFoundException;
 import com.nextzy.nextwork.exception.StatusCodeException;
-import com.nextzy.nextwork.reponse.NextworkResponse;
 
 import org.json.JSONException;
 
@@ -17,15 +16,13 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 import io.reactivex.Single;
-import io.reactivex.SingleSource;
 import io.reactivex.SingleTransformer;
-import io.reactivex.functions.Function;
 import retrofit2.HttpException;
 
 /**
  * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
-public abstract class NextworkErrorJsonHandling<T extends NextworkResponse> implements SingleTransformer<T, T>{
+public abstract class NextworkErrorJsonHandling<T> implements SingleTransformer<T, T>{
     private final static String TAG = NextworkErrorJsonHandling.class.getSimpleName();
 
     private Class<T> typeOfResultClass;
@@ -39,18 +36,8 @@ public abstract class NextworkErrorJsonHandling<T extends NextworkResponse> impl
     @Override
     public Single<T> apply( Single<T> upstream ){
         return upstream
-                .onErrorResumeNext( new Function<Throwable, SingleSource<? extends T>>(){
-                    @Override
-                    public SingleSource<? extends T> apply( Throwable throwable ) throws Exception{
-                        return NextworkErrorJsonHandling.this.handleHttpExceptionAndConvertToErrorJson( throwable, typeOfResultClass );
-                    }
-                } )
-                .flatMap( new Function<T, SingleSource<? extends T>>(){
-                    @Override
-                    public SingleSource<? extends T> apply( T t ) throws Exception{
-                        return NextworkErrorJsonHandling.this.checkJsonResponse( t );
-                    }
-                } );
+                .onErrorResumeNext( throwable -> handleHttpExceptionAndConvertToErrorJson( throwable, typeOfResultClass ) )
+                .flatMap( NextworkErrorJsonHandling.this::checkJsonResponse );
     }
 
     /* =========================== Private method =============================================== */

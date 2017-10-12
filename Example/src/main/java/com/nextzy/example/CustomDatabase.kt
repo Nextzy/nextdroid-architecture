@@ -3,9 +3,9 @@ package com.nextzy.example
 import android.content.Context
 import com.google.gson.Gson
 import com.nextzy.library.base.mvvm.layer3Repository.database.realm.BaseRealmDatabase
-import com.nextzy.tabcustomize.base.database.realm.CustomDatabaseModule
-import com.nextzy.tabcustomize.base.database.realm.RealmConfig
-import com.nextzy.tabcustomize.base.database.realm.model.DefaultRealmObject
+import com.nextzy.tabcustomize.base.repository.database.realm.CustomDatabaseModule
+import com.nextzy.tabcustomize.base.repository.database.realm.RealmConfig
+import com.nextzy.tabcustomize.base.repository.database.realm.model.DefaultRealmObject
 import io.reactivex.Single
 import io.realm.Realm
 import java.util.*
