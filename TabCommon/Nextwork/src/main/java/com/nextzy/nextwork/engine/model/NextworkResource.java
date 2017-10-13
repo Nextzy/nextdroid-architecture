@@ -7,38 +7,41 @@ import android.support.annotation.Nullable;
  * A generic class that holds a value with its loading status.
  * @param <T>
  */
-public class Resource<T> {
+public abstract class NextworkResource<T> {
 
     @NonNull
-    public final @Status int status;
+    private final @Status int status;
 
     @Nullable
-    public final String message;
+    private final String message;
 
     @Nullable
-    public final T data;
+    private final T data;
 
-    public Resource(@NonNull @Status int status, @Nullable T data, @Nullable String message) {
+    public NextworkResource( @NonNull @Status int status, @Nullable T data, @Nullable String message) {
         this.status = status;
         this.data = data;
         this.message = message;
     }
 
-    public static <T> Resource<T> success(@Nullable T data) {
-        return new Resource<>(NetworkStatus.SUCCESS, data, null);
+    @NonNull
+    public int getStatus(){
+        return status;
     }
 
-    public static <T> Resource<T> error(String msg, @Nullable T data) {
-        return new Resource<>(NetworkStatus.ERROR, data, msg);
+    @Nullable
+    public String getMessage(){
+        return message;
     }
 
-    public static <T> Resource<T> loading(@Nullable T data) {
-        return new Resource<>(NetworkStatus.LOADING, data, null);
+    @Nullable
+    public T getData(){
+        return data;
     }
 
     @Override
     public String toString() {
-        return "Resource{" +
+        return "NextworkResource{" +
                 "status=" + status +
                 ", message='" + message + '\'' +
                 ", data=" + data +
@@ -48,9 +51,9 @@ public class Resource<T> {
     @Override
     public boolean equals( Object o ){
         if( this == o ) return true;
-        if( !( o instanceof Resource ) ) return false;
+        if( !( o instanceof NextworkResource ) ) return false;
 
-        Resource<?> resource = (Resource<?>) o;
+        NextworkResource<?> resource = (NextworkResource<?>) o;
 
         if( status != resource.status ) return false;
         if( message != null ? !message.equals( resource.message ) : resource.message != null )

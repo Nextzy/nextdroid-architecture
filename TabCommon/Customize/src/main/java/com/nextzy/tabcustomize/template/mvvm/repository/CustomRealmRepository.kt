@@ -1,13 +1,13 @@
 package com.nextzy.tabcustomize.template.mvvm.repository
 
 import android.arch.lifecycle.LiveData
-import com.nextzy.nextwork.engine.AppExecutors
-import com.nextzy.nextwork.engine.model.NextworkResponse
-import com.nextzy.nextwork.engine.model.Resource
 import com.nextzy.tabcustomize.base.repository.database.realm.CustomDatabase
+import com.nextzy.tabcustomize.base.repository.network.DefaultNetworkBoundResource
+import com.nextzy.tabcustomize.base.repository.network.DefaultResource
+import com.nextzy.tabcustomize.base.repository.network.DefaultResponse
 import com.nextzy.tabcustomize.template.mvvm.repository.model.CustomModel
-import com.nextzy.tabcustomize.template.mvvm.repository.network.CustomApiService
-import com.nextzy.tabcustomize.template.mvvm.repository.network.response.CustomResponse
+import com.nextzy.tabcustomize.template.mvvm.repository.network.CustomApiManager
+import com.nextzy.tabcustomize.template.mvvm.repository.network.model.reponse.CustomResponse
 
 /**
  * Created by「 The Khaeng 」on 12 Oct 2017 :)
@@ -23,14 +23,11 @@ class CustomRealmRepository private constructor() {
         val instance: CustomRealmRepository by lazy { Holder.INSTANCE }
     }
 
-    private val service: CustomApiService = CustomApiService.newInstance
+    private val serviceManager: CustomApiManager = CustomApiManager.instance
     private val database: CustomDatabase = CustomDatabase.instance
-    private val appExecutors: AppExecutors = AppExecutors.getInstance()
 
-
-    fun getTestResponse(id:Int,isForceFetch: Boolean = false): LiveData<Resource<CustomModel>>
-            = object : CustomBoundResource<CustomModel, CustomResponse>(appExecutors) {
-
+    fun getTestResponse(id: Int, isForceFetch: Boolean = false): LiveData<DefaultResource<CustomModel>>
+            = object : DefaultNetworkBoundResource<CustomModel, CustomResponse>() {
         override
         fun saveCallResult(item: CustomModel) {
             database.saveCustomModel(item).subscribe()
@@ -48,11 +45,16 @@ class CustomRealmRepository private constructor() {
         }
 
         override
-        fun createCall(): LiveData<NextworkResponse<CustomResponse>> {
-            return service
-                    .createApi()
-                    .getTestResponse()
+        fun createCall(): LiveData<DefaultResponse<CustomResponse>> {
+            return serviceManager.getTestLiveData()
         }
+
+
+        override
+        fun convertToResultType(requestType: CustomResponse?): CustomModel {
+            return CustomModel()
+        }
+
     }.asLiveData()
 
 }

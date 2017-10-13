@@ -1,4 +1,4 @@
-package com.nextzy.tabcustomize.template.mvvm.repository.network
+package com.nextzy.tabcustomize.template.mvvm.repository.network.api
 
 /**
  * Created by「 The Khaeng 」on 29 Sep 2017 :)

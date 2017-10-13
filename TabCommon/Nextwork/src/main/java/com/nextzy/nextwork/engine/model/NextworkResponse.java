@@ -12,49 +12,51 @@ import retrofit2.Response;
  *
  * @param <T>
  */
-public class NextworkResponse<T> {
+public class NextworkResponse<T>{
     private static final String TAG = NextworkResponse.class.getSimpleName();
     public final int code;
+
     @Nullable
     public final T body;
-    @Nullable
-    public final String errorMessage;
 
-    public NextworkResponse( int code, @Nullable T body, @Nullable String errorMessage) {
+    @Nullable
+    public final Throwable error;
+
+    public NextworkResponse( int code, @Nullable T body, @Nullable Throwable error ){
         this.code = code;
         this.body = body;
-        this.errorMessage = errorMessage;
+        this.error = error;
     }
 
-    public NextworkResponse( Throwable error) {
-        code = 500;
-        body = null;
-        errorMessage = error.getMessage();
+    public NextworkResponse( Throwable error ){
+        this.code = 500;
+        this.body = null;
+        this.error = error;
     }
 
-    public NextworkResponse( Response<T> response) {
+    public NextworkResponse( Response<T> response ){
         code = response.code();
-        if (response.isSuccessful()) {
+        if( response.isSuccessful() ){
             body = response.body();
-            errorMessage = null;
-        } else {
+            error = null;
+        }else{
             String message = null;
-            if (response.errorBody() != null) {
-                try {
+            if( response.errorBody() != null ){
+                try{
                     message = response.errorBody().string();
-                } catch (IOException ignored) {
-                    Log.e(TAG, "error while parsing response");
+                }catch( IOException ignored ){
+                    Log.e( TAG, "error while parsing response" );
                 }
             }
-            if (message == null || message.trim().length() == 0) {
+            if( message == null || message.trim().length() == 0 ){
                 message = response.message();
             }
-            errorMessage = message;
+            error = new IllegalArgumentException(message);
             body = null;
         }
     }
 
-    public boolean isSuccessful() {
+    public boolean isSuccessful(){
         return code >= 200 && code < 300;
     }
 }

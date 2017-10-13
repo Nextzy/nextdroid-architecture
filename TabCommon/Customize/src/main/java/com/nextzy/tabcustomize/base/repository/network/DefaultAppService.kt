@@ -8,7 +8,7 @@ import okhttp3.OkHttpClient
  */
 
 
-abstract class CustomAppService<T> (apiClass: Class<T>)
+abstract class DefaultAppService<T>(apiClass: Class<T>)
     : BaseApiCreator<T>(apiClass) {
 
     override

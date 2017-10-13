@@ -8,8 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
+import com.nextzy.nextwork.engine.model.NextworkResource;
 import com.nextzy.nextwork.engine.model.NextworkResponse;
-import com.nextzy.nextwork.engine.model.Resource;
 
 
 /**
@@ -21,30 +21,32 @@ import com.nextzy.nextwork.engine.model.Resource;
  * @param <ResultType>
  * @param <RequestType>
  */
-public abstract class NextworkBoundResource<ResultType, RequestType>{
+public abstract class NextworkBoundResource<ResultType, RequestType, ResponseApiType extends NextworkResponse<RequestType>, ResourceType extends NextworkResource<ResultType>>{
     private final AppExecutors appExecutors;
+    private final NextworkResourceCreator<ResultType,ResourceType> creator;
 
-    private final MediatorLiveData<Resource<ResultType>> result = new MediatorLiveData<>();
+    private final MediatorLiveData<ResourceType> result = new MediatorLiveData<>();
 
     @MainThread
-    public NextworkBoundResource( AppExecutors appExecutors ){
+    public NextworkBoundResource( AppExecutors appExecutors, NextworkResourceCreator<ResultType,ResourceType> creator ){
         this.appExecutors = appExecutors;
-        result.setValue( Resource.<ResultType>loading( null ) );
+        this.creator = creator;
+        result.setValue( creator.<ResultType>loading( null ) );
         LiveData<ResultType> dbSource = loadFromDb();
         result.addSource( dbSource, data -> {
             result.removeSource( dbSource );
             if( shouldFetch( data ) ){
                 fetchFromNetwork( dbSource );
             }else{
-                result.addSource( dbSource, newData -> result.setValue( Resource.success( newData ) ) );
+                result.addSource( dbSource, newData -> result.setValue( creator.success( newData ) ) );
             }
         } );
     }
 
     private void fetchFromNetwork( final LiveData<ResultType> dbSource ){
-        LiveData<NextworkResponse<RequestType>> apiResponse = createCall();
+        LiveData<ResponseApiType> apiResponse = createCall();
         // we re-attach dbSource as a new source, it will dispatch its latest value quickly
-        result.addSource( dbSource, newData -> result.setValue( Resource.loading( newData ) ) );
+        result.addSource( dbSource, newData -> result.setValue( creator.loading( newData ) ) );
         result.addSource( apiResponse, response -> {
             result.removeSource( apiResponse );
             result.removeSource( dbSource );
@@ -57,13 +59,13 @@ public abstract class NextworkBoundResource<ResultType, RequestType>{
                             // otherwise we will get immediately last cached value,
                             // which may not be updated with latest results received from network.
                             result.addSource( loadFromDb(),
-                                    newData -> result.setValue( Resource.success( newData ) ) )
+                                    newData -> result.setValue( creator.success( newData ) ) )
                     );
                 } );
             }else{
                 onFetchFailed();
                 result.addSource( dbSource,
-                        newData -> result.setValue( Resource.error( response.errorMessage, newData ) ) );
+                        newData -> result.setValue( creator.error( response.error, newData ) ) );
             }
         } );
     }
@@ -71,12 +73,12 @@ public abstract class NextworkBoundResource<ResultType, RequestType>{
     protected void onFetchFailed(){
     }
 
-    public LiveData<Resource<ResultType>> asLiveData(){
+    public LiveData<ResourceType> asLiveData(){
         return result;
     }
 
     @WorkerThread
-    protected RequestType processResponse( NextworkResponse<RequestType> response ){
+    protected RequestType processResponse( ResponseApiType response ){
         return response.body;
     }
 
@@ -92,7 +94,7 @@ public abstract class NextworkBoundResource<ResultType, RequestType>{
 
     @NonNull
     @MainThread
-    protected abstract LiveData<NextworkResponse<RequestType>> createCall();
+    protected abstract LiveData<ResponseApiType> createCall();
 
 
     public abstract ResultType convertToResultType( RequestType requestType );

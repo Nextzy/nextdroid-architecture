@@ -24,7 +24,7 @@ import android.support.annotation.Nullable;
  *
  * @param <T>
  */
-public class Request<T> {
+public class NextworkRequest<T> {
 
     @NonNull
     public final boolean isForceFetch;
@@ -32,7 +32,7 @@ public class Request<T> {
     @Nullable
     public final T data;
 
-    public Request(@Nullable T data, @Nullable boolean isForceFetch) {
+    public NextworkRequest( @Nullable T data, @Nullable boolean isForceFetch) {
         this.data = data;
         this.isForceFetch = isForceFetch;
     }
@@ -42,7 +42,7 @@ public class Request<T> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Request<?> request = (Request<?>) o;
+        NextworkRequest<?> request = (NextworkRequest<?>) o;
 
         if (isForceFetch != request.isForceFetch) return false;
         return data != null ? data.equals(request.data) : request.data == null;
@@ -57,7 +57,7 @@ public class Request<T> {
 
     @Override
     public String toString() {
-        return "Request{" +
+        return "NextworkRequest{" +
                 "isForceFetch=" + isForceFetch +
                 ", data=" + data +
                 '}';
