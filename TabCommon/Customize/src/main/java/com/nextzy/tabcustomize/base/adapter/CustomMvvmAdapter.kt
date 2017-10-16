@@ -13,9 +13,8 @@ import com.nextzy.tabcustomize.base.mvvm.CustomViewModel
  */
 
 abstract class CustomMvvmAdapter<
-        VH : BaseViewHolder<*>,
-        VM : CustomViewModel>
-    : BaseMvvmListAdapter<VH, VM> {
+        VH : BaseViewHolder<*>>
+    : BaseMvvmListAdapter<VH> {
 
     constructor(activity: FragmentActivity) : super(activity) {}
 

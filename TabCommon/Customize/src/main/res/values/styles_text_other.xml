@@ -2,7 +2,7 @@
 
     <!-- ================ Accent ================================================================-->
     <style name="CustomTextView.Regular.AccentPink">
-        <item name="android:textColor">@color/accent_pink_dark</item>
+        <item name="android:textColor">@color/accent_amber_dark</item>
     </style>
 
     <style name="CustomTextView.Regular.AccentPink.Display3">
@@ -39,7 +39,7 @@
     </style>
 
     <style name="CustomTextView.Bold.AccentPink">
-        <item name="android:textColor">@color/accent_pink_dark</item>
+        <item name="android:textColor">@color/accent_amber_dark</item>
     </style>
 
     <style name="CustomTextView.Bold.AccentPink.Display3">

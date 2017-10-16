@@ -24,6 +24,7 @@ private constructor(
         val DEFAULT_FONT_NAME = "ProductSans-Regular.ttf"
         val BOLD_FONT_NAME = "ProductSans-Bold.ttf"
 
+        @JvmStatic
         fun newInstance(textView: TextView): CustomFontDelegate {
             return CustomFontDelegate(textView)
         }

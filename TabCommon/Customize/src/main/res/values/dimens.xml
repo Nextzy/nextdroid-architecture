@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <dimen name="stroke_progressbar">4dp</dimen>
+    <dimen name="progressbar_size">56dp</dimen>
+    <dimen name="card_view_corner">24dp</dimen>
+
 </resources>

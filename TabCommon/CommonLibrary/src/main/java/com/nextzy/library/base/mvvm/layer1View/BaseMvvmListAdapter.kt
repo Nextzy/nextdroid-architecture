@@ -1,6 +1,7 @@
 package com.nextzy.library.base.mvvm.layer1View
 
 
+import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.v4.app.Fragment
@@ -8,9 +9,6 @@ import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.nextzy.library.base.mvvm.exception.ViewModelNotNullException
-import com.nextzy.library.base.mvvm.exception.ViewModelNotSetupException
-import com.nextzy.library.base.mvvm.layer2ViewModel.BaseViewModel
 import com.nextzy.library.base.view.holder.base.BaseViewHolder
 import java.lang.ref.WeakReference
 
@@ -19,7 +17,7 @@ import java.lang.ref.WeakReference
  * Created by「 The Khaeng 」on 20 Sep 2017 :)
  */
 
-abstract class BaseMvvmListAdapter<VH : BaseViewHolder<*>, VM : BaseViewModel>
+abstract class BaseMvvmListAdapter<VH : BaseViewHolder<*>>
     : RecyclerView.Adapter<VH> {
 
     protected val context: Context
@@ -30,30 +28,6 @@ abstract class BaseMvvmListAdapter<VH : BaseViewHolder<*>, VM : BaseViewModel>
     var recyclerView: RecyclerView? = null
         private set
 
-    val viewModelShared: VM?
-        get() {
-            if (setupViewModel() == null) throw ViewModelNotSetupException()
-            if (fragment != null) {
-                return ViewModelProviders.of(fragment?.get()?.activity!!)
-                        .get(setupViewModel())
-            } else if (activity != null) {
-                return ViewModelProviders.of(activity?.get()!!)
-                        .get(setupViewModel())
-            }
-            return null
-        }
-
-    val viewModel: VM
-        get() {
-            if (setupViewModel() == null) throw ViewModelNotSetupException()
-            return if (fragment != null) {
-                ViewModelProviders.of(fragment?.get()!!)
-                        .get(setupViewModel())
-            } else {
-                ViewModelProviders.of(activity?.get()!!)
-                        .get(setupViewModel())
-            }
-        }
 
     interface OnClickHolderItemListener<in VH> {
         fun onClickHolder(v: VH, position: Int)
@@ -81,20 +55,22 @@ abstract class BaseMvvmListAdapter<VH : BaseViewHolder<*>, VM : BaseViewModel>
         this.recyclerView = recyclerView
     }
 
-    fun getViewModel(viewModelClass: Class<VM>): VM? {
-        if (setupViewModel() == null) throw ViewModelNotNullException()
-        if (fragment != null) {
-            return ViewModelProviders.of(fragment?.get()!!)
+
+    fun <VM : ViewModel> getViewModel(viewModelClass: Class<VM>): VM {
+        return if (fragment != null) {
+            ViewModelProviders.of(fragment?.get()!!)
                     .get(viewModelClass)
-        } else if (activity != null) {
-            return ViewModelProviders.of(activity?.get()!!)
+        } else {
+            ViewModelProviders.of(activity?.get()!!)
                     .get(viewModelClass)
         }
-        return null
     }
 
-    abstract fun setupViewModel(): Class<VM>?
 
+    fun <VM : ViewModel> getSharedViewModel(viewModelClass: Class<VM>): VM? {
+        if (activity != null) return null
+        return ViewModelProviders.of(activity?.get()!!).get(viewModelClass)
+    }
 
     override
     fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH? {
@@ -112,7 +88,7 @@ abstract class BaseMvvmListAdapter<VH : BaseViewHolder<*>, VM : BaseViewModel>
         return View.OnClickListener { v ->
             listener?.onClickHolder(
                     holder,
-                    holder.adapterPosition )
+                    holder.adapterPosition)
         }
     }
 

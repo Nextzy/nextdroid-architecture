@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="primary_light">@color/primary_blue_light</color>
-    <color name="primary">@color/primary_blue</color>
-    <color name="primary_dark">@color/primary_blue_dark</color>
+    <color name="primary_light">@color/primary_green_light</color>
+    <color name="primary">@color/primary_green</color>
+    <color name="primary_dark">@color/primary_green_dark</color>
 
-    <color name="primary_blue_light">@color/md_blue300</color>
-    <color name="primary_blue">@color/md_blue500</color>
-    <color name="primary_blue_dark">@color/md_blue700</color>
+    <color name="primary_green_light">@color/md_green300</color>
+    <color name="primary_green">@color/md_green500</color>
+    <color name="primary_green_dark">@color/md_green700</color>
 
-    <color name="accent_dark">@color/accent_pink_dark</color>
-    <color name="accent">@color/accent_pink</color>
-    <color name="accent_light">@color/accent_pink_light</color>
+    <color name="accent_dark">@color/accent_amber_dark</color>
+    <color name="accent">@color/accent_amber</color>
+    <color name="accent_light">@color/accent_amber_light</color>
 
-    <color name="accent_pink_dark">@color/md_pinkA400</color>
-    <color name="accent_pink">@color/md_pinkA200</color>
-    <color name="accent_pink_light">@color/md_pinkA100</color>
+    <color name="accent_amber_dark">@color/md_amberA400</color>
+    <color name="accent_amber">@color/md_amberA200</color>
+    <color name="accent_amber_light">@color/md_amberA100</color>
 
 </resources>

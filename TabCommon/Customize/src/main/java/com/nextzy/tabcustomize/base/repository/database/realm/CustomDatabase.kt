@@ -6,11 +6,10 @@ import android.arch.lifecycle.Transformations
 import android.content.Context
 import com.google.gson.Gson
 import com.nextzy.library.base.mvvm.layer3Repository.database.realm.BaseLiveDataRealmDatabase
+import com.nextzy.library.base.view.holder.base.BaseItem
 import com.nextzy.tabcustomize.base.repository.database.realm.model.DefaultRealmObject
-import com.nextzy.tabcustomize.template.mvvm.repository.model.CustomModel
 import io.reactivex.Single
 import io.realm.Realm
-import java.util.*
 
 class CustomDatabase private constructor() : BaseLiveDataRealmDatabase() {
 
@@ -20,6 +19,9 @@ class CustomDatabase private constructor() : BaseLiveDataRealmDatabase() {
 
     companion object {
         val DATABASE_VERSION = 1 //update: 9/10/2017
+        val PICTURE_LIST = 100
+        val PICTURE_BEFORE_ID = 101
+        val PICTURE_AFTER_ID = 102
 
         val instance: CustomDatabase by lazy { Holder.INSTANCE }
     }
@@ -35,62 +37,36 @@ class CustomDatabase private constructor() : BaseLiveDataRealmDatabase() {
     fun getRealm(): Realm = RealmConfig.getRealm()
 
 
-    fun saveCustomModel(obj: CustomModel): Single<CustomModel> {
-        if (obj.id == null) obj.id = UUID.randomUUID().toString()
+    fun <T: BaseItem> saveBaseItemAsSingle(obj: T): Single<T> {
         val json = Gson().toJson(obj)
         val realmObject = DefaultRealmObject(
-                obj.id,
+                obj.id.toString(),
                 obj.javaClass.simpleName,
                 json)
         return save(realmObject)
                 .map { obj }
     }
 
-
-    fun loadAllCustomModel(): Single<MutableList<CustomModel>> {
-        return queryAllAsync(fieldName = arrayListOf(DefaultRealmObject.KEY_ID),
-                             realmClass = DefaultRealmObject::class.java)
-                .map { defaultRealmObjects ->
-                    val list = defaultRealmObjects.indices.mapTo(ArrayList<CustomModel>()) {
-                        Gson().fromJson(
-                                defaultRealmObjects[it].json, CustomModel::class.java)
-                    }
-                    list
-                }
-    }
-
-
-    fun loadCustomModelAsLiveData(id: Int): LiveData<CustomModel> {
+    fun <T: BaseItem> loadObjectAsLiveData(id:Int, clazz:Class<T>): LiveData<T> {
         return Transformations.map(queryAsLiveData(fieldName = DefaultRealmObject.KEY_ID,
                                                    value = id.toString(),
                                                    realmClass = DefaultRealmObject::class.java))
         { realmObject: DefaultRealmObject ->
-            Gson().fromJson(realmObject.json, CustomModel::class.java)
-        }
-    }
-
-    fun loadAllCustomModelAsLiveData(): LiveData<MutableList<CustomModel>> {
-        return Transformations.map(queryAllAsLiveData(fieldName = arrayListOf(DefaultRealmObject.KEY_ID),
-                                                      realmClass = DefaultRealmObject::class.java))
-        { realmObject: List<DefaultRealmObject> ->
-            val list = realmObject.indices.mapTo(ArrayList<CustomModel>()) {
-                Gson().fromJson(
-                        realmObject[it].json, CustomModel::class.java)
-            }
-            list
+            Gson().fromJson(realmObject.json, clazz)
         }
     }
 
 
-    fun deleteCustomModel(bottleList: CustomModel): Single<CustomModel> {
-        return deleteAsync(DefaultRealmObject.KEY_ID,
-                           bottleList.id,
+    fun <T: BaseItem> deleteBaseItemAsSingle(obj: T): Single<T> {
+        return delete(DefaultRealmObject.KEY_ID,
+                           obj.id.toString(),
                            DefaultRealmObject::class.java)
                 .map { defaultRealmObjects ->
                     Gson().fromJson(
-                            defaultRealmObjects.json, CustomModel::class.java)
+                            defaultRealmObjects.json, obj::class.java)
                 }
 
     }
+
 
 }

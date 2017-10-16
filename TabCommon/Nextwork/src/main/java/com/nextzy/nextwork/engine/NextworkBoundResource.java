@@ -10,6 +10,7 @@ import android.support.annotation.WorkerThread;
 
 import com.nextzy.nextwork.engine.model.NextworkResource;
 import com.nextzy.nextwork.engine.model.NextworkResponse;
+import com.nextzy.nextwork.operator.NLog;
 
 
 /**
@@ -22,20 +23,24 @@ import com.nextzy.nextwork.engine.model.NextworkResponse;
  * @param <RequestType>
  */
 public abstract class NextworkBoundResource<ResultType, RequestType, ResponseApiType extends NextworkResponse<RequestType>, ResourceType extends NextworkResource<ResultType>>{
+    private final static String TAG = NextworkBoundResource.class.getSimpleName();
     private final AppExecutors appExecutors;
-    private final NextworkResourceCreator<ResultType,ResourceType> creator;
+    private final NextworkResourceCreator<ResultType, ResourceType> creator;
 
     private final MediatorLiveData<ResourceType> result = new MediatorLiveData<>();
 
     @MainThread
-    public NextworkBoundResource( AppExecutors appExecutors, NextworkResourceCreator<ResultType,ResourceType> creator ){
+    public NextworkBoundResource( AppExecutors appExecutors, NextworkResourceCreator<ResultType, ResourceType> creator ){
         this.appExecutors = appExecutors;
         this.creator = creator;
         result.setValue( creator.<ResultType>loading( null ) );
         LiveData<ResultType> dbSource = loadFromDb();
+        NLog.i( TAG, "Load from database: " + dbSource );
         result.addSource( dbSource, data -> {
             result.removeSource( dbSource );
-            if( shouldFetch( data ) ){
+            boolean shouldFetch = shouldFetch( data );
+            NLog.i( TAG, "ShouldFetch: " + shouldFetch );
+            if( shouldFetch ){
                 fetchFromNetwork( dbSource );
             }else{
                 result.addSource( dbSource, newData -> result.setValue( creator.success( newData ) ) );
@@ -45,6 +50,7 @@ public abstract class NextworkBoundResource<ResultType, RequestType, ResponseApi
 
     private void fetchFromNetwork( final LiveData<ResultType> dbSource ){
         LiveData<ResponseApiType> apiResponse = createCall();
+        NLog.i( TAG, "CreateCall: " + apiResponse );
         // we re-attach dbSource as a new source, it will dispatch its latest value quickly
         result.addSource( dbSource, newData -> result.setValue( creator.loading( newData ) ) );
         result.addSource( apiResponse, response -> {
@@ -53,13 +59,18 @@ public abstract class NextworkBoundResource<ResultType, RequestType, ResponseApi
             //noinspection ConstantConditions
             if( response.isSuccessful() ){
                 appExecutors.diskIO().execute( () -> {
-                    saveCallResult( convertToResultType( processResponse( response ) ) );
-                    appExecutors.mainThread().execute( () ->
-                            // we specially request a new live data,
-                            // otherwise we will get immediately last cached value,
-                            // which may not be updated with latest results received from network.
-                            result.addSource( loadFromDb(),
-                                    newData -> result.setValue( creator.success( newData ) ) )
+                    ResultType data = convertToResultType( processResponse( response ) );
+                    saveCallResult( data );
+                    NLog.i( TAG, "Save call result: " + data );
+                    appExecutors.mainThread().execute( () -> {
+                                // we specially request a new live data,
+                                // otherwise we will get immediately last cached value,
+                                // which may not be updated with latest results received from network.
+                                LiveData<ResultType> dataSource = loadFromDb();
+                                result.addSource( dataSource,
+                                        newData -> result.setValue( creator.success( newData ) ) );
+                                NLog.i( TAG, "Load from database: " + dataSource );
+                            }
                     );
                 } );
             }else{
@@ -71,6 +82,7 @@ public abstract class NextworkBoundResource<ResultType, RequestType, ResponseApi
     }
 
     protected void onFetchFailed(){
+        NLog.e( TAG, "Load from database: " );
     }
 
     public LiveData<ResourceType> asLiveData(){

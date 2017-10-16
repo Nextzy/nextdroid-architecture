@@ -15,20 +15,22 @@ import com.nextzy.tabcustomize.template.mvvm.adapter.operator.KotlinMvvmCreator
 * Created by「 The Khaeng 」on 18 Sep 2017 :)
 */
 
-class KotlinMvvmCustomListAdapter : CustomMvvmAdapter<BaseViewHolder<*>, KotlinMvvmCustomAdapterViewModel> {
+class KotlinMvvmCustomListAdapter
+    : CustomMvvmAdapter<BaseViewHolder<*> > {
 
     companion object {
         private val TAG = KotlinMvvmCustomListAdapter::class.java.simpleName
     }
 
+    private var viewModel: KotlinMvvmCustomIndividualAdapterViewModel
 
-    constructor(activity: FragmentActivity) : super(activity) {}
+    constructor(activity: FragmentActivity) : super(activity) {
+       viewModel = getViewModel(KotlinMvvmCustomIndividualAdapterViewModel::class.java)
+    }
 
-    constructor(fragment: Fragment) : super(fragment) {}
-
-    override
-    fun setupViewModel(): Class<KotlinMvvmCustomAdapterViewModel>
-            = KotlinMvvmCustomAdapterViewModel::class.java
+    constructor(fragment: Fragment) : super(fragment) {
+        viewModel = getViewModel(KotlinMvvmCustomIndividualAdapterViewModel::class.java)
+    }
 
 
     override

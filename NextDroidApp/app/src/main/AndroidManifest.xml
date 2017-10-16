@@ -10,8 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+
         <activity
-            android:name="com.nextzy.nextdroidapp.module.main.MainActivity">
+            android:name=".module.splashScreen.SplashScreenActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -19,8 +21,7 @@
         </activity>
 
         <activity
-            android:name=".module.splashScreen.SplashScreenActivity"
-            android:theme="@style/SplashTheme">
+            android:name="com.nextzy.nextdroidapp.module.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>

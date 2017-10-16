@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Progress Bar (Loading) -->
+    <style name="ProgressBar">
+        <item name="android:indeterminate">true</item>
+        <item name="cpb_max_sweep_angle">300</item>
+        <item name="cpb_min_sweep_angle">10</item>
+        <item name="cpb_stroke_width">@dimen/stroke_progressbar</item>
+        <item name="cpb_rotation_speed">1.0</item>
+        <item name="cpb_sweep_speed">1.0</item>
+    </style>
+
+    <style name="ProgressBar.Primary">
+        <item name="cpb_color">@color/primary</item>
+    </style>
 
 </resources>

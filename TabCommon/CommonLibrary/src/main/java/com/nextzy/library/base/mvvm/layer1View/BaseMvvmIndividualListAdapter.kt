@@ -13,53 +13,56 @@ import com.nextzy.library.base.view.holder.base.BaseViewHolder
  */
 
 abstract class BaseMvvmIndividualListAdapter<VH : BaseViewHolder<*>, VM : BaseListAdapterViewModel>
-    : BaseMvvmListAdapter<VH, VM> {
+    : BaseMvvmListAdapter<VH> {
 
+    lateinit var viewModel: VM
 
     var itemList: MutableList<BaseItem>
-        get() = privateViewModel?.getItemList() ?: mutableListOf()
+        get() = viewModel.getItemList() ?: mutableListOf()
         set(itemList) = setItemList(itemList, true)
 
-    private val privateViewModel: VM?
-        get() = if (setSharedViewModel()) {
-            viewModelShared
-        } else {
-            viewModel
-        }
 
-    constructor(activity: FragmentActivity) : super(activity) {}
+    constructor(activity: FragmentActivity) : super(activity) {
+        init()
+    }
 
-    constructor(fragment: Fragment) : super(fragment) {}
+    constructor(fragment: Fragment) : super(fragment) {
+        init()
+    }
 
+
+    private fun init() {
+        viewModel = setupAdapterViewModel()
+    }
 
     /* =================================== Read Item =============================================*/
     fun getItem(pos: Int): BaseItem? {
-        return privateViewModel?.getItem(pos)
+        return viewModel?.getItem(pos)
     }
 
     fun hasItems(): Boolean {
-        return privateViewModel?.isEmpty?.not() ?: false
+        return viewModel?.isEmpty?.not() ?: false
     }
 
     /* =================================== Update Item ===========================================*/
     fun setItemList(itemList: MutableList<BaseItem>, isNotify: Boolean) {
-        privateViewModel?.setItemList(itemList)
+        viewModel.setItemList(itemList)
         if (isNotify) {
             notifyDataSetChanged()
         }
     }
 
     fun addItem(index: Int = -1, item: BaseItem, isNotify: Boolean = true) {
-        if (index == -1) privateViewModel?.addItem(item)
-        else privateViewModel?.addItem(index, item)
+        if (index == -1) viewModel.addItem(item)
+        else viewModel.addItem(index, item)
         if (isNotify) {
             notifyItemInserted(index)
         }
     }
 
     fun addAllItems(index: Int = -1, items: List<BaseItem>, isNotify: Boolean = true) {
-        if (index == -1) privateViewModel?.addAllItems(items)
-        else privateViewModel?.addAllItems(index, items)
+        if (index == -1) viewModel.addAllItems(items)
+        else viewModel.addAllItems(index, items)
 
         if (isNotify) {
             notifyItemRangeInserted(index, items.size)
@@ -67,7 +70,7 @@ abstract class BaseMvvmIndividualListAdapter<VH : BaseViewHolder<*>, VM : BaseLi
     }
 
     fun updateItem(index: Int, item: BaseItem, isNotify: Boolean = true) {
-        privateViewModel?.updateItem(index, item)
+        viewModel.updateItem(index, item)
         if (isNotify) {
             notifyItemChanged(index)
         }
@@ -76,14 +79,14 @@ abstract class BaseMvvmIndividualListAdapter<VH : BaseViewHolder<*>, VM : BaseLi
     /* =================================== Delete Item ===========================================*/
 
     fun removeAllItem(isNotify: Boolean = true) {
-        privateViewModel?.removeAllItem()
+        viewModel.removeAllItem()
         if (isNotify) {
             notifyDataSetChanged()
         }
     }
 
     fun removeItemAt(index: Int, isNotify: Boolean = true) {
-        privateViewModel?.removeItemAt(index)
+        viewModel.removeItemAt(index)
         if (isNotify) {
             notifyItemRemoved(index)
         }
@@ -92,7 +95,7 @@ abstract class BaseMvvmIndividualListAdapter<VH : BaseViewHolder<*>, VM : BaseLi
     fun removeItem(baseItem: BaseItem, isNotify: Boolean = true): Int {
         val removeIndex = (0 until itemCount).firstOrNull { getItem(it) == baseItem } ?: -1
         if (removeIndex != -1) {
-            privateViewModel?.removeItem(baseItem)
+            viewModel.removeItem(baseItem)
         }
         if (isNotify && removeIndex != -1) {
             notifyItemRemoved(removeIndex)
@@ -100,6 +103,6 @@ abstract class BaseMvvmIndividualListAdapter<VH : BaseViewHolder<*>, VM : BaseLi
         return removeIndex
     }
 
-    abstract fun setSharedViewModel(): Boolean
+    abstract fun setupAdapterViewModel(): VM
 
 }

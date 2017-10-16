@@ -24,6 +24,10 @@ public abstract class BaseItem implements Parcelable{
         return id;
     }
 
+    public void setId( int id ){
+        this.id = id;
+    }
+
     public int getType(){
         return type;
     }

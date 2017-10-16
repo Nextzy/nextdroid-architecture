@@ -14,8 +14,10 @@ class SplashScreenActivity : CustomMvvmActivity() {
 
     private lateinit var viewModel: SplashScreenViewModel
 
-    private val ONE_SECOND: Long = 1000
-    private val TEN_SECOND: Long = ONE_SECOND * 10
+    companion object {
+        private const val ONE_SECOND: Long = 1000
+        private const val TEN_SECOND: Long = ONE_SECOND * 10
+    }
 
     override
     fun setupViewModel(){

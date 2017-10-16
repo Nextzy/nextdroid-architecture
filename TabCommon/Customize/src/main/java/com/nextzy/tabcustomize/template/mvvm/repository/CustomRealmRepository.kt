@@ -1,6 +1,7 @@
 package com.nextzy.tabcustomize.template.mvvm.repository
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import com.nextzy.tabcustomize.base.repository.database.realm.CustomDatabase
 import com.nextzy.tabcustomize.base.repository.network.DefaultNetworkBoundResource
 import com.nextzy.tabcustomize.base.repository.network.DefaultResource
@@ -30,7 +31,7 @@ class CustomRealmRepository private constructor() {
             = object : DefaultNetworkBoundResource<CustomModel, CustomResponse>() {
         override
         fun saveCallResult(item: CustomModel) {
-            database.saveCustomModel(item).subscribe()
+//            database.saveCustomModel(item).subscribe()
         }
 
         override
@@ -41,7 +42,8 @@ class CustomRealmRepository private constructor() {
 
         override
         fun loadFromDb(): LiveData<CustomModel> {
-            return database.loadCustomModelAsLiveData(id)
+            return MutableLiveData()
+//            return database.loadCustomModelAsLiveData(id)
         }
 
         override

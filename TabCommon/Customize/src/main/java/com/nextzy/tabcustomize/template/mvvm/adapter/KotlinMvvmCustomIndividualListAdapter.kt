@@ -20,17 +20,14 @@ class KotlinMvvmCustomIndividualListAdapter
         private val TAG = KotlinMvvmCustomIndividualListAdapter::class.java.simpleName
     }
 
-
     constructor(activity: FragmentActivity) : super(activity) {}
 
     constructor(fragment: Fragment) : super(fragment) {}
 
     override
-    fun setupViewModel(): Class<KotlinMvvmCustomIndividualAdapterViewModel>
-            = KotlinMvvmCustomIndividualAdapterViewModel::class.java
+    fun setupAdapterViewModel(): KotlinMvvmCustomIndividualAdapterViewModel
+            = getViewModel(KotlinMvvmCustomIndividualAdapterViewModel::class.java)
 
-    override
-    fun setSharedViewModel(): Boolean = false
 
     override
     fun getItemCount(): Int = viewModel.itemCount
