@@ -1,5 +1,6 @@
 package com.nextzy.nextwork.engine;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +45,7 @@ public abstract class NextworkClient{
     }
 
     public List<Interceptor> setupInterceptorList(){
-        return null;
+        return new ArrayList<>();
     }
 
 }

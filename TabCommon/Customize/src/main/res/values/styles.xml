@@ -9,9 +9,13 @@
     <style name="AppTheme" parent="BaseTheme">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorPrimaryDark">@color/md_black</item>
         <item name="colorAccent">@color/accent</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -20,6 +24,7 @@
 
     <style name="SplashTheme" parent="AppTheme.NoActionBar">
     </style>
+
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <!--<item name="android:textColorPrimary">@color/md_white</item>-->

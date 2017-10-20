@@ -41,4 +41,7 @@ fun <T : RealmObject> RealmObject.asLiveData(): LiveData<T>
     fun onInactive() {
         this@asLiveData.removeChangeListener(listener)
     }
+
+
 }
+

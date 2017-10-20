@@ -68,7 +68,7 @@ abstract class BaseMvvmListAdapter<VH : BaseViewHolder<*>>
 
 
     fun <VM : ViewModel> getSharedViewModel(viewModelClass: Class<VM>): VM? {
-        if (activity != null) return null
+        if (activity == null) return null
         return ViewModelProviders.of(activity?.get()!!).get(viewModelClass)
     }
 

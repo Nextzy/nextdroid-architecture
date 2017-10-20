@@ -7,14 +7,7 @@ import okhttp3.OkHttpClient
  * Created by「 The Khaeng 」on 29 Sep 2017 :)
  */
 
-class DefaultClient : BaseClient() {
-    private object Holder {
-        val INSTANCE = DefaultClient()
-    }
-
-    companion object {
-        val instance: DefaultClient by lazy { Holder.INSTANCE }
-    }
+object DefaultClient : BaseClient() {
 
     override
     fun configBuilder(builder: OkHttpClient.Builder) {

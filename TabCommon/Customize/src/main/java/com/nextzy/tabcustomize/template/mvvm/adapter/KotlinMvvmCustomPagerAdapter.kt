@@ -9,7 +9,7 @@ import com.nextzy.tabcustomize.base.adapter.CustomMvvmPagerAdapter
 * Created by「 The Khaeng 」on 20 Aug 2017 :)
 */
 
-class KotlinMvvmCustomPagerAdapter : CustomMvvmPagerAdapter<KotlinMvvmCustomAdapterViewModel> {
+class KotlinMvvmCustomPagerAdapter : CustomMvvmPagerAdapter {
 
     companion object {
         private val TAG = KotlinMvvmCustomPagerAdapter::class.java.simpleName
@@ -19,9 +19,6 @@ class KotlinMvvmCustomPagerAdapter : CustomMvvmPagerAdapter<KotlinMvvmCustomAdap
 
     constructor(fragment: Fragment) : super(fragment) {}
 
-    override
-    fun setupViewModel(): Class<KotlinMvvmCustomAdapterViewModel>
-            = KotlinMvvmCustomAdapterViewModel::class.java
 
     override
     fun getCount(): Int = 0

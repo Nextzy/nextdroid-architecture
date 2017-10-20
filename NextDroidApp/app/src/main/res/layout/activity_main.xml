@@ -1,33 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/main_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".module.main.MainActivity">
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_layout"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_picture"
+        <com.nextzy.tabcustomize.widgets.CustomToolbarLayout
+            android:id="@+id/toolbar"
+            style="@style/ToolbarTheme"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="@dimen/default_padding_margin_large"
-            android:paddingEnd="@dimen/default_padding_margin_large"
-            android:paddingStart="@dimen/default_padding_margin_large"
-            android:paddingTop="?attr/actionBarSize"
-            android:scrollbarStyle="outsideOverlay"/>
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/background_white"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-</android.support.constraint.ConstraintLayout>
+                <com.nextzy.tabcustomize.widgets.CustomTextView
+                    android:id="@+id/title"
+                    style="@style/CustomTextView.Regular.Black.Secondary.Title"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/setting_margin_padding_large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"/>
+
+            </LinearLayout>
+
+        </com.nextzy.tabcustomize.widgets.CustomToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".module.main.MainActivity">
+
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_picture"
+                android:layout_width="match_parent"
+                android:scrollbars="vertical"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="@dimen/default_padding_margin"
+                android:scrollbarStyle="outsideOverlay"/>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
+
+
+
+
+
+
+
+
+

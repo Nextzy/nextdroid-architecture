@@ -68,7 +68,7 @@ abstract class BaseFragment
     fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         Timber.d("onViewCreated: savedInstanceState=" + savedInstanceState)
         super.onViewCreated(view, savedInstanceState)
-        Timber.d("bindView")
+        Timber.d("onBindView")
         bindView(view)
         Timber.d("setupInstance")
         setupInstance()

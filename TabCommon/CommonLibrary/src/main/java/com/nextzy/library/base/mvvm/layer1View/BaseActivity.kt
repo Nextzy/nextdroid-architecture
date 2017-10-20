@@ -38,7 +38,7 @@ abstract class BaseActivity
         fragmentDelegate = FragmentHelperDelegate(this)
         Timber.d("setContentView: ")
         setContentView(layoutResId)
-        Timber.d("bindView: ")
+        Timber.d("onBindView: ")
         bindView()
         Timber.d("setupInstance: ")
         setupInstance()

@@ -48,7 +48,7 @@ class KotlinMvvmCustomListAdapter
         if (viewType == KotlinMvvmCreator.TYPE_CUSTOM_ITEM) {
             return KotlinMvvmHolder(viewGroup)
         }
-        throw TypeNotMatchInAdapterException(TAG)
+        throw TypeNotMatchInAdapterException(TAG,viewType)
     }
 
     override

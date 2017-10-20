@@ -52,8 +52,16 @@ class CustomDatabase private constructor() : BaseLiveDataRealmDatabase() {
                                                    value = id.toString(),
                                                    realmClass = DefaultRealmObject::class.java))
         { realmObject: DefaultRealmObject ->
-            Gson().fromJson(realmObject.json, clazz)
+            if (realmObject.isValid) {
+                Gson().fromJson(realmObject.json, clazz)
+            }else{
+                null
+            }
         }
+    }
+
+    fun clearAllData(){
+        return deleteAllDatabase()
     }
 
 

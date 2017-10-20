@@ -15,4 +15,9 @@
         <item name="cpb_color">@color/primary</item>
     </style>
 
+    <style name="ProgressBar.Primary.Small">
+        <item name="cpb_color">@color/primary</item>
+        <item name="cpb_stroke_width">@dimen/stroke_progressbar_small</item>
+    </style>
+
 </resources>

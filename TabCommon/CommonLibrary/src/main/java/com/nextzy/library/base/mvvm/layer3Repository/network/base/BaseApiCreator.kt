@@ -18,7 +18,7 @@ abstract class BaseApiCreator<T>(apiClass: Class<T>) : NextworkApiCreator<T>(api
     fun getBaseUrl(): String = BASE_URL
 
     override
-    fun getClient(): OkHttpClient = DefaultClient.instance.okHttpClient
+    fun getClient(): OkHttpClient = DefaultClient.okHttpClient
 
 //    override
 //    fun getAdapterFactory(): CallAdapter.Factory = LiveDataCallAdapterFactory.create()

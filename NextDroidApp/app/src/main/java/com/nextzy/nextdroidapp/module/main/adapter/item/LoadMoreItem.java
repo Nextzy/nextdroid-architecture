@@ -4,7 +4,7 @@ package com.nextzy.nextdroidapp.module.main.adapter.item;
 import android.os.Parcel;
 
 import com.nextzy.library.base.view.holder.base.BaseItem;
-import com.nextzy.nextdroidapp.module.main.adapter.operator.PictureCreator;
+import com.nextzy.nextdroidapp.module.main.adapter.PhotoListAdapter;
 
 /**
  * Created by「 The Khaeng 」on 08 Oct 2017 :)
@@ -13,7 +13,7 @@ import com.nextzy.nextdroidapp.module.main.adapter.operator.PictureCreator;
 public class LoadMoreItem extends BaseItem{
 
     public LoadMoreItem(){
-        super( PictureCreator.TYPE_LOADMORE );
+        super( PhotoListAdapter.TYPE_LOADMORE );
     }
 
     @Override

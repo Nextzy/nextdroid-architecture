@@ -2,7 +2,6 @@ package com.nextzy.tabcustomize.base.repository.network
 
 import com.google.gson.GsonBuilder
 import com.nextzy.library.base.mvvm.layer3Repository.network.base.BaseApiCreator
-import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -16,11 +15,6 @@ abstract class DefaultAppService<T>(apiClass: Class<T>)
 
     override
     fun getBaseUrl(): String = "https://nuuneoi.com/courses/500px/"
-
-    override
-    fun getClient(): OkHttpClient {
-        return super.getClient()
-    }
 
     override
     fun addConverter(): Converter.Factory? {

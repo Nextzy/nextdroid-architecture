@@ -10,10 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.Transformation
-
+import com.nextzy.library.glide.GlideApp
 import jp.wasabeef.glide.transformations.CropCircleTransformation
 
 /**
@@ -32,10 +30,10 @@ abstract class BaseViewHolder<I>(parent: ViewGroup, layout: Int)
     val context: Context = itemView.context
 
     init {
-        bindView(itemView)
+        onBindView(itemView)
     }
 
-    open fun bindView(view: View) {}
+    open fun onBindView(view: View) {}
 
 
     abstract fun onBind(item: I)
@@ -52,21 +50,21 @@ abstract class BaseViewHolder<I>(parent: ViewGroup, layout: Int)
     fun setImage(imgView: ImageView,
                  url: String,
                  @DrawableRes placeholderId: Int) {
-        Glide.with(context)
+        GlideApp.with(context)
                 .load(url)
-                .centerCrop()
                 .placeholder(placeholderId)
+                .centerCrop()
                 .into(imgView)
     }
 
     fun setCircleImage(imgView: ImageView,
                        url: String,
                        @DrawableRes placeholderId: Int) {
-        Glide.with(context)
+        GlideApp.with(context)
                 .load(url)
                 .centerCrop()
                 .placeholder(placeholderId)
-                .bitmapTransform(CropCircleTransformation(context))
+                .transform(CropCircleTransformation(context))
                 .into(imgView)
     }
 
@@ -74,14 +72,12 @@ abstract class BaseViewHolder<I>(parent: ViewGroup, layout: Int)
                  transformation: Transformation<Bitmap>,
                  url: String,
                  @DrawableRes placeholderId: Int) {
-        Glide.with(context)
+        GlideApp.with(context)
                 .load(url)
                 .centerCrop()
                 .placeholder(placeholderId)
-                .bitmapTransform(transformation)
+                .transform(transformation)
                 .into(imgView)
     }
 
-
-    class BaseItemHolderInfo(val payload: String) : RecyclerView.ItemAnimator.ItemHolderInfo()
 }

@@ -2,7 +2,9 @@
 <resources>
 
     <dimen name="stroke_progressbar">4dp</dimen>
-    <dimen name="progressbar_size">56dp</dimen>
-    <dimen name="card_view_corner">24dp</dimen>
+    <dimen name="stroke_progressbar_small">3dp</dimen>
+    <dimen name="progressbar_size">48dp</dimen>
+    <dimen name="progressbar_size_small">32dp</dimen>
+    <dimen name="card_view_corner">16dp</dimen>
 
 </resources>
