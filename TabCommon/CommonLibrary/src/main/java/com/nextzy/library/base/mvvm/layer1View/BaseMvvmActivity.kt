@@ -2,7 +2,6 @@ package com.nextzy.library.base.mvvm.layer1View
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
-import android.os.Bundle
 import com.nextzy.library.base.delegate.RxDelegation
 import io.reactivex.disposables.Disposable
 
@@ -15,9 +14,9 @@ abstract class BaseMvvmActivity : SettingHelperActivity() {
     private val rxDelegation = RxDelegation()
 
     override
-    fun onCreate(savedInstanceState: Bundle?) {
+    fun setupInstance() {
         setupViewModel()
-        super.onCreate(savedInstanceState)
+        super.setupInstance()
     }
 
     open fun setupViewModel() {
@@ -31,7 +30,9 @@ abstract class BaseMvvmActivity : SettingHelperActivity() {
     }
 
     fun <VM : ViewModel> getViewModel(viewModelClass: Class<VM>): VM
-            = ViewModelProviders.of(this).get(viewModelClass)
+            = ViewModelProviders
+            .of(this)
+            .get(viewModelClass)
 
 
     fun addDisposable(d: Disposable) {

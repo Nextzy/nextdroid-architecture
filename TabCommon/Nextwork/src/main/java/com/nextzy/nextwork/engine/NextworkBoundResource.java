@@ -30,7 +30,8 @@ public abstract class NextworkBoundResource<ResultType, RequestType, ResponseApi
     private final MediatorLiveData<ResourceType> result = new MediatorLiveData<>();
 
     @MainThread
-    public NextworkBoundResource( AppExecutors appExecutors, NextworkResourceCreator<ResultType, ResourceType> creator ){
+    public NextworkBoundResource( AppExecutors appExecutors,
+                                  NextworkResourceCreator<ResultType, ResourceType> creator ){
         this.appExecutors = appExecutors;
         this.creator = creator;
         result.setValue( creator.<ResultType>loading( null ) );
@@ -82,7 +83,7 @@ public abstract class NextworkBoundResource<ResultType, RequestType, ResponseApi
     }
 
     protected void onFetchFailed(){
-        NLog.e( TAG, "Load from database: " );
+        NLog.e( TAG, "Load from database: onFetchFailed()" );
     }
 
     public LiveData<ResourceType> asLiveData(){

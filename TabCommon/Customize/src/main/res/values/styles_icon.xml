@@ -32,6 +32,7 @@
     <style name="Icon.Click.Toolbar">
         <item name="android:layout_marginEnd">4dp</item>
         <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
     </style>
 
     <style name="Icon.Click.Small">

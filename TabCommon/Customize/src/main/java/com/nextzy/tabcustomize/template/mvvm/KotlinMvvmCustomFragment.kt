@@ -33,16 +33,17 @@ class KotlinMvvmCustomFragment : CustomMvvmFragment() {
 
     override
     fun setupInstance() {
-
+        super.setupInstance()
     }
 
     override
     fun setupView() {
-
+        super.setupView()
     }
 
     override
     fun initialize() {
+        super.initialize()
 
     }
 

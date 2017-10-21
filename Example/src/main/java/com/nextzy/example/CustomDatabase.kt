@@ -75,7 +75,7 @@ class CustomDatabase : BaseRealmDatabase() {
             return queryAsync(fieldName = DefaultRealmObject.KEY_ID,
                               value = id,
                               realmClass = DefaultRealmObject::class.java)
-                    .map { defaultRealmObject ->
+                    .map { defaultRealmObject: DefaultRealmObject ->
                         Gson().fromJson(
                                 defaultRealmObject.json, MockObject::class.java)
 

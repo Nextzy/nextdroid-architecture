@@ -1,74 +1,140 @@
 package com.nextzy.nextdroidapp.module.main
 
+import com.nextzy.nextdroidapp.module.main.adapter.item.PhotoItem
 import com.nextzy.nextdroidapp.module.main.adapter.item.PhotoListItem
-import com.nextzy.nextdroidapp.repository.PictureRepository
+import com.nextzy.nextdroidapp.repository.PhotoRepository
 import com.nextzy.nextwork.engine.FetchLiveData
 import com.nextzy.nextwork.engine.TriggerLiveData
 import com.nextzy.tabcustomize.base.mvvm.CustomViewModel
 import com.nextzy.tabcustomize.base.repository.network.DefaultResource
+import io.reactivex.Single
 
-class MainViewModel : CustomViewModel() {
+class MainViewModel : CustomViewModel {
 
-    private var repository: PictureRepository = PictureRepository.instance
+    private var repository: PhotoRepository = PhotoRepository.instance
 
-    var pictureListItem: PhotoListItem? = null
+    var photoListItemAll: MutableList<PhotoListItem> = mutableListOf()
 
-    val pictureList: FetchLiveData<DefaultResource<PhotoListItem>>
-    val pictureListAfterId: TriggerLiveData<Int, DefaultResource<PhotoListItem>>
-    val pictureListBeforeId: TriggerLiveData<Int, DefaultResource<PhotoListItem>>
+    val photoListLiveData: FetchLiveData<DefaultResource<PhotoListItem>>
+    val photoListAfterIdLiveData: TriggerLiveData<Int, DefaultResource<PhotoListItem>>
+    val photoListBeforeIdLiveData: TriggerLiveData<Int, DefaultResource<PhotoListItem>>
 
     init {
-        this.pictureList = FetchLiveData<DefaultResource<PhotoListItem>>()
+    }
+    constructor(){
+        this.photoListLiveData = FetchLiveData<DefaultResource<PhotoListItem>>()
                 .createSwitchMap({ forceFetch ->
-                                     repository.getPictureList(forceFetch)
+                                     repository.getPhotoList(forceFetch)
                                  })
-        this.pictureListAfterId = TriggerLiveData<Int, DefaultResource<PhotoListItem>>()
+        this.photoListAfterIdLiveData = TriggerLiveData<Int, DefaultResource<PhotoListItem>>()
                 .createSwitchMap({ id ->
-                                     repository.getPictureListAfterId(id)
+                                     repository.getPhotoListAfterId(id)
                                  })
-        this.pictureListBeforeId = TriggerLiveData<Int, DefaultResource<PhotoListItem>>()
+        this.photoListBeforeIdLiveData = TriggerLiveData<Int, DefaultResource<PhotoListItem>>()
                 .createSwitchMap({ id ->
-                                     repository.getPictureListBeforeId(id)
+                                     repository.getPhotoListBeforeId(id)
                                  })
     }
+
+    fun getMaxPhotoId(): Single<Int> {
+        return repository.getMaxPhotoId()
+    }
+
 
     fun requestPhotoList(forceFetch: Boolean = false) {
         if (forceFetch) {
-            pictureListItem = null
+            photoListItemAll.clear()
             repository.clearAllDataInDatabase()
         }
-        pictureList.trigger(forceFetch)
+        photoListLiveData.trigger(forceFetch)
     }
 
-    fun requestPhotoListBeforeId(id:Int) {
-        pictureListBeforeId.trigger(id)
+    fun requestPhotoListBeforeId(id: Int) {
+        photoListBeforeIdLiveData.trigger(id)
     }
 
-    fun requestPhotoListAfterId(id:Int) {
-        pictureListAfterId.trigger(id)
+    fun requestPhotoListAfterId(id: Int) {
+        photoListAfterIdLiveData.trigger(id)
     }
 
     fun getMinimumPhotoId(): Int {
-        if (pictureListItem == null) return 0
-        if (pictureListItem?.size() == 0) return 0
+        if (photoListItemAll.size == 0) return 0
 
-        var minId = pictureListItem?.get(0)?.id ?: 0
-        pictureListItem?.pictureItemList?.forEach{ pictureItem ->
-            minId = Math.min(minId, pictureItem.id)
+        var minId = photoListItemAll[0].get(0).id
+
+        photoListItemAll.forEach { it: PhotoListItem ->
+            it.photoItemList.forEach { pictureItem ->
+                minId = Math.min(minId, pictureItem.id)
+            }
         }
+
         return minId
     }
 
-    fun getMaximumPhotoId(): Int{
-        if (pictureListItem == null) return 0
-        if (pictureListItem?.size() == 0) return 0
+    fun getMaximumPhotoId(): Int {
+        if (photoListItemAll.size == 0) return 0
 
-        var maxId = pictureListItem?.get(0)?.id ?: 0
-        pictureListItem?.pictureItemList?.forEach{ pictureItem ->
-            maxId = Math.max(maxId, pictureItem.id)
+        var maxId = photoListItemAll[0].get(0).id
+
+        photoListItemAll.forEach { it: PhotoListItem ->
+            it.photoItemList.forEach { pictureItem ->
+                maxId = Math.max(maxId, pictureItem.id)
+            }
         }
+
         return maxId
     }
 
+    fun getPhotoAllItem(): List<PhotoItem> {
+        val list = ArrayList<PhotoItem>()
+        photoListItemAll.forEach { photoListItem ->
+            list.addAll(photoListItem.photoItemList)
+        }
+        return list
+    }
+
+    fun getPhotoItem(pos: Int): PhotoItem? {
+        var tmpPos = pos
+        photoListItemAll.forEach { photoListItem ->
+            if (tmpPos >= photoListItem.size()) {
+                tmpPos -= photoListItem.size()
+            } else {
+                return photoListItem[tmpPos]
+            }
+        }
+        return null
+    }
+
+    fun getPhotoItemType(pos: Int): Int {
+        var tmpPos = pos
+        photoListItemAll.forEach { photoListItem ->
+            if (tmpPos >= photoListItem.size()) {
+                tmpPos -= photoListItem.size()
+            } else {
+                return photoListItem[tmpPos].type
+            }
+        }
+        return -1
+    }
+
+    fun getPhotoItemListSize(): Int {
+        var size = 0
+        photoListItemAll.forEach { size += it.size() }
+        return size
+    }
+
+    fun addPhotoItemList(i: Int = -1, data: PhotoListItem?) {
+        if (data?.photoItemList?.isNotEmpty() == true) {
+            if (i == -1) {
+                photoListItemAll.add(data)
+            } else {
+                photoListItemAll.add(i, data)
+            }
+        }
+    }
+
+    fun saveData() {
+        repository.savePhotoListItemAll(photoListItemAll)
+    }
 
 }

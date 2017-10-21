@@ -31,11 +31,31 @@
                 <com.nextzy.tabcustomize.widgets.CustomTextView
                     android:id="@+id/title"
                     style="@style/CustomTextView.Regular.Black.Secondary.Title"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/setting_margin_padding_large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/setting_margin_padding_large"
                     android:text="@string/app_name"/>
+
+                <android.support.v4.widget.Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/ic_reload"
+                    style="@style/Icon.Click.Toolbar"
+                    android:alpha="@dimen/default_alpha_secondary_light_theme"
+                    app:srcCompat="@drawable/ic_autorenew_black"
+                    />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/ic_info"
+                    style="@style/Icon.Click.Toolbar"
+                    android:layout_marginEnd="@dimen/default_padding_margin"
+                    android:tint="@color/primary"
+                    app:srcCompat="@drawable/ic_info_outline_black"
+                    />
 
             </LinearLayout>
 
@@ -63,16 +83,30 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_picture"
                 android:layout_width="match_parent"
-                android:scrollbars="vertical"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:padding="@dimen/default_padding_margin"
-                android:scrollbarStyle="outsideOverlay"/>
+                android:paddingBottom="@dimen/default_padding_margin"
+                android:paddingEnd="@dimen/default_padding_margin"
+                android:paddingStart="@dimen/default_padding_margin"
+                android:paddingTop="@dimen/default_padding_margin"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"/>
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
     </android.support.constraint.ConstraintLayout>
 
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_arrow_upward_black"
+        app:fabSize="normal"
+        app:borderWidth="0dp"
+        app:layout_behavior="com.nextzy.nextdroidapp.module.main.viewUtil.ScrollingFABBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>
 

@@ -10,7 +10,7 @@ import com.nextzy.library.base.mvvm.exception.TypeNotMatchInAdapterException
 import com.nextzy.library.base.view.holder.base.BaseViewHolder
 import com.nextzy.nextdroidapp.module.main.MainViewModel
 import com.nextzy.nextdroidapp.module.main.adapter.holder.LoadMoreHolder
-import com.nextzy.nextdroidapp.module.main.adapter.holder.PictureViewHolder
+import com.nextzy.nextdroidapp.module.main.adapter.holder.PhotoViewHolder
 import com.nextzy.nextdroidapp.module.main.adapter.item.PhotoItem
 import com.nextzy.nextdroidapp.module.main.adapter.operator.PhotoDiffUtilCallback
 import com.nextzy.tabcustomize.base.adapter.CustomMvvmAdapter
@@ -51,23 +51,22 @@ class PhotoListAdapter
         viewModel = getSharedViewModel(MainViewModel::class.java)
     }
 
-
     override
-    fun getItemCount(): Int = viewModel?.pictureListItem?.size()?.plus(1) ?: 1
+    fun getItemCount(): Int = viewModel?.getPhotoItemListSize()?.plus(1) ?: 1
 
     override
     fun getItemViewType(position: Int): Int {
-        if (position >= viewModel?.pictureListItem?.size() ?: 0) {
+        if (position >= viewModel?.getPhotoItemListSize() ?: 0) {
             return TYPE_LOADMORE
         }
-        return viewModel?.pictureListItem?.getType(position) ?: -1
+        return viewModel?.getPhotoItemType(position) ?: -1
     }
 
     override
     fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): BaseViewHolder<*> {
         super.onCreateViewHolder(viewGroup, viewType)
         if (viewType == TYPE_PICTURE) {
-            return PictureViewHolder(viewGroup)
+            return PhotoViewHolder(viewGroup)
         } else if (viewType == TYPE_LOADMORE) {
             return LoadMoreHolder(viewGroup)
         }
@@ -78,8 +77,8 @@ class PhotoListAdapter
     fun onBindViewHolder(vh: BaseViewHolder<*>, pos: Int) {
         super.onBindViewHolder(vh, pos)
         if (getItemViewType(pos) == TYPE_PICTURE) {
-            val item = viewModel?.pictureListItem?.get(pos)
-            val viewHolder = vh as PictureViewHolder
+            val item = viewModel?.getPhotoItem(pos)
+            val viewHolder = vh as PhotoViewHolder
             item?.let { viewHolder.onBind(it) }
             preloadSizeProvider.setView(viewHolder.itemView.image)
         } else if (getItemViewType(pos) == TYPE_LOADMORE) {
@@ -89,17 +88,15 @@ class PhotoListAdapter
         }
     }
 
-
-    fun notifyPictureDataSetChanged() {
-        val newDataList = viewModel?.pictureListItem?.pictureItemList
+    fun notifyPhotoDataSetChanged() {
+        val newDataList = viewModel?.getPhotoAllItem()
         val diffResult = DiffUtil.calculateDiff(PhotoDiffUtilCallback(
                 oldDataList,
                 newDataList))
         diffResult.dispatchUpdatesTo(this)
         oldDataList = mutableListOf<PhotoItem>().apply {
-            newDataList?.forEach { add(it) }
+            viewModel?.getPhotoAllItem()?.forEach {it: PhotoItem -> add(it) }
         }
     }
-
 
 }

@@ -21,6 +21,7 @@ class SplashScreenActivity : CustomMvvmActivity() {
 
     override
     fun setupViewModel(){
+        super.setupViewModel()
         viewModel = getViewModel( SplashScreenViewModel::class.java)
     }
 
@@ -47,6 +48,7 @@ class SplashScreenActivity : CustomMvvmActivity() {
 
     override
     fun setupView() {
+        super.setupView()
         delay(Action { openActivityWithFinish(MainActivity::class.java) },
               ONE_SECOND)
     }

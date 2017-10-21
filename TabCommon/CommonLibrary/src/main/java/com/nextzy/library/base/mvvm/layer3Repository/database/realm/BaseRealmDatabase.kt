@@ -55,6 +55,12 @@ abstract class BaseRealmDatabase {
     protected fun <T : RealmObject> saveAsync(realmObject: T): Single<T>
             = save(ASYNC, realmObject)
 
+    protected fun <T : RealmObject> saveList(realmObjectList: List<T>): Single<List<T>>
+            = saveList(SYNC, realmObjectList)
+
+    protected fun <T : RealmObject> saveListAsync(realmObjectList: List<T>): Single<List<T>>
+            = saveList(ASYNC, realmObjectList)
+
 
     protected fun <T : RealmObject> query(fieldName: String,
                                           value: String,
@@ -117,6 +123,35 @@ abstract class BaseRealmDatabase {
         singleEmitter.setDisposable(Disposables.fromRunnable { close(realm) })
 
     }
+
+
+    private fun <T : RealmObject> saveList(@Type type: Long,
+                                           realmObjectList: List<T>): Single<List<T>>
+            = Single.create { singleEmitter ->
+        val realm = getRealm()
+
+        if (type == SYNC) {
+            realm.executeTransaction({ realm1 ->
+                                         realm1.copyToRealmOrUpdate(realmObjectList)
+                                         singleEmitter.onSuccess(realmObjectList)
+                                     })
+        } else if (type == ASYNC) {
+            realm.executeTransactionAsync(
+                    { realm1 -> realm1.copyToRealmOrUpdate(realmObjectList) },
+                    {
+                        singleEmitter.onSuccess(realmObjectList)
+                        close(realm)
+                    })
+            { throwable ->
+                singleEmitter.onError(throwable)
+                close(realm)
+            }
+        }
+        singleEmitter.setDisposable(Disposables.fromRunnable { close(realm) })
+
+    }
+
+
 
 
     private fun <T : RealmObject> query(@Type type: Long,

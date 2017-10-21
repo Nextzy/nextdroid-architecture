@@ -11,7 +11,7 @@ public class FetchLiveData<T> extends TriggerLiveData<Boolean,T>{
 
 
 
-    public Boolean getFetchValue(){
+    public Boolean getTriggerValue(){
         return trickLiveData.getValue();
     }
 
@@ -27,10 +27,7 @@ public class FetchLiveData<T> extends TriggerLiveData<Boolean,T>{
 
     @Override
     public void trigger( Boolean isForce ){
-        if( isForce ) reset();
-        if( getFetchValue() != null && isShouldBeSkip( getFetchValue(), isForce ) ) return;
-
-        trickLiveData.setValue( isForce );
+        super.trigger( isForce );
     }
 
     @Override

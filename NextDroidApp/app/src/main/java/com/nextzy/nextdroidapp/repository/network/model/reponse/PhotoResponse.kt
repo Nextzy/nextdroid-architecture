@@ -9,7 +9,7 @@ import com.nextzy.nextdroidapp.repository.model.Picture
 /**
  * Created by Nonthawit on 3/13/2016.
  */
-data class PictureResponse(
+data class PhotoResponse(
         @SerializedName("success")
         var isSuccess: Boolean = false,
         @SerializedName("data")
@@ -30,9 +30,9 @@ data class PictureResponse(
 
     companion object {
         @JvmField
-        val CREATOR: Parcelable.Creator<PictureResponse> = object : Parcelable.Creator<PictureResponse> {
-            override fun createFromParcel(source: Parcel): PictureResponse = PictureResponse(source)
-            override fun newArray(size: Int): Array<PictureResponse?> = arrayOfNulls(size)
+        val CREATOR: Parcelable.Creator<PhotoResponse> = object : Parcelable.Creator<PhotoResponse> {
+            override fun createFromParcel(source: Parcel): PhotoResponse = PhotoResponse(source)
+            override fun newArray(size: Int): Array<PhotoResponse?> = arrayOfNulls(size)
         }
     }
 }

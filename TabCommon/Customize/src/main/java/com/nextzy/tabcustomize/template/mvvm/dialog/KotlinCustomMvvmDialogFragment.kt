@@ -21,32 +21,35 @@ class KotlinCustomMvvmDialogFragment : CustomMvvmDialogFragment<KotlinCustomDial
         }
     }
 
+    private lateinit var viewModel: KotlinCustomDialogViewModel
 
     override
-    fun setupViewModel(): Class<KotlinCustomDialogViewModel>
-            = KotlinCustomDialogViewModel::class.java
+    fun setupViewModel() {
+        viewModel = getViewModel(KotlinCustomDialogViewModel::class.java)
+    }
+
 
     override
     fun setupLayoutView(): Int = 0
 
     override
     fun bindView(view: View?) {
-
+        super.bindView(view)
     }
 
     override
     fun setupInstance() {
-
+        super.setupInstance()
     }
 
     override
     fun setupView() {
-
+        super.setupView()
     }
 
     override
     fun initialize() {
-
+        super.initialize()
     }
 
     override

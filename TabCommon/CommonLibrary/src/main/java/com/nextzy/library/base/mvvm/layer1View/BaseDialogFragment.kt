@@ -65,6 +65,7 @@ abstract class BaseDialogFragment
         }
     }
 
+
     override
     fun onAttach(context: Context?) {
         super.onAttach(context)

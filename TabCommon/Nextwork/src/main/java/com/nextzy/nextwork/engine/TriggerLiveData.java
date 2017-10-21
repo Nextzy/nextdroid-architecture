@@ -19,7 +19,7 @@ public class TriggerLiveData<TRIGGER, RESULT> extends LiveData<RESULT>{
     LiveData<RESULT> liveData;
 
 
-    public TRIGGER getFetchValue(){
+    public TRIGGER getTriggerValue(){
         return trickLiveData.getValue();
     }
 
@@ -30,21 +30,21 @@ public class TriggerLiveData<TRIGGER, RESULT> extends LiveData<RESULT>{
 
 
     public void trigger( TRIGGER trigger ){
-        if( trigger == null ) reset();
-        if( getFetchValue() != null && isShouldBeSkip( getFetchValue(), trigger ) ) return;
+        reset();
+        if( getTriggerValue() != null && isShouldBeSkip( getTriggerValue(), trigger ) ) return;
 
-        trickLiveData.setValue( trigger );
+        trickLiveData.postValue( trigger );
     }
 
 
     public TriggerLiveData<TRIGGER, RESULT> createSwitchMap( Function<TRIGGER, LiveData<RESULT>> func ){
         liveData = Transformations.switchMap(
                 trickLiveData,
-                forceFetch -> {
-                    if( forceFetch == null ){
+                trigger -> {
+                    if( trigger == null ){
                         return AbsentLiveData.create();
                     }else{
-                        return func.apply( forceFetch );
+                        return func.apply( trigger );
                     }
                 }
         );

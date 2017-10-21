@@ -22,11 +22,13 @@ class CrashActivity : CustomMvvmActivity() {
 
     override
     fun initialize() {
+        super.initialize()
         repeatShowErrorStackTrace()
     }
 
     override
     fun setupView() {
+        super.setupView()
         btnRestart.setOnClickListener({ restartApplication() })
     }
 

@@ -7,11 +7,11 @@ import com.nextzy.tabcustomize.base.repository.network.DefaultAppService
  */
 
 
-class PictureApiService private constructor()
-    : DefaultAppService<PictureApi>(PictureApi::class.java) {
+class PhotoApiService private constructor()
+    : DefaultAppService<PhotoApi>(PhotoApi::class.java) {
 
     companion object {
         val newInstance
-            get() = PictureApiService()
+            get() = PhotoApiService()
     }
 }

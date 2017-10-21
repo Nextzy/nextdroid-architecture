@@ -3,33 +3,28 @@ package com.nextzy.library.base.mvvm.layer1View
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.annotation.DimenRes
 import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.BottomSheetBehavior.STATE_COLLAPSED
 import android.support.design.widget.BottomSheetDialogFragment
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.Fragment
 import android.util.TypedValue
 import android.view.View
-
 import com.nextzy.library.base.delegate.DefaultSnackbarDelegate
 import com.nextzy.library.base.delegate.DefaultSnackbarInterface
 import com.nextzy.library.base.mvvm.exception.NotSetLayoutException
-import com.nextzy.library.base.mvvm.exception.ShareViewModelNotCreated
 import com.nextzy.library.base.mvvm.exception.ViewModelNotNullException
-import com.nextzy.library.base.mvvm.exception.ViewModelNotSetupException
 import com.nextzy.library.base.mvvm.layer2ViewModel.BaseDialogViewModel
-
-import timber.log.Timber
-
-import android.support.design.widget.BottomSheetBehavior.STATE_COLLAPSED
 import com.nextzy.setting.view.util.SettingPreferenceDelegate
 import com.nextzy.setting.view.util.SettingPreferenceInterface
+import timber.log.Timber
 
 /**
  * Created by「 The Khaeng 」on 26 Aug 2017 :)
@@ -55,23 +50,14 @@ abstract class BaseMvvmBottomSheetFragment<VM : BaseDialogViewModel>
 
 
 
-    val viewModelShared: VM?
-        get() {
-            if (setupViewModel() == null) throw ViewModelNotSetupException()
-            if (activity != null) {
-                return ViewModelProviders.of(activity)
-                        .get(setupViewModel())
-            }
-            Timber.w("getViewModelShared: ", ShareViewModelNotCreated())
-            return null
-        }
 
-    val viewModel: VM
-        get() {
-            if (setupViewModel() == null) throw ViewModelNotSetupException()
-            return ViewModelProviders.of(this)
-                    .get(setupViewModel())
-        }
+    fun <VM : ViewModel> getViewModel(viewModelClass: Class<VM>): VM
+            = ViewModelProviders.of(this).get(viewModelClass)
+
+
+    fun <VM : ViewModel> getSharedViewModel(viewModelClass: Class<VM>): VM
+            = ViewModelProviders.of(activity).get(viewModelClass)
+
 
     override
     fun onCreate(savedInstanceState: Bundle?) {
@@ -95,6 +81,7 @@ abstract class BaseMvvmBottomSheetFragment<VM : BaseDialogViewModel>
     override
     fun onAttach(context: Context?) {
         super.onAttach(context)
+        setupViewModel()
         try {
             this.listener = context as OnFragmentDialogListener?
         } catch (e: ClassCastException) {
@@ -238,7 +225,7 @@ abstract class BaseMvvmBottomSheetFragment<VM : BaseDialogViewModel>
 
     abstract fun setupLayoutView(): Int
 
-    abstract fun setupViewModel(): Class<VM>?
+    open fun setupViewModel(){ }
 
     abstract fun bindView(view: View)
 

@@ -11,8 +11,10 @@ import com.nextzy.nextdroidapp.module.main.adapter.PhotoListAdapter;
 
 public class PhotoItem extends BaseItem{
 
-    private int imageWidth = 0;
-    private int imageHeight = 0;
+    private int imageWidthPortrait = 0;
+    private int imageHeightPortrait = 0;
+    private int imageWidthLandScape = 0;
+    private int imageHeightLandScape = 0;
     private String imageUrl = null;
     private String caption = null;
     private String profilePicture = null;
@@ -41,13 +43,33 @@ public class PhotoItem extends BaseItem{
     }
 
 
-    public PhotoItem setImageWidth( int imageWidth ){
-        this.imageWidth = imageWidth;
+    public float getAspectRaito(){
+        if( isSetImageSizePortrait() ){
+            return (float) imageWidthPortrait / imageHeightPortrait;
+        }else if( isSetImageSizeLandScape()){
+            return (float) imageWidthLandScape / imageHeightLandScape;
+        }else{
+            return 0;
+        }
+    }
+
+    public PhotoItem setImageWidthLandScape( int imageWidthLandScape ){
+        this.imageWidthLandScape = imageWidthLandScape;
         return this;
     }
 
-    public PhotoItem setImageHeight( int imageHeight ){
-        this.imageHeight = imageHeight;
+    public PhotoItem setImageHeightLandScape( int imageHeightLandScape ){
+        this.imageHeightLandScape = imageHeightLandScape;
+        return this;
+    }
+
+    public PhotoItem setImageWidthPortrait( int imageWidthPortrait ){
+        this.imageWidthPortrait = imageWidthPortrait;
+        return this;
+    }
+
+    public PhotoItem setImageHeightPortrait( int imageHeightPortrait ){
+        this.imageHeightPortrait = imageHeightPortrait;
         return this;
     }
 
@@ -101,16 +123,28 @@ public class PhotoItem extends BaseItem{
         return this;
     }
 
-    public boolean isSetImageSize(){
-       return imageWidth != 0 && imageHeight != 0;
+    public boolean isSetImageSizePortrait(){
+        return imageWidthPortrait != 0 && imageHeightPortrait != 0;
     }
 
-    public int getImageWidth(){
-        return imageWidth;
+    public boolean isSetImageSizeLandScape(){
+        return imageWidthLandScape != 0 && imageHeightLandScape != 0;
     }
 
-    public int getImageHeight(){
-        return imageHeight;
+    public int getImageWidthLandScape(){
+        return imageWidthLandScape;
+    }
+
+    public int getImageHeightLandScape(){
+        return imageHeightLandScape;
+    }
+
+    public int getImageWidthPortrait(){
+        return imageWidthPortrait;
+    }
+
+    public int getImageHeightPortrait(){
+        return imageHeightPortrait;
     }
 
     public String getImageUrl(){
@@ -157,8 +191,10 @@ public class PhotoItem extends BaseItem{
     @Override
     public void writeToParcel( Parcel dest, int flags ){
         super.writeToParcel( dest, flags );
-        dest.writeInt( this.imageWidth );
-        dest.writeInt( this.imageHeight );
+        dest.writeInt( this.imageWidthPortrait );
+        dest.writeInt( this.imageHeightPortrait );
+        dest.writeInt( this.imageWidthLandScape );
+        dest.writeInt( this.imageHeightLandScape );
         dest.writeString( this.imageUrl );
         dest.writeString( this.caption );
         dest.writeString( this.profilePicture );
@@ -172,8 +208,10 @@ public class PhotoItem extends BaseItem{
 
     protected PhotoItem( Parcel in ){
         super( in );
-        this.imageWidth = in.readInt();
-        this.imageHeight = in.readInt();
+        this.imageWidthPortrait = in.readInt();
+        this.imageHeightPortrait = in.readInt();
+        this.imageWidthLandScape = in.readInt();
+        this.imageHeightLandScape = in.readInt();
         this.imageUrl = in.readString();
         this.caption = in.readString();
         this.profilePicture = in.readString();
@@ -204,8 +242,10 @@ public class PhotoItem extends BaseItem{
 
         PhotoItem photoItem = (PhotoItem) o;
 
-        if( imageWidth != photoItem.imageWidth ) return false;
-        if( imageHeight != photoItem.imageHeight ) return false;
+        if( imageWidthPortrait != photoItem.imageWidthPortrait ) return false;
+        if( imageHeightPortrait != photoItem.imageHeightPortrait ) return false;
+        if( imageWidthLandScape != photoItem.imageWidthLandScape ) return false;
+        if( imageHeightLandScape != photoItem.imageHeightLandScape ) return false;
         if( imageUrl != null ? !imageUrl.equals( photoItem.imageUrl ) : photoItem.imageUrl != null )
             return false;
         if( caption != null ? !caption.equals( photoItem.caption ) : photoItem.caption != null )
@@ -225,8 +265,10 @@ public class PhotoItem extends BaseItem{
 
     @Override
     public int hashCode(){
-        int result = imageWidth;
-        result = 31 * result + imageHeight;
+        int result = imageWidthPortrait;
+        result = 31 * result + imageHeightPortrait;
+        result = 31 * result + imageWidthLandScape;
+        result = 31 * result + imageHeightLandScape;
         result = 31 * result + ( imageUrl != null ? imageUrl.hashCode() : 0 );
         result = 31 * result + ( caption != null ? caption.hashCode() : 0 );
         result = 31 * result + ( profilePicture != null ? profilePicture.hashCode() : 0 );

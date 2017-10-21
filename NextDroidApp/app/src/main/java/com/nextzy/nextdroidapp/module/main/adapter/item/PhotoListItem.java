@@ -15,45 +15,45 @@ import java.util.List;
 
 public class PhotoListItem extends BaseItem{
 
-    private List<PhotoItem> pictureItemList = new ArrayList<>();
+    private List<PhotoItem> photoItemList = new ArrayList<>();
 
     public PhotoListItem(){
         super( PhotoListAdapter.TYPE_PICTURE_LIST );
     }
 
-    public PhotoListItem setPictureItemList( List<PhotoItem> pictureItemList ){
-        this.pictureItemList = pictureItemList;
+    public PhotoListItem setPhotoItemList( List<PhotoItem> photoItemList ){
+        this.photoItemList = photoItemList;
         return this;
     }
 
-    public void addPictureItemList(PhotoListItem pictureListItem){
-        this.pictureItemList.addAll(pictureListItem.getPictureItemList());
+    public void addPhotoItemList( PhotoListItem photoListItem){
+        this.photoItemList.addAll(photoListItem.getPhotoItemList());
     }
 
-    public void addPictureItemList(int index, PhotoListItem pictureListItem){
-        this.pictureItemList.addAll(index, pictureListItem.getPictureItemList());
+    public void addPhotoItemList( int index, PhotoListItem photoListItem){
+        this.photoItemList.addAll(index, photoListItem.getPhotoItemList());
     }
 
     public PhotoItem get( int pos ){
-        if( pictureItemList == null || pictureItemList.isEmpty() ) return null;
-        return pictureItemList.get( pos );
+        if( photoItemList == null || photoItemList.isEmpty() ) return null;
+        return photoItemList.get( pos );
     }
 
     public int size(){
-        if( pictureItemList == null || pictureItemList.isEmpty() ) return 0;
-        return pictureItemList.size();
+        if( photoItemList == null || photoItemList.isEmpty() ) return 0;
+        return photoItemList.size();
     }
 
     public int getType( int position ){
-        return pictureItemList.get( position ).getType();
+        return photoItemList.get( position ).getType();
     }
 
-    public List<PhotoItem> getPictureItemList(){
-        return pictureItemList;
+    public List<PhotoItem> getPhotoItemList(){
+        return photoItemList;
     }
 
     public boolean shouldFetch(){
-        return pictureItemList.isEmpty();
+        return photoItemList.isEmpty();
     }
 
     @Override
@@ -64,12 +64,12 @@ public class PhotoListItem extends BaseItem{
     @Override
     public void writeToParcel( Parcel dest, int flags ){
         super.writeToParcel( dest, flags );
-        dest.writeTypedList( this.pictureItemList );
+        dest.writeTypedList( this.photoItemList );
     }
 
     protected PhotoListItem( Parcel in ){
         super( in );
-        this.pictureItemList = in.createTypedArrayList( PhotoItem.CREATOR );
+        this.photoItemList = in.createTypedArrayList( PhotoItem.CREATOR );
     }
 
     public static final Creator<PhotoListItem> CREATOR = new Creator<PhotoListItem>(){
@@ -91,11 +91,11 @@ public class PhotoListItem extends BaseItem{
 
         PhotoListItem that = (PhotoListItem) o;
 
-        return pictureItemList != null ? pictureItemList.equals( that.pictureItemList ) : that.pictureItemList == null;
+        return photoItemList != null ? photoItemList.equals( that.photoItemList ) : that.photoItemList == null;
     }
 
     @Override
     public int hashCode(){
-        return pictureItemList != null ? pictureItemList.hashCode() : 0;
+        return photoItemList != null ? photoItemList.hashCode() : 0;
     }
 }

@@ -1,7 +1,9 @@
 package com.nextzy.nextdroidapp.module.main.adapter.holder
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.graphics.drawable.Drawable
+import android.support.v7.widget.AppCompatImageView
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.load.DataSource
@@ -13,6 +15,7 @@ import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.bumptech.glide.request.target.Target
 import com.nextzy.library.base.view.holder.base.BaseViewHolder
 import com.nextzy.library.glide.GlideApp
+import com.nextzy.library.glide.GlideRequest
 import com.nextzy.nextdroidapp.R
 import com.nextzy.nextdroidapp.module.main.adapter.item.PhotoItem
 import com.thekhaeng.pushdownanim.PushDownAnim
@@ -23,7 +26,7 @@ import kotlinx.android.synthetic.main.view_holder_picture.view.*
  * Created by「 The Khaeng 」on 03 Oct 2017 :)
  */
 
-class PictureViewHolder(parent: ViewGroup)
+class PhotoViewHolder(parent: ViewGroup)
     : BaseViewHolder<PhotoItem>(parent, R.layout.view_holder_picture) {
 
     override
@@ -36,22 +39,13 @@ class PictureViewHolder(parent: ViewGroup)
                 .load(item.imageUrl)
         itemView.title.text = item.caption
 
-        if (item.isSetImageSize) {
-            if (itemView.image.layoutParams.height != item.imageHeight) {
-                itemView.image.layoutParams = itemView.image.layoutParams.apply {
-                    height = item.imageHeight
-                }
-            }
-            glideRequest
-                    .override(item.imageWidth, item.imageHeight)
-        }
+        setupImageViewSize(item, glideRequest)
 
         glideRequest
                 .placeholder(R.drawable.img_placeholder)
-                .dontTransform()
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .listener(requestListener(item))
+                .listener(requestListener(itemView.image, item))
                 .into(itemView.image)
 
         PushDownAnim
@@ -61,7 +55,34 @@ class PictureViewHolder(parent: ViewGroup)
 
     }
 
-    private fun requestListener(item: PhotoItem): RequestListener<Drawable>
+    private fun setupImageViewSize(item: PhotoItem, glideRequest: GlideRequest<Drawable>) {
+        if (item.isSetImageSizePortrait) {
+            if (isPortrait()) {
+                glideRequest
+                        .override(item.imageWidthPortrait, item.imageHeightPortrait)
+                if (itemView.image.layoutParams.height != item.imageHeightPortrait) {
+                    itemView.image.layoutParams = itemView.image.layoutParams.apply {
+                        height = item.imageHeightPortrait
+                    }
+                    itemView.image.requestLayout()
+                }
+            } else {
+                glideRequest
+                        .override(item.imageWidthLandScape, item.imageHeightLandScape)
+                if (itemView.image.layoutParams.height != item.imageHeightLandScape) {
+                    itemView.image.layoutParams = itemView.image.layoutParams.apply {
+                        height = item.imageHeightLandScape
+                    }
+                    itemView.image.requestLayout()
+                }
+            }
+
+        }else{
+            itemView.image.layout(0,0,0,0)
+        }
+    }
+
+    private fun requestListener(imageView: AppCompatImageView, item: PhotoItem): RequestListener<Drawable>
             = object : RequestListener<Drawable> {
         @SuppressLint("SetTextI18n")
         override
@@ -78,9 +99,21 @@ class PictureViewHolder(parent: ViewGroup)
                 val width = iv.measuredWidth
 
                 val targetHeight = width * resource.intrinsicHeight / resource.intrinsicWidth
-
-                item.imageWidth = width
-                item.imageHeight = targetHeight
+                if (width != 0 && targetHeight != 0) {
+                    if (imageView.layoutParams.height != targetHeight) {
+                        if (isPortrait()) {
+                            item.imageWidthPortrait = width
+                            item.imageHeightPortrait = targetHeight
+                        } else {
+                            item.imageWidthLandScape = width
+                            item.imageHeightLandScape = targetHeight
+                        }
+                        imageView.layoutParams.height = targetHeight
+                        imageView.requestLayout()
+                    }
+                }else{
+                    itemView.image.layout(0,0,0,0)
+                }
 
                 itemView.size.visibility = View.VISIBLE
                 itemView.size.text = width.toString() + " x " + targetHeight
@@ -95,6 +128,10 @@ class PictureViewHolder(parent: ViewGroup)
                          isFirstResource: Boolean): Boolean {
             return false
         }
+    }
+
+    private fun isPortrait(): Boolean {
+        return context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
     }
 
 
