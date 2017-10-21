@@ -10,7 +10,7 @@ import com.nextzy.tabcustomize.base.mvvm.dialog.CustomMvvmDialogFragment
 * Created by「 The Khaeng 」on 03 Oct 2017 :)
 */
 
-class KotlinCustomMvvmDialogFragment : CustomMvvmDialogFragment<KotlinCustomDialogViewModel>() {
+class KotlinCustomMvvmDialogFragment : CustomMvvmDialogFragment() {
 
     companion object {
         fun newInstance(): KotlinCustomMvvmDialogFragment {

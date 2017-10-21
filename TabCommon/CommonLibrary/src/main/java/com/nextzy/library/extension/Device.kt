@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.net.wifi.WifiManager
 import android.os.storage.StorageManager
 import android.provider.Settings
+import com.nextzy.library.R
 import java.lang.reflect.InvocationTargetException
 import java.net.NetworkInterface
 import java.util.*
@@ -14,6 +15,9 @@ import java.util.*
 /**
  * Created by「 The Khaeng 」on 03 Oct 2017 :)
  */
+
+val Context.isTablet: Boolean
+    get() = this.resources.getBoolean(R.bool.is_tablet)
 
 val Context.androidID: String
     @SuppressLint("HardwareIds")

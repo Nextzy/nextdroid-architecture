@@ -7,5 +7,6 @@
     <dimen name="progressbar_size_small">32dp</dimen>
     <dimen name="card_view_corner">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="default_dialog_corner">16dp</dimen>
 
 </resources>

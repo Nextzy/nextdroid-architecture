@@ -3,6 +3,8 @@ package com.nextzy.library.extension.view
 import android.content.res.Resources
 import android.graphics.Rect
 import android.support.annotation.Px
+import android.support.annotation.StringRes
+import android.support.v4.view.ViewCompat
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,15 @@ import com.thekhaeng.pushdownanim.PushDownAnim
 interface OnGetViewSizeListener {
     fun onSize(width: Int, height: Int)
 }
+
+fun View.setTransitionNameCompat(name: String){
+    ViewCompat.setTransitionName(this, name)
+}
+
+fun View.setTransitionNameCompat(@StringRes id: Int){
+    ViewCompat.setTransitionName(this, this.context.resources.getString(id))
+}
+
 
 fun View?.setOnTouchAnimScale(scale: Float = 0.96f,
                               listener: View.OnClickListener? = null) {

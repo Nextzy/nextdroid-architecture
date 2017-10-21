@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <com.nextzy.tabcustomize.widgets.CustomTextView
+            android:id="@+id/tv_no_content"
+            style="@style/CustomTextView.Regular.White.Hint.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photo"
+            tools:visibility="visible"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:adjustViewBounds="true"
+            tools:src="@drawable/img_placeholder"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/ic_back"
+            style="@style/Icon.Click.Toolbar"
+            android:layout_margin="@dimen/default_padding_margin"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_black"
+            tools:visibility="visible"/>
+
+
+        <LinearLayout
+            android:id="@+id/container_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photo">
+
+
+            <com.nextzy.tabcustomize.widgets.CustomTextView
+                android:id="@+id/tv_caption"
+                style="@style/CustomTextView.Regular.White.Primary.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_padding_margin"
+                tools:text="Caption"/>
+
+            <LinearLayout
+                android:id="@+id/container_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/ic_camera"
+                    style="@style/Icon.Small"
+                    android:layout_margin="@dimen/default_padding_margin"
+                    android:tint="@color/md_white"
+                    app:srcCompat="@drawable/ic_camera_black"
+                    />
+
+                <com.nextzy.tabcustomize.widgets.CustomTextView
+                    android:id="@+id/tv_camera"
+                    style="@style/CustomTextView.Regular.White.Primary.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    tools:text="Camera"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/container_lens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/ic_lens"
+                    style="@style/Icon.Small"
+                    android:layout_margin="@dimen/default_padding_margin"
+                    android:tint="@color/md_white"
+                    app:srcCompat="@drawable/ic_lens_black"
+                    />
+
+                <com.nextzy.tabcustomize.widgets.CustomTextView
+                    android:id="@+id/tv_lens"
+                    style="@style/CustomTextView.Regular.White.Primary.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    tools:text="Lens"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/container_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/ic_focus"
+                    style="@style/Icon.Small"
+                    android:layout_margin="@dimen/default_padding_margin"
+                    android:tint="@color/md_white"
+                    app:srcCompat="@drawable/ic_focus_length_black"
+                    />
+
+                <com.nextzy.tabcustomize.widgets.CustomTextView
+                    android:id="@+id/tv_focus"
+                    style="@style/CustomTextView.Regular.White.Primary.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    tools:text="Focus length"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/container_shutter_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/ic_shutter_speed"
+                    style="@style/Icon.Small"
+                    android:layout_margin="@dimen/default_padding_margin"
+                    android:tint="@color/md_white"
+                    app:srcCompat="@drawable/ic_shutter_speed_black"
+                    />
+
+                <com.nextzy.tabcustomize.widgets.CustomTextView
+                    android:id="@+id/tv_shutter_speed"
+                    style="@style/CustomTextView.Regular.White.Primary.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    tools:text="Shutter speed"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/container_aperture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/ic_aperture"
+                    style="@style/Icon.Small"
+                    android:layout_margin="@dimen/default_padding_margin"
+                    android:tint="@color/md_white"
+                    app:srcCompat="@drawable/ic_aperture_black"
+                    />
+
+                <com.nextzy.tabcustomize.widgets.CustomTextView
+                    android:id="@+id/tv_aperture"
+                    style="@style/CustomTextView.Regular.White.Primary.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    tools:text="Aperture"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/container_iso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/ic_iso"
+                    style="@style/Icon.Small"
+                    android:layout_margin="@dimen/default_padding_margin"
+                    android:tint="@color/md_white"
+                    app:srcCompat="@drawable/ic_iso_black"
+                    />
+
+                <com.nextzy.tabcustomize.widgets.CustomTextView
+                    android:id="@+id/tv_iso"
+                    style="@style/CustomTextView.Regular.White.Primary.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    tools:text="ISO"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

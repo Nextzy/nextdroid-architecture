@@ -1,6 +1,8 @@
 package com.nextzy.nextdroidapp.module.main
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
@@ -9,12 +11,16 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
 import com.nextzy.library.base.mvvm.layer1View.BaseMvvmListAdapter
 import com.nextzy.library.decorator.EndlessScrollListener
+import com.nextzy.library.extension.isTablet
 import com.nextzy.library.extension.toast
 import com.nextzy.library.extension.view.delay
 import com.nextzy.nextdroidapp.R
 import com.nextzy.nextdroidapp.module.main.adapter.PhotoListAdapter
+import com.nextzy.nextdroidapp.module.main.adapter.item.PhotoItem
 import com.nextzy.nextdroidapp.module.main.adapter.item.PhotoListItem
+import com.nextzy.nextdroidapp.module.photo.PhotoActivity
 import com.nextzy.nextwork.engine.model.NetworkStatus
+import com.nextzy.tabcustomize.base.extension.showPositiveDialog
 import com.nextzy.tabcustomize.base.mvvm.CustomMvvmActivity
 import com.nextzy.tabcustomize.base.repository.network.DefaultResource
 import com.thekhaeng.pushdownanim.PushDownAnim
@@ -22,19 +28,20 @@ import io.reactivex.functions.Action
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.ic_info as icInfo
 import kotlinx.android.synthetic.main.activity_main.ic_reload as icReload
-import kotlinx.android.synthetic.main.activity_main.rv_picture as rvPicture
+import kotlinx.android.synthetic.main.activity_main.rv_picture as rvPhoto
 import kotlinx.android.synthetic.main.activity_main.swipe_layout as swipeLayout
 
 
 class MainActivity : CustomMvvmActivity() {
 
     companion object {
+        const val REQUEST_OPEN_PHOTO = 100
         private const val SPAN_TWO = 2
         private const val SPAN_THREE = 3
     }
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var pictureAdapter: PhotoListAdapter
+    private lateinit var photoAdapter: PhotoListAdapter
     private lateinit var manager: StaggeredGridLayoutManager
 
     override
@@ -52,7 +59,8 @@ class MainActivity : CustomMvvmActivity() {
     override
     fun setupInstance() {
         super.setupInstance()
-        pictureAdapter = PhotoListAdapter(this).apply {
+        photoAdapter = PhotoListAdapter(this).apply {
+            setHasStableIds(true)
             setOnClickHolderItemListener(onClickHolderItemListener())
         }
     }
@@ -74,8 +82,9 @@ class MainActivity : CustomMvvmActivity() {
         swipeLayout.setOnRefreshListener(onRefreshListener())
 
 
-        rvPicture.apply {
-            adapter = pictureAdapter
+        rvPhoto.apply {
+            setHasFixedSize(true)
+            adapter = photoAdapter
             layoutManager = manager
             addOnScrollListener(EndlessScrollListener.create(onLoadMore()))
         }
@@ -102,7 +111,7 @@ class MainActivity : CustomMvvmActivity() {
         if (viewModel.photoListItemAll.isEmpty()) {
             initialize()
         } else {
-            pictureAdapter.notifyPhotoDataSetChanged()
+            photoAdapter.notifyPhotoDataSetChanged()
             manager.onScrollStateChanged(RecyclerView.SCROLL_STATE_IDLE)
         }
     }
@@ -111,6 +120,22 @@ class MainActivity : CustomMvvmActivity() {
     fun onDestroy() {
         super.onDestroy()
         viewModel.saveData()
+    }
+
+    override
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_OPEN_PHOTO) {
+            if(resultCode == Activity.RESULT_OK){
+                val holderId = data?.getLongExtra(PhotoActivity.KEY_HOLDER_ID, -1L) ?: -1L
+                if ( holderId != -1L
+                        && photoAdapter.itemCount > 0                           // grid populated
+                        && rvPhoto.findViewHolderForItemId(holderId) == null) {    // view not attached
+                    toast("test")
+                }
+            }
+        }else{
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     private fun showRefreshing() {
@@ -144,19 +169,27 @@ class MainActivity : CustomMvvmActivity() {
         viewModel.requestPhotoListAfterId(maxId)
     }
 
+
+    private fun openPhotoActivity(id: Long, photoItem: PhotoItem) {
+        val data = Bundle()
+        data.putParcelable(PhotoActivity.KEY_PHOTO_ITEM, photoItem)
+        data.putLong(PhotoActivity.KEY_HOLDER_ID, id)
+        openActivity(PhotoActivity::class.java, REQUEST_OPEN_PHOTO, data = data)
+    }
+
     private fun onClickListener(): View.OnClickListener
             = View.OnClickListener { v ->
         when (v) {
             fab -> {
-                rvPicture.smoothScrollToPosition(0)
+                rvPhoto.smoothScrollToPosition(0)
             }
             icReload -> {
                 showRefreshing()
                 viewModel.requestPhotoList(true)
-                pictureAdapter.notifyPhotoDataSetChanged()
+                photoAdapter.notifyPhotoDataSetChanged()
             }
             icInfo -> {
-                toast("fab")
+                showPositiveDialog(R.mipmap.ic_launcher, R.string.app_name, R.string.app_name, R.string.app_name)
             }
         }
     }
@@ -165,7 +198,11 @@ class MainActivity : CustomMvvmActivity() {
             = object : BaseMvvmListAdapter.OnClickHolderItemListener<RecyclerView.ViewHolder> {
         override
         fun onClickHolder(v: RecyclerView.ViewHolder, position: Int) {
-            // do nothing
+            viewModel.getPhotoItem(position)?.let {
+                openPhotoActivity(
+                        photoAdapter.getItemId(position),
+                        it)
+            }
         }
 
     }
@@ -188,6 +225,7 @@ class MainActivity : CustomMvvmActivity() {
 
     private fun getSpan(): Int {
         return when {
+            isTablet -> SPAN_THREE
             resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE -> SPAN_THREE
             resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT -> SPAN_TWO
             else -> SPAN_TWO
@@ -201,7 +239,7 @@ class MainActivity : CustomMvvmActivity() {
             resource?.status == NetworkStatus.SUCCESS -> {
                 resource.data?.let {
                     viewModel.addPhotoItemList(data = resource.data)
-                    pictureAdapter.notifyPhotoDataSetChanged()
+                    photoAdapter.notifyPhotoDataSetChanged()
                 }
                 hideRefreshing()
             }
@@ -221,7 +259,7 @@ class MainActivity : CustomMvvmActivity() {
             resource?.status == NetworkStatus.SUCCESS -> {
                 if (resource.data != null) {
                     viewModel.addPhotoItemList(data = resource.data)
-                    pictureAdapter.notifyPhotoDataSetChanged()
+                    photoAdapter.notifyPhotoDataSetChanged()
                     manager.onScrollStateChanged(RecyclerView.SCROLL_STATE_IDLE)
                 }
                 hideRefreshing()
@@ -243,7 +281,7 @@ class MainActivity : CustomMvvmActivity() {
             resource?.status == NetworkStatus.SUCCESS -> {
                 if (resource.data != null) {
                     viewModel.addPhotoItemList(0, data = resource.data)
-                    pictureAdapter.notifyPhotoDataSetChanged()
+                    photoAdapter.notifyPhotoDataSetChanged()
                     manager.onScrollStateChanged(RecyclerView.SCROLL_STATE_IDLE)
                 }
                 hideRefreshing()

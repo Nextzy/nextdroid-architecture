@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.widget.TextView
 import com.nextzy.library.R
 import com.nextzy.library.extension.findFont
+import com.nextzy.library.extension.isTablet
 import com.nextzy.library.extension.view.pxToSp
 import java.util.*
 
@@ -78,7 +79,7 @@ private constructor(
                         pxToSp(textView.textSize) + 1.0f)
             }
 
-            if (textView.context.resources.getBoolean(R.bool.is_tablet)) {
+            if (textView.context.isTablet) {
                 textView.setTextSize(
                         TypedValue.COMPLEX_UNIT_SP,
                         pxToSp(textView.textSize) + 2.0f)

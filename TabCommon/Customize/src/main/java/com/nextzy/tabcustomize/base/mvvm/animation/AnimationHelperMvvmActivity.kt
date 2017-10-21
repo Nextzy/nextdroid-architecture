@@ -14,8 +14,6 @@ import com.nextzy.library.R
 import com.nextzy.library.base.delegate.DefaultSnackbarDelegate
 import com.nextzy.library.base.delegate.DefaultSnackbarInterface
 import com.nextzy.library.base.mvvm.layer1View.BaseMvvmActivity
-import com.nextzy.tabcustomize.base.delegation.DefaultAnimationDelegate
-import com.nextzy.tabcustomize.base.delegation.DefaultAnimationDelegateListener
 
 /**
  * Created by「 The Khaeng 」on 18 Sep 2017 :)
@@ -23,14 +21,14 @@ import com.nextzy.tabcustomize.base.delegation.DefaultAnimationDelegateListener
 
 abstract class AnimationHelperMvvmActivity
     : BaseMvvmActivity(),
-      DefaultAnimationDelegateListener,
       DefaultSnackbarInterface {
 
     private lateinit var snackbarDelegate: DefaultSnackbarDelegate
-    private val animationDelegate = DefaultAnimationDelegate()
     private var onStartCount: Int = 0
 
     val isFinishAfterTransition: Boolean = true
+
+    var isPendingIntroAnimation: Boolean = false
 
     override
     fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +36,7 @@ abstract class AnimationHelperMvvmActivity
         snackbarDelegate = DefaultSnackbarDelegate(this)
 
         if (savedInstanceState == null) {
-            animationDelegate.isPendingIntroAnimation = true
+            isPendingIntroAnimation = true
             setOverridePendingStartTransition()
         } else { // already created so reverse animation
             onStartCount = 2
@@ -80,8 +78,8 @@ abstract class AnimationHelperMvvmActivity
     override
     fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
-        if (animationDelegate.isPendingIntroAnimation) {
-            animationDelegate.isPendingIntroAnimation = false
+        if (isPendingIntroAnimation) {
+            isPendingIntroAnimation = false
             startIntroAnimation()
         }
         return true
@@ -96,10 +94,6 @@ abstract class AnimationHelperMvvmActivity
         setTaskDescription(taskDesc)
     }
 
-    fun linkTransitionTo(target: View, transitionName: String) {
-        animationDelegate.setTransitionName(target, transitionName)
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     fun addEnterTransition(transition: Transition) {
         window.sharedElementEnterTransition = transition
@@ -111,10 +105,6 @@ abstract class AnimationHelperMvvmActivity
         window.sharedElementReturnTransition = transition
     }
 
-    override
-    fun setTransitionName(target: View, transitionName: String) {
-        animationDelegate.setTransitionName(target, transitionName)
-    }
 
     override
     fun backPressedFragment() {

@@ -21,13 +21,25 @@
         </activity>
 
         <activity
-            android:name="com.nextzy.nextdroidapp.module.main.MainActivity">
+            android:name=".module.main.MainActivity"
+            android:theme="@style/MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".module.photo.PhotoActivity"
+            android:theme="@style/PhotoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
 
         <activity android:name=".module.crash.CrashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
         </activity>
 
     </application>

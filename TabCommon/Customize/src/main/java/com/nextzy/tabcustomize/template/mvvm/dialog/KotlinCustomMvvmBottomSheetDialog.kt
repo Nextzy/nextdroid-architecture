@@ -11,7 +11,7 @@ import com.nextzy.tabcustomize.base.mvvm.dialog.CustomMvvmBottomSheetDialog
 */
 
 class KotlinCustomMvvmBottomSheetDialog
-    : CustomMvvmBottomSheetDialog<KotlinCustomDialogViewModel>() {
+    : CustomMvvmBottomSheetDialog() {
 
     companion object {
         @JvmOverloads

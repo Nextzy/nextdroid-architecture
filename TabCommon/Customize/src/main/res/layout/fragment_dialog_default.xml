@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:background="@color/grey"
+             tools:ignore="KeyboardInaccessibleWidget">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/default_dialog_corner"
+        app:cardElevation="0dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/ic_cancel"
+                style="@style/Icon.Click.Small"
+                android:layout_marginStart="@dimen/default_padding_margin"
+                android:layout_marginTop="@dimen/default_padding_margin"
+                app:srcCompat="@drawable/ic_cancel_black"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/ic_dialog"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/default_padding_margin_extra_large"
+                android:visibility="gone"
+                tools:background="@mipmap/ic_launcher"
+                tools:visibility="visible"/>
+
+            <com.nextzy.tabcustomize.widgets.CustomTextView
+                android:id="@+id/tv_title"
+                style="@style/CustomTextView.Bold.Black.Primary.Subheading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/default_padding_margin"
+                android:visibility="gone"
+                tools:text="Title test"
+                tools:visibility="visible"/>
+
+            <com.nextzy.tabcustomize.widgets.CustomTextView
+                android:id="@+id/tv_body"
+                style="@style/CustomTextView.Bold.Black.Secondary.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                tools:text="Body test"/>
+
+            <com.nextzy.tabcustomize.widgets.CustomButton
+                android:id="@+id/btn_confirm"
+                style="@style/CustomTextView.Regular.White.Primary.Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_padding_margin_extra_large"
+                android:background="@drawable/selector_dialog_button_positive"
+                android:gravity="center"
+                android:padding="10dp"
+                tools:text="Button"/>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</FrameLayout>
+

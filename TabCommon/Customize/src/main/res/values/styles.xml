@@ -25,6 +25,13 @@
     <style name="SplashTheme" parent="AppTheme.NoActionBar">
     </style>
 
+    <style name="MainActivity" parent="AppTheme.NoActionBar">
+        <item name="colorAccent">@color/ios_green</item>
+    </style>
+
+    <style name="PhotoActivity" parent="AppTheme.NoActionBar">
+    </style>
+
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <!--<item name="android:textColorPrimary">@color/md_white</item>-->

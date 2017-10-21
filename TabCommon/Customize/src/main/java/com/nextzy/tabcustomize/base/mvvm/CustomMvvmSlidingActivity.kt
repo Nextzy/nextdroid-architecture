@@ -1,6 +1,6 @@
 package com.nextzy.tabcustomize.base.mvvm
 
-import com.nextzy.tabcustomize.base.mvvm.dialog.DialogHelperMvvmSlidingActivity
+import com.nextzy.tabcustomize.base.mvvm.animation.AnimationHelperMvvmSlidingActivity
 
 
 /**
@@ -8,5 +8,5 @@ import com.nextzy.tabcustomize.base.mvvm.dialog.DialogHelperMvvmSlidingActivity
 */
 
 abstract class CustomMvvmSlidingActivity
-    : DialogHelperMvvmSlidingActivity() {
+    : AnimationHelperMvvmSlidingActivity() {
 }

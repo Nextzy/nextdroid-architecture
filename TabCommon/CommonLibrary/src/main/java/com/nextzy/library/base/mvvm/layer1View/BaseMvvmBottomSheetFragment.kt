@@ -20,8 +20,6 @@ import android.view.View
 import com.nextzy.library.base.delegate.DefaultSnackbarDelegate
 import com.nextzy.library.base.delegate.DefaultSnackbarInterface
 import com.nextzy.library.base.mvvm.exception.NotSetLayoutException
-import com.nextzy.library.base.mvvm.exception.ViewModelNotNullException
-import com.nextzy.library.base.mvvm.layer2ViewModel.BaseDialogViewModel
 import com.nextzy.setting.view.util.SettingPreferenceDelegate
 import com.nextzy.setting.view.util.SettingPreferenceInterface
 import timber.log.Timber
@@ -30,7 +28,7 @@ import timber.log.Timber
  * Created by「 The Khaeng 」on 26 Aug 2017 :)
  */
 
-abstract class BaseMvvmBottomSheetFragment<VM : BaseDialogViewModel>
+abstract class BaseMvvmBottomSheetFragment
     : BottomSheetDialogFragment(),
       DefaultSnackbarInterface,
       SettingPreferenceInterface {
@@ -215,12 +213,6 @@ abstract class BaseMvvmBottomSheetFragment<VM : BaseDialogViewModel>
 
     fun setResultCode(resultCode: Int) {
         this.resultCode = resultCode
-    }
-
-    fun getViewModel(viewModelClass: Class<VM>): VM {
-        if (setupViewModel() == null) throw ViewModelNotNullException()
-        return ViewModelProviders.of(this)
-                .get(viewModelClass)
     }
 
     abstract fun setupLayoutView(): Int

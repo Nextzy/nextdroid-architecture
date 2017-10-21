@@ -2,4 +2,6 @@
     <string name="app_name">NextDroidApp</string>
     <string name="alert_error_fail_download">Failed to download picture, please try again :(</string>
     <string name="load_more">Load More</string>
+    <string name="no_content">No Content</string>
+
 </resources>

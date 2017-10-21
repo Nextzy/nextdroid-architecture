@@ -15,6 +15,7 @@ private constructor(private val refreshList: RefreshList)
     private var hasMorePages: Boolean = false
     private var pageNumber = 0
     private var isRefreshing: Boolean = false
+    private var isInitial: Boolean = true
     private var pastVisibleItems: Int = 0
 
     interface RefreshList {
@@ -26,6 +27,7 @@ private constructor(private val refreshList: RefreshList)
     }
 
     init {
+        this.isInitial = true
         this.isLoading = false
         this.hasMorePages = true
     }
@@ -45,8 +47,9 @@ private constructor(private val refreshList: RefreshList)
             }
 
             if (visibleItemCount + pastVisibleItems >= totalItemCount && !isLoading) {
+                delayInitial()
                 isLoading = true
-                if (hasMorePages && !isRefreshing) {
+                if (hasMorePages && !isRefreshing && !isInitial) {
                     isRefreshing = true
                     Handler().postDelayed({
                                               if (refreshList.onRefresh(pageNumber)) {
@@ -54,13 +57,14 @@ private constructor(private val refreshList: RefreshList)
                                               } else {
                                                   noMorePages()
                                               }
-                                          }, 200)
+                                          }, 300L)
                 }
             } else {
                 isLoading = false
             }
         }
     }
+
 
     fun noMorePages() {
         this.hasMorePages = false
@@ -70,5 +74,10 @@ private constructor(private val refreshList: RefreshList)
         isRefreshing = false
         pageNumber += 1
     }
+
+    private fun delayInitial() {
+        Handler().postDelayed({ isInitial = false }, 500L)
+    }
+
 
 }

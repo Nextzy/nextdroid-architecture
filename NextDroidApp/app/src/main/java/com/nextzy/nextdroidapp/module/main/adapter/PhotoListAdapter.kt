@@ -55,6 +55,11 @@ class PhotoListAdapter
     fun getItemCount(): Int = viewModel?.getPhotoItemListSize()?.plus(1) ?: 1
 
     override
+    fun getItemId(position: Int): Long {
+        return viewModel?.getPhotoItem(position)?.id?.toLong() ?: -1L
+    }
+
+    override
     fun getItemViewType(position: Int): Int {
         if (position >= viewModel?.getPhotoItemListSize() ?: 0) {
             return TYPE_LOADMORE

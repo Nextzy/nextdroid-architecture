@@ -4,7 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import com.nextzy.library.R
-import com.nextzy.tabcustomize.base.mvvm.dialog.DialogHelperMvvmActivity
+import com.nextzy.tabcustomize.base.mvvm.animation.AnimationHelperMvvmActivity
 
 
 /**
@@ -12,7 +12,7 @@ import com.nextzy.tabcustomize.base.mvvm.dialog.DialogHelperMvvmActivity
 */
 
 abstract class CustomMvvmActivity
-    : DialogHelperMvvmActivity() {
+    : AnimationHelperMvvmActivity() {
 
 
     override

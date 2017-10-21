@@ -8,8 +8,6 @@ import android.view.View
 import com.nextzy.library.base.delegate.DefaultSnackbarDelegate
 import com.nextzy.library.base.delegate.DefaultSnackbarInterface
 import com.nextzy.library.base.mvvm.layer1View.BaseMvvmFragment
-import com.nextzy.tabcustomize.base.delegation.DefaultAnimationDelegate
-import com.nextzy.tabcustomize.base.delegation.DefaultAnimationDelegateListener
 
 /**
  * Created by「 The Khaeng 」on 18 Sep 2017 :)
@@ -17,26 +15,26 @@ import com.nextzy.tabcustomize.base.delegation.DefaultAnimationDelegateListener
 
 abstract class AnimationHelperMvvmFragment
     : BaseMvvmFragment(),
-      DefaultAnimationDelegateListener,
       DefaultSnackbarInterface {
 
     private lateinit var snackbarDelegate: DefaultSnackbarDelegate
-    private val animationDelegate = DefaultAnimationDelegate()
+
+    private var isPendingIntroAnimation: Boolean = false
 
     override
     fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         snackbarDelegate = DefaultSnackbarDelegate(this)
         if (savedInstanceState == null) {
-            animationDelegate.isPendingIntroAnimation = true
+            isPendingIntroAnimation = true
         }
     }
 
     override
     fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        if (animationDelegate.isPendingIntroAnimation) {
-            animationDelegate.isPendingIntroAnimation = false
+        if (isPendingIntroAnimation) {
+            isPendingIntroAnimation = false
             startIntroAnimation()
         }
     }
@@ -52,11 +50,6 @@ abstract class AnimationHelperMvvmFragment
 
     fun addExitTransition(transition: Transition) {
         sharedElementReturnTransition = transition
-    }
-
-    override
-    fun setTransitionName(target: View, transitionName: String) {
-        animationDelegate.setTransitionName(target, transitionName)
     }
 
     /**
