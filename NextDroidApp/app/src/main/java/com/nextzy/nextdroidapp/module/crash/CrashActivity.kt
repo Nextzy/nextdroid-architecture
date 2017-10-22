@@ -41,6 +41,7 @@ class CrashActivity : CustomMvvmActivity() {
                 MainApplication.crashConfig)
     }
 
+    /* =========================== Private method =============================================== */
     private fun repeatShowErrorStackTrace() {
         val stackTrace: String? = CustomActivityOnCrash.getStackTraceFromIntent(intent)
         if (stackTrace != null) {

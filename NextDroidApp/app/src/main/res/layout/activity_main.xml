@@ -54,7 +54,7 @@
                     style="@style/Icon.Click.Toolbar"
                     android:layout_marginEnd="@dimen/default_padding_margin"
                     android:tint="@color/primary"
-                    app:srcCompat="@drawable/ic_info_outline_black"
+                    app:srcCompat="@drawable/ic_handshake"
                     />
 
             </LinearLayout>

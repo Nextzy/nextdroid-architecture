@@ -27,6 +27,11 @@ object DialogManager {
         dialog?.show(fragmentManager, TAG)
     }
 
+    fun showDialog(fragmentManager: FragmentManager, dialog: DialogFragment) {
+        dismissDialog()
+        dialog.show(fragmentManager, TAG)
+    }
+
 
     fun showDefaultDialog(
             fragmentManager: FragmentManager,
@@ -59,5 +64,6 @@ object DialogManager {
             dialog = null
         }
     }
+
 
 }

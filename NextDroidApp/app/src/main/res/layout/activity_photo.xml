@@ -14,7 +14,7 @@
 
         <com.nextzy.tabcustomize.widgets.CustomTextView
             android:id="@+id/tv_no_content"
-            style="@style/CustomTextView.Regular.White.Hint.Title"
+            style="@style/CustomTextView.Regular.White.Divider.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no_content"
@@ -30,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:adjustViewBounds="true"
+            android:background="@color/background_photo"
             tools:src="@drawable/img_placeholder"/>
 
         <android.support.v7.widget.AppCompatImageView
@@ -48,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/photo">

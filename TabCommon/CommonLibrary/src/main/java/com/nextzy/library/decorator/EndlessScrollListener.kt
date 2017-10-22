@@ -12,10 +12,10 @@ class EndlessScrollListener
 private constructor(private val refreshList: RefreshList)
     : RecyclerView.OnScrollListener() {
     private var isLoading: Boolean = false
-    private var hasMorePages: Boolean = false
+    private var hasMorePages: Boolean = true
     private var pageNumber = 0
     private var isRefreshing: Boolean = false
-    private var isInitial: Boolean = true
+    private var isInitial: Boolean = false
     private var pastVisibleItems: Int = 0
 
     interface RefreshList {
@@ -25,13 +25,6 @@ private constructor(private val refreshList: RefreshList)
     companion object {
         fun create(refreshList: RefreshList): EndlessScrollListener = EndlessScrollListener(refreshList)
     }
-
-    init {
-        this.isInitial = true
-        this.isLoading = false
-        this.hasMorePages = true
-    }
-
 
     override
     fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
@@ -47,7 +40,6 @@ private constructor(private val refreshList: RefreshList)
             }
 
             if (visibleItemCount + pastVisibleItems >= totalItemCount && !isLoading) {
-                delayInitial()
                 isLoading = true
                 if (hasMorePages && !isRefreshing && !isInitial) {
                     isRefreshing = true

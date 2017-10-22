@@ -5,4 +5,7 @@
     <color name="snackbar_warning">@color/ios_orange</color>
     <color name="snackbar_error">@color/ios_red</color>
 
+
+    <color name="background_photo">@color/md_icon_color_active_light_theme_no_transparent</color>
+
 </resources>

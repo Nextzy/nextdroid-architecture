@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:background="@color/grey"
+             tools:ignore="KeyboardInaccessibleWidget">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/default_dialog_corner"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/ic_cancel"
+                style="@style/Icon.Click.Small"
+                android:layout_marginStart="@dimen/default_padding_margin"
+                android:layout_marginTop="@dimen/default_padding_margin"
+                android:alpha="@dimen/default_alpha_icon_inactive_light_theme"
+                app:srcCompat="@drawable/ic_cancel_black"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/ic_contribute"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/default_padding_margin"
+                    app:srcCompat="@drawable/ic_handshake_color" />
+
+                <com.nextzy.tabcustomize.widgets.CustomTextView
+                    android:id="@+id/tv_contribute"
+                    style="@style/CustomTextView.Regular.Black.Secondary.Subheading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/default_padding_margin_large"
+                    android:text="Contribute"/>
+
+                <LinearLayout
+                    android:id="@+id/container_user1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/default_padding_margin"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/ic_user1"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/profile_thekhaeng" />
+
+                    <com.nextzy.tabcustomize.widgets.CustomTextView
+                        android:id="@+id/tv_user1"
+                        style="@style/CustomTextView.Bold.Black.Secondary.Subheading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/default_padding_margin_large"
+                        android:text="TheKhaeng.io"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/container_anonymous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/ic_anonymous"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="@dimen/default_padding_margin"
+                        app:srcCompat="@drawable/ic_anonymous" />
+
+                    <com.nextzy.tabcustomize.widgets.CustomTextView
+                        android:id="@+id/tv_anonymous"
+                        style="@style/CustomTextView.Regular.Black.Secondary.Subheading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/default_padding_margin_large"
+                        android:text="Go to Github :)"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <com.nextzy.tabcustomize.widgets.CustomButton
+                android:id="@+id/btn_confirm"
+                style="@style/CustomTextView.Regular.Black.Hint.Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_padding_margin_extra_large"
+                android:background="@drawable/selector_dialog_button_negative_transparent"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/dismiss"/>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</FrameLayout>
+

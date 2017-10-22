@@ -34,6 +34,7 @@ import kotlinx.android.synthetic.main.activity_photo.tv_shutter_speed as tvShutt
 class PhotoActivity : CustomMvvmActivity() {
 
     companion object {
+        const val KEY_ITEM_POSITION = "key_item_position"
         const val KEY_PHOTO_ITEM = "key_photo_item"
         const val KEY_HOLDER_ID = "key_holder_id"
     }
@@ -94,13 +95,12 @@ class PhotoActivity : CustomMvvmActivity() {
         }
 
 
-        if (photoItem.camera?.isNotBlank() == true
-                && photoItem.lens?.isBlank() == true
-                && photoItem.focalLength?.isBlank() == true
-                && photoItem.shutterSpeed?.isBlank() == true
-                && photoItem.aperture?.isBlank() == true
-                && photoItem.iso?.isBlank() == true) {
-            containerContent.show(false)
+        if (photoItem.camera?.isBlank() != false
+                && photoItem.lens?.isBlank() != false
+                && photoItem.focalLength?.isBlank() != false
+                && photoItem.shutterSpeed?.isBlank() != false
+                && photoItem.aperture?.isBlank() != false
+                && photoItem.iso?.isBlank() != false) {
             tvNoContent.show(true)
         }
     }

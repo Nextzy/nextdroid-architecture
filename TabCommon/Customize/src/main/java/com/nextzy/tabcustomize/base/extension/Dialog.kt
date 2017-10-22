@@ -3,6 +3,7 @@ package com.nextzy.tabcustomize.base.extension
 import android.os.Bundle
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
+import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import com.nextzy.tabcustomize.dialog.DefaultDialogFragment
@@ -21,6 +22,10 @@ import com.nextzy.tabcustomize.dialog.listener.DialogDismissListener
 
 fun FragmentActivity.showLoading() = DialogManager.showLoadingDialog(this.supportFragmentManager)
 fun Fragment.showLoading() = DialogManager.showLoadingDialog(this.fragmentManager)
+
+
+fun FragmentActivity.showDialog(dialog: DialogFragment) = DialogManager.showDialog(this.supportFragmentManager, dialog)
+fun Fragment.showDialog(dialog: DialogFragment) = DialogManager.showDialog(this.fragmentManager, dialog)
 
 
 fun FragmentActivity.hideLoading() = DialogManager.dismissDialog()

@@ -18,9 +18,10 @@ import com.nextzy.nextdroidapp.R
 import com.nextzy.nextdroidapp.module.main.adapter.PhotoListAdapter
 import com.nextzy.nextdroidapp.module.main.adapter.item.PhotoItem
 import com.nextzy.nextdroidapp.module.main.adapter.item.PhotoListItem
+import com.nextzy.nextdroidapp.module.main.dialog.ContributeDialogFragment
 import com.nextzy.nextdroidapp.module.photo.PhotoActivity
 import com.nextzy.nextwork.engine.model.NetworkStatus
-import com.nextzy.tabcustomize.base.extension.showPositiveDialog
+import com.nextzy.tabcustomize.base.extension.showDialog
 import com.nextzy.tabcustomize.base.mvvm.CustomMvvmActivity
 import com.nextzy.tabcustomize.base.repository.network.DefaultResource
 import com.thekhaeng.pushdownanim.PushDownAnim
@@ -125,19 +126,22 @@ class MainActivity : CustomMvvmActivity() {
     override
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_OPEN_PHOTO) {
-            if(resultCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK) {
                 val holderId = data?.getLongExtra(PhotoActivity.KEY_HOLDER_ID, -1L) ?: -1L
-                if ( holderId != -1L
+                val position = data?.getIntExtra(PhotoActivity.KEY_ITEM_POSITION, -1) ?: -1
+                if (position != -1
+                        && holderId != -1L
                         && photoAdapter.itemCount > 0                           // grid populated
                         && rvPhoto.findViewHolderForItemId(holderId) == null) {    // view not attached
-                    toast("test")
+                    // do something for restore
                 }
             }
-        }else{
+        } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
 
+    /* =========================== Private method =============================================== */
     private fun showRefreshing() {
         swipeLayout.isRefreshing = true
     }
@@ -170,27 +174,25 @@ class MainActivity : CustomMvvmActivity() {
     }
 
 
-    private fun openPhotoActivity(id: Long, photoItem: PhotoItem) {
+    private fun openPhotoActivity(id: Long, position: Int, photoItem: PhotoItem) {
         val data = Bundle()
         data.putParcelable(PhotoActivity.KEY_PHOTO_ITEM, photoItem)
+        data.putInt(PhotoActivity.KEY_ITEM_POSITION, position)
         data.putLong(PhotoActivity.KEY_HOLDER_ID, id)
         openActivity(PhotoActivity::class.java, REQUEST_OPEN_PHOTO, data = data)
     }
 
+    /* =========================== Callback method ============================================== */
     private fun onClickListener(): View.OnClickListener
             = View.OnClickListener { v ->
         when (v) {
-            fab -> {
-                rvPhoto.smoothScrollToPosition(0)
-            }
+            fab -> rvPhoto.smoothScrollToPosition(0)
             icReload -> {
                 showRefreshing()
                 viewModel.requestPhotoList(true)
                 photoAdapter.notifyPhotoDataSetChanged()
             }
-            icInfo -> {
-                showPositiveDialog(R.mipmap.ic_launcher, R.string.app_name, R.string.app_name, R.string.app_name)
-            }
+            icInfo -> showDialog(ContributeDialogFragment.Builder().build())
         }
     }
 
@@ -201,6 +203,7 @@ class MainActivity : CustomMvvmActivity() {
             viewModel.getPhotoItem(position)?.let {
                 openPhotoActivity(
                         photoAdapter.getItemId(position),
+                        position,
                         it)
             }
         }

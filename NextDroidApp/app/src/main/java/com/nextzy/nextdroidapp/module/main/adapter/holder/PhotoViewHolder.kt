@@ -55,6 +55,7 @@ class PhotoViewHolder(parent: ViewGroup)
 
     }
 
+    /* =========================== Private method =============================================== */
     private fun setupImageViewSize(item: PhotoItem, glideRequest: GlideRequest<Drawable>) {
         if (item.isSetImageSizePortrait) {
             if (isPortrait()) {
@@ -82,6 +83,11 @@ class PhotoViewHolder(parent: ViewGroup)
         }
     }
 
+    private fun isPortrait(): Boolean {
+        return context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+    }
+
+    /* =========================== Callback method =============================================== */
     private fun requestListener(imageView: AppCompatImageView, item: PhotoItem): RequestListener<Drawable>
             = object : RequestListener<Drawable> {
         @SuppressLint("SetTextI18n")
@@ -128,10 +134,6 @@ class PhotoViewHolder(parent: ViewGroup)
                          isFirstResource: Boolean): Boolean {
             return false
         }
-    }
-
-    private fun isPortrait(): Boolean {
-        return context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
     }
 
 
