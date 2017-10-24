@@ -30,11 +30,12 @@
 
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="@dimen/default_icon_size_large"
+                    android:layout_height="@dimen/default_icon_size_large"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/default_padding_margin"
-                    android:src="@mipmap/ic_launcher" />
+                    android:tint="@color/nextdroid_color"
+                    app:srcCompat="@drawable/ic_nextdroid" />
 
                 <android.support.v4.widget.Space
                     android:layout_width="0dp"

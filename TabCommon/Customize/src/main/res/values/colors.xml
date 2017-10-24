@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
+    <color name="nextdroid_color">@color/ios_green</color>
+
     <color name="background_white">@color/md_white</color>
 
     <color name="primary_light">@color/primary_green_light</color>

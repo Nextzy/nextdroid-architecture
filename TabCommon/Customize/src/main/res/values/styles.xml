@@ -30,7 +30,7 @@
     </style>
 
     <style name="PhotoActivity" parent="AppTheme.NoActionBar">
-        <item name="colorPrimary">@color/background_overlay_light</item>
+        <item name="colorPrimary">@color/background_dark</item>
         <item name="colorPrimaryDark">@color/background_photo</item>
 
     </style>

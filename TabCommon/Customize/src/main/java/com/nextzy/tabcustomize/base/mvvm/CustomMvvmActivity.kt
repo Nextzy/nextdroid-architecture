@@ -18,12 +18,6 @@ abstract class CustomMvvmActivity
     override
     fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setTaskDescription(
-                    getString(R.string.app_name),
-                    null,
-                    ContextCompat.getColor(this, R.color.md_white))
-        }
     }
 
 }
