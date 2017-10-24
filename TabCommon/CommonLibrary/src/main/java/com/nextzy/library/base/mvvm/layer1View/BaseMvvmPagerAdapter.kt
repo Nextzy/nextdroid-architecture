@@ -29,17 +29,17 @@ abstract class BaseMvvmPagerAdapter : FragmentStatePagerAdapter {
         this.context = activity
         this.fm = WeakReference(activity.supportFragmentManager)
         this.activity = WeakReference(activity)
-        setupViewModel()
+        onSetupViewModel()
     }
 
     constructor(fragment: Fragment) : super(fragment.childFragmentManager) {
         this.context = fragment.context
         this.fm = WeakReference(fragment.childFragmentManager)
         this.fragment = WeakReference(fragment)
-        setupViewModel()
+        onSetupViewModel()
     }
 
-    fun setupViewModel(){
+    open fun onSetupViewModel(){
     }
 
     fun <VM : ViewModel> getViewModel(viewModelClass: Class<VM>): VM {

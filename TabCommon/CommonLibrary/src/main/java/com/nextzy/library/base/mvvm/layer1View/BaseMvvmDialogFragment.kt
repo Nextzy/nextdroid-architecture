@@ -22,10 +22,10 @@ abstract class BaseMvvmDialogFragment
     override
     fun onAttach(context: Context?) {
         super.onAttach(context)
-        setupViewModel()
+        onSetupViewModel()
     }
 
-    open fun setupViewModel() {
+    open fun onSetupViewModel() {
 
     }
 

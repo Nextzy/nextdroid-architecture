@@ -77,12 +77,12 @@ class DefaultDialogFragment : CustomMvvmDialogFragment() {
     fun setupLayoutView(): Int = R.layout.fragment_dialog_default
 
     override
-    fun setupInstance() {
+    fun onSetupInstance() {
 
     }
 
     override
-    fun setupView() {
+    fun onSetupView() {
         when (type) {
             POSITIVE -> setupPositiveType()
             NEGATIVE_RED -> setupNegativeRedType()
@@ -124,7 +124,7 @@ class DefaultDialogFragment : CustomMvvmDialogFragment() {
     }
 
     override
-    fun initialize() {
+    fun onPrepareInstance() {
 
     }
 

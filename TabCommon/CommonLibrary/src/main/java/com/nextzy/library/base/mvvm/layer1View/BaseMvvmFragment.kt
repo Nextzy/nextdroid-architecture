@@ -19,10 +19,10 @@ abstract class BaseMvvmFragment : BaseFragment() {
     override
     fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupViewModel()
+        onSetupViewModel()
     }
 
-    open fun setupViewModel() {
+    open fun onSetupViewModel() {
 
     }
 

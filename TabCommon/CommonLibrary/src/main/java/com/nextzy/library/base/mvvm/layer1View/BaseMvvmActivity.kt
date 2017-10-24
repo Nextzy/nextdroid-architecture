@@ -14,12 +14,12 @@ abstract class BaseMvvmActivity : BaseActivity() {
     private val rxDelegation = RxDelegation()
 
     override
-    fun setupInstance() {
-        setupViewModel()
-        super.setupInstance()
+    fun onInitialize() {
+        onSetupViewModel()
+        super.onInitialize()
     }
 
-    open fun setupViewModel() {
+    open fun onSetupViewModel() {
 
     }
 

@@ -65,7 +65,7 @@ abstract class BaseMvvmBottomSheetFragment
     override
     fun onAttach(context: Context?) {
         super.onAttach(context)
-        setupViewModel()
+        onSetupViewModel()
         try {
             this.listener = context as OnFragmentDialogListener?
         } catch (e: ClassCastException) {
@@ -108,9 +108,9 @@ abstract class BaseMvvmBottomSheetFragment
             dismiss()
         }
 
-        bindView(contentView)
-        setupInstance()
-        setupView()
+        onBindView(contentView)
+        onInitialize()
+        onSetupView()
     }
 
     open fun setContentView(contentView: View) {
@@ -205,17 +205,17 @@ abstract class BaseMvvmBottomSheetFragment
 
     abstract fun setupLayoutView(): Int
 
-    open fun setupViewModel() {}
+    open fun onSetupViewModel() {}
 
-    abstract fun bindView(view: View)
+    abstract fun onBindView(view: View)
 
-    open fun setupInstance() {}
+    open fun onInitialize() {}
 
-    open fun setupView() {}
+    open fun onSetupView() {}
 
     open fun onRestoreArgument(bundle: Bundle) {}
 
-    open fun initialize() {}
+    open fun onPrepareInstance() {}
 
 
 }

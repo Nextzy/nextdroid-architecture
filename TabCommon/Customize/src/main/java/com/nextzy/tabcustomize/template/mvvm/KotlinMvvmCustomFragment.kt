@@ -24,7 +24,7 @@ class KotlinMvvmCustomFragment : CustomMvvmFragment() {
     private lateinit var viewModelShared: KotlinMvvmCustomViewModel
 
     override
-    fun setupViewModel() {
+    fun onSetupViewModel() {
         viewModelShared = getSharedViewModel(KotlinMvvmCustomViewModel::class.java)
     }
 
@@ -32,18 +32,18 @@ class KotlinMvvmCustomFragment : CustomMvvmFragment() {
     fun setupLayoutView(): Int = 0
 
     override
-    fun setupInstance() {
-        super.setupInstance()
+    fun onInitialize() {
+        super.onInitialize()
     }
 
     override
-    fun setupView() {
-        super.setupView()
+    fun onSetupView() {
+        super.onSetupView()
     }
 
     override
-    fun initialize() {
-        super.initialize()
+    fun onPrepareInstance() {
+        super.onPrepareInstance()
 
     }
 

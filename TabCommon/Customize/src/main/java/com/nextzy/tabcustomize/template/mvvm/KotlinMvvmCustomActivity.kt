@@ -14,7 +14,7 @@ class KotlinMvvmCustomActivity : CustomMvvmActivity() {
     private lateinit var viewModel: KotlinMvvmCustomViewModel
 
     override
-    fun setupViewModel() {
+    fun onSetupViewModel() {
         viewModel = getViewModel(KotlinMvvmCustomViewModel::class.java)
     }
 
@@ -23,18 +23,18 @@ class KotlinMvvmCustomActivity : CustomMvvmActivity() {
 
 
     override
-    fun setupInstance() {
-        super.setupInstance()
+    fun onInitialize() {
+        super.onInitialize()
     }
 
     override
-    fun setupView() {
-        super.setupView()
+    fun onSetupView() {
+        super.onSetupView()
     }
 
     override
-    fun initialize() {
-        super.initialize()
+    fun onPrepareInstance() {
+        super.onPrepareInstance()
     }
 
     override

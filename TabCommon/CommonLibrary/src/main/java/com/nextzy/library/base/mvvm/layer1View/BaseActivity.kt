@@ -39,11 +39,11 @@ abstract class BaseActivity
         Timber.d("setContentView: ")
         setContentView(layoutResId)
         Timber.d("onBindView: ")
-        bindView()
-        Timber.d("setupInstance: ")
-        setupInstance()
-        Timber.d("setupView: ")
-        setupView()
+        onBindView()
+        Timber.d("onInitialize: ")
+        onInitialize()
+        Timber.d("onSetupView: ")
+        onSetupView()
         Timber.d("onViewCreate: ")
         if (savedInstanceState == null) {
             val intent = intent
@@ -54,8 +54,8 @@ abstract class BaseActivity
                     onRestoreArgument(bundle)
                 }
             }
-            Timber.d("initialize")
-            initialize()
+            Timber.d("onPrepareInstance")
+            onPrepareInstance()
         }
 
     }
@@ -172,13 +172,13 @@ abstract class BaseActivity
 
     abstract fun setupLayoutView(): Int
 
-    open fun bindView() {}
+    open fun onBindView() {}
 
-    open fun setupInstance() {}
+    open fun onInitialize() {}
 
-    open fun setupView() {}
+    open fun onSetupView() {}
 
-    open fun initialize() {}
+    open fun onPrepareInstance() {}
 
     /* ============================ Open Activity ======================================== */
 

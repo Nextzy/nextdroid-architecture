@@ -82,10 +82,10 @@ abstract class BaseDialogFragment
     override
     fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindView(view)
-        setupView()
+        onBindView(view)
+        onSetupView()
         if (savedInstanceState == null) {
-            initialize()
+            onPrepareInstance()
         } else {
             onRestoreView(savedInstanceState)
         }
@@ -173,16 +173,16 @@ abstract class BaseDialogFragment
 
     abstract fun setupLayoutView(): Int
 
-    open fun bindView(view: View?){ }
+    open fun onBindView(view: View?){ }
 
-    open fun setupInstance() {}
+    open fun onSetupInstance() {}
 
-    open fun setupView() {}
+    open fun onSetupView() {}
 
     open fun onRestoreView(savedInstanceState: Bundle) {}
 
     open fun onRestoreArgument(bundle: Bundle) {}
 
-    open fun initialize() {}
+    open fun onPrepareInstance() {}
 
 }

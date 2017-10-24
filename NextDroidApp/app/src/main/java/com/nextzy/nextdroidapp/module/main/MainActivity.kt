@@ -46,7 +46,7 @@ class MainActivity : CustomMvvmActivity() {
     private lateinit var manager: StaggeredGridLayoutManager
 
     override
-    fun setupViewModel() {
+    fun onSetupViewModel() {
         viewModel = getViewModel(MainViewModel::class.java)
         viewModel.photoListAfterIdLiveData.observe(this, observerPictureListAfterList())
         viewModel.photoListLiveData.observe(this, observerPictureList())
@@ -58,8 +58,8 @@ class MainActivity : CustomMvvmActivity() {
 
 
     override
-    fun setupInstance() {
-        super.setupInstance()
+    fun onInitialize() {
+        super.onInitialize()
         photoAdapter = PhotoListAdapter(this).apply {
             setHasStableIds(true)
             setOnClickHolderItemListener(onClickHolderItemListener())
@@ -67,8 +67,8 @@ class MainActivity : CustomMvvmActivity() {
     }
 
     override
-    fun setupView() {
-        super.setupView()
+    fun onSetupView() {
+        super.onSetupView()
         setSupportActionBar(toolbar)
 
         PushDownAnim
@@ -93,8 +93,8 @@ class MainActivity : CustomMvvmActivity() {
 
 
     override
-    fun initialize() {
-        super.initialize()
+    fun onPrepareInstance() {
+        super.onPrepareInstance()
         viewModel
                 .getMaxPhotoId()
                 .subscribe({ id: Int ->
@@ -110,7 +110,7 @@ class MainActivity : CustomMvvmActivity() {
     fun onRestoreView(savedInstanceState: Bundle) {
         super.onRestoreView(savedInstanceState)
         if (viewModel.photoListItemAll.isEmpty()) {
-            initialize()
+            onPrepareInstance()
         } else {
             photoAdapter.notifyPhotoDataSetChanged()
             manager.onScrollStateChanged(RecyclerView.SCROLL_STATE_IDLE)

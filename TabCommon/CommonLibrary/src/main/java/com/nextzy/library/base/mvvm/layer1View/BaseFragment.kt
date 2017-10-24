@@ -69,14 +69,14 @@ abstract class BaseFragment
         Timber.d("onViewCreated: savedInstanceState=" + savedInstanceState)
         super.onViewCreated(view, savedInstanceState)
         Timber.d("onBindView")
-        bindView(view)
-        Timber.d("setupInstance")
-        setupInstance()
-        Timber.d("setupView")
-        setupView()
+        onBindView(view)
+        Timber.d("onInitialize")
+        onInitialize()
+        Timber.d("onSetupView")
+        onSetupView()
         if (savedInstanceState == null) {
-            Timber.d("initialize")
-            initialize()
+            Timber.d("onPrepareInstance")
+            onPrepareInstance()
         } else {
             Timber.d("onRestoreView: savedInstanceState=" + savedInstanceState)
             onRestoreView(savedInstanceState)
@@ -167,13 +167,13 @@ abstract class BaseFragment
 
     abstract fun setupLayoutView(): Int
 
-    open fun bindView(view: View?) {}
+    open fun onBindView(view: View?) {}
 
-    open fun setupInstance() {}
+    open fun onInitialize() {}
 
-    open fun setupView() {}
+    open fun onSetupView() {}
 
-    open fun initialize() {}
+    open fun onPrepareInstance() {}
 
 
 

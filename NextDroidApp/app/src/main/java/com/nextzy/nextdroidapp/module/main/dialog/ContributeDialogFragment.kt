@@ -34,8 +34,8 @@ class ContributeDialogFragment : CustomMvvmDialogFragment() {
 
 
     override
-    fun setupView() {
-        super.setupView()
+    fun onSetupView() {
+        super.onSetupView()
         PushDownAnim.setOnTouchPushDownAnim(containerUser1)
                 .setOnClickListener(onClickListener())
                 .setScale(0.98f)

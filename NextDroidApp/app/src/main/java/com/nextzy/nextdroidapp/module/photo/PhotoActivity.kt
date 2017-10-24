@@ -43,7 +43,7 @@ class PhotoActivity : CustomMvvmActivity() {
     private lateinit var photoItem: PhotoItem
 
     override
-    fun setupViewModel() {
+    fun onSetupViewModel() {
         viewModel = getViewModel(PhotoViewModel::class.java)
     }
 
@@ -52,14 +52,14 @@ class PhotoActivity : CustomMvvmActivity() {
 
 
     override
-    fun setupInstance() {
-        super.setupInstance()
+    fun onInitialize() {
+        super.onInitialize()
         photoItem = intent.extras.getParcelable(KEY_PHOTO_ITEM)
     }
 
     override
-    fun setupView() {
-        super.setupView()
+    fun onSetupView() {
+        super.onSetupView()
         icBack.setOnClickListener(onClickListener())
         GlideApp.with(this)
                 .load(photoItem.imageUrl)

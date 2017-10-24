@@ -28,7 +28,7 @@ class KotlinCustomMvvmBottomSheetDialog
     private lateinit var viewModel: KotlinCustomDialogViewModel
 
     override
-    fun setupViewModel() {
+    fun onSetupViewModel() {
         viewModel = getViewModel(KotlinCustomDialogViewModel::class.java)
     }
 
@@ -36,21 +36,21 @@ class KotlinCustomMvvmBottomSheetDialog
     fun setupLayoutView(): Int = 0
 
     override
-    fun bindView(view: View) {
+    fun onBindView(view: View) {
     }
 
     override
-    fun setupInstance() {
-
-    }
-
-    override
-    fun setupView() {
+    fun onInitialize() {
 
     }
 
     override
-    fun initialize() {
+    fun onSetupView() {
+
+    }
+
+    override
+    fun onPrepareInstance() {
 
     }
 
