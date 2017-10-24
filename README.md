@@ -1,5 +1,5 @@
 # NextDroid Android Architecture
-<img src="./pictures/cover.png" width="1000" height="500"/>
+<img src="./pictures/cover.png"/>
 
 Our core libraries that are customized to fit our Android projects' requirement. This include
 * Network
