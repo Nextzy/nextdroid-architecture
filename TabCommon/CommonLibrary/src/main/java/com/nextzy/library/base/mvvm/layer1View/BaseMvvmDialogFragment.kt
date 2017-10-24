@@ -3,17 +3,13 @@ package com.nextzy.library.base.mvvm.layer1View
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import com.nextzy.library.base.delegate.DefaultSnackbarInterface
-import com.nextzy.setting.view.util.SettingPreferenceInterface
 
 /**
  * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 
 abstract class BaseMvvmDialogFragment
-    : BaseDialogFragment(),
-      DefaultSnackbarInterface,
-      SettingPreferenceInterface {
+    : BaseDialogFragment(){
 
 
     fun <VM : ViewModel> getViewModel(viewModelClass: Class<VM>): VM

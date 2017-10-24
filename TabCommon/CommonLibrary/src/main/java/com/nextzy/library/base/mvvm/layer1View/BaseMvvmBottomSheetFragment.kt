@@ -7,7 +7,6 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.DialogInterface
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.annotation.DimenRes
 import android.support.design.widget.BottomSheetBehavior
@@ -17,11 +16,7 @@ import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.Fragment
 import android.util.TypedValue
 import android.view.View
-import com.nextzy.library.base.delegate.DefaultSnackbarDelegate
-import com.nextzy.library.base.delegate.DefaultSnackbarInterface
 import com.nextzy.library.base.mvvm.exception.NotSetLayoutException
-import com.nextzy.setting.view.util.SettingPreferenceDelegate
-import com.nextzy.setting.view.util.SettingPreferenceInterface
 import timber.log.Timber
 
 /**
@@ -29,9 +24,7 @@ import timber.log.Timber
  */
 
 abstract class BaseMvvmBottomSheetFragment
-    : BottomSheetDialogFragment(),
-      DefaultSnackbarInterface,
-      SettingPreferenceInterface {
+    : BottomSheetDialogFragment() {
     private var requestCode = -1
     private var data: Bundle? = null
     private var isDestroy = false
@@ -39,14 +32,9 @@ abstract class BaseMvvmBottomSheetFragment
     private var listener: OnFragmentDialogListener? = null
     private var isDismissWithResult = false
 
-    private lateinit var snackbarDelegate: DefaultSnackbarDelegate
-    private lateinit var settingDelegate: SettingPreferenceDelegate
-
     companion object {
         val KEY_REQUEST_CODE = "key_request_code"
     }
-
-
 
 
     fun <VM : ViewModel> getViewModel(viewModelClass: Class<VM>): VM
@@ -62,8 +50,6 @@ abstract class BaseMvvmBottomSheetFragment
         Timber.d("onCreate: savedInstanceState=" + savedInstanceState)
         super.onCreate(savedInstanceState)
         isDestroy = false
-        settingDelegate = SettingPreferenceDelegate(context)
-        snackbarDelegate = DefaultSnackbarDelegate(this)
         if (savedInstanceState == null) {
             val bundle = arguments
             if (bundle != null) {
@@ -95,9 +81,7 @@ abstract class BaseMvvmBottomSheetFragment
         val layoutResId = setupLayoutView()
         if (setupLayoutView() == 0) throw NotSetLayoutException()
         val contentView = View.inflate(context, layoutResId, null)
-        snackbarDelegate.setSnackbarTargetView(contentView)
-        dialog.setContentView(contentView)
-
+        setContentView(contentView)
 
         val params = (contentView.parent as View).layoutParams as CoordinatorLayout.LayoutParams
         val behavior = params.behavior
@@ -127,6 +111,10 @@ abstract class BaseMvvmBottomSheetFragment
         bindView(contentView)
         setupInstance()
         setupView()
+    }
+
+    open fun setContentView(contentView: View) {
+        dialog.setContentView(contentView)
     }
 
     override
@@ -217,7 +205,7 @@ abstract class BaseMvvmBottomSheetFragment
 
     abstract fun setupLayoutView(): Int
 
-    open fun setupViewModel(){ }
+    open fun setupViewModel() {}
 
     abstract fun bindView(view: View)
 
@@ -229,125 +217,5 @@ abstract class BaseMvvmBottomSheetFragment
 
     open fun initialize() {}
 
-    override
-    fun setSnackbarTargetView(target: View?) {
-        snackbarDelegate.setSnackbarTargetView(target)
-    }
-
-    override
-    fun showSnackbarCustom(colorId: Int, iconId: Int, message: String, duration: Int) {
-        snackbarDelegate.showSnackbarCustom(colorId, iconId, message, duration)
-    }
-
-    override
-    fun showSnackbarCustomDismiss(colorId: Int, iconId: Int, message: String) {
-        snackbarDelegate.showSnackbarCustomDismiss(colorId, iconId, message)
-    }
-
-    override
-    fun showSnackbarSuccess(message: String, duration: Int) {
-        snackbarDelegate.showSnackbarSuccess(message, duration)
-    }
-
-    override
-    fun showSnackbarWarning(message: String, duration: Int) {
-        snackbarDelegate.showSnackbarWarning(message, duration)
-    }
-
-    override
-    fun showSnackbarError(message: String, duration: Int) {
-        snackbarDelegate.showSnackbarError(message, duration)
-    }
-
-    override
-    fun showSnackbarInfo(message: String, duration: Int) {
-        snackbarDelegate.showSnackbarInfo(message, duration)
-    }
-
-    override
-    fun showSnackbarSuccessDismiss(message: String) {
-        snackbarDelegate.showSnackbarSuccessDismiss(message)
-    }
-
-    override
-    fun showSnackbarWarningDismiss(message: String) {
-        snackbarDelegate.showSnackbarWarningDismiss(message)
-    }
-
-    override
-    fun showSnackbarErrorDismiss(message: String) {
-        snackbarDelegate.showSnackbarErrorDismiss(message)
-    }
-
-    override
-    fun showSnackbarInfoDismiss(message: String) {
-        snackbarDelegate.showSnackbarInfoDismiss(message)
-    }
-
-    /* ============================== Persist =================================================== */
-    override
-    fun persistString(key: String, value: String): Boolean {
-        return settingDelegate.persistString(key, value)
-    }
-
-    override
-    fun getPersistedString(key: String, defaultValue: String): String {
-        return settingDelegate.getPersistedString(key, defaultValue)
-    }
-
-    override
-    fun persistStringSet(key: String, values: Set<String>): Boolean {
-        return settingDelegate.persistStringSet(key, values)
-    }
-
-    override
-    fun getPersistedStringSet(key: String, defaultValue: Set<String>): Set<String> {
-        return settingDelegate.getPersistedStringSet(key, defaultValue)
-    }
-
-    override
-    fun persistInt(key: String, value: Int): Boolean {
-        return settingDelegate.persistInt(key, value)
-    }
-
-    override
-    fun getPersistedInt(key: String, defaultValue: Int): Int {
-        return settingDelegate.getPersistedInt(key, defaultValue)
-    }
-
-    override
-    fun persistFloat(key: String, value: Float): Boolean {
-        return settingDelegate.persistFloat(key, value)
-    }
-
-    override
-    fun getPersistedFloat(key: String, defaultReturnValue: Float): Float {
-        return settingDelegate.getPersistedFloat(key, defaultReturnValue)
-    }
-
-    override
-    fun persistLong(key: String, value: Long): Boolean {
-        return settingDelegate.persistLong(key, value)
-    }
-
-    override
-    fun getPersistedLong(key: String, defaultValue: Long): Long {
-        return settingDelegate.getPersistedLong(key, defaultValue)
-    }
-
-    override
-    fun persistedBoolean(key: String, value: Boolean): Boolean {
-        return settingDelegate.persistedBoolean(key, value)
-    }
-
-    override
-    fun getPersistedBoolean(key: String, defaultValue: Boolean): Boolean {
-        return settingDelegate.getPersistedBoolean(key, defaultValue)
-    }
-
-    override
-    fun getSharedPreferences(): SharedPreferences {
-        return settingDelegate.sharedPreferences
-    }
 
 }

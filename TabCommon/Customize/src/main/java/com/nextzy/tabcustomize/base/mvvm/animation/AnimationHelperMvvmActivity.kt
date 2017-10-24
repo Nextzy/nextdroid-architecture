@@ -11,9 +11,9 @@ import android.transition.Transition
 import android.view.Menu
 import android.view.View
 import com.nextzy.library.R
-import com.nextzy.library.base.delegate.DefaultSnackbarDelegate
-import com.nextzy.library.base.delegate.DefaultSnackbarInterface
 import com.nextzy.library.base.mvvm.layer1View.BaseMvvmActivity
+import com.nextzy.tabcustomize.base.delegation.DefaultSnackbarDelegate
+import com.nextzy.tabcustomize.base.delegation.DefaultSnackbarInterface
 
 /**
  * Created by「 The Khaeng 」on 18 Sep 2017 :)
@@ -21,7 +21,7 @@ import com.nextzy.library.base.mvvm.layer1View.BaseMvvmActivity
 
 abstract class AnimationHelperMvvmActivity
     : BaseMvvmActivity(),
-      DefaultSnackbarInterface {
+        DefaultSnackbarInterface {
 
     private lateinit var snackbarDelegate: DefaultSnackbarDelegate
     private var onStartCount: Int = 0

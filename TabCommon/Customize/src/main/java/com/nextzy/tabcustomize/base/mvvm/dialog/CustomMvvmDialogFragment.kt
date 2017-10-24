@@ -1,7 +1,7 @@
 package com.nextzy.tabcustomize.base.mvvm.dialog
 
 
-import com.nextzy.library.base.mvvm.layer1View.BaseMvvmDialogFragment
+import com.nextzy.tabcustomize.base.mvvm.animation.AnimationHelperDialogFragment
 
 
 /**
@@ -9,7 +9,7 @@ import com.nextzy.library.base.mvvm.layer1View.BaseMvvmDialogFragment
 */
 
 abstract class CustomMvvmDialogFragment
-    : BaseMvvmDialogFragment(){
+    : AnimationHelperDialogFragment(){
 }
 
 

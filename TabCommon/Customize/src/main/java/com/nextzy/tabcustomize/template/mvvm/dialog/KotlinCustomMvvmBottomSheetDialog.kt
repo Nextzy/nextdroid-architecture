@@ -37,7 +37,6 @@ class KotlinCustomMvvmBottomSheetDialog
 
     override
     fun bindView(view: View) {
-
     }
 
     override

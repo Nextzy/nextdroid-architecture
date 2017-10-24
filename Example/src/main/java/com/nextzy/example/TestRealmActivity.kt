@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.CompoundButton
-import com.nextzy.library.base.delegate.DefaultSnackbarDelegate
+import com.nextzy.tabcustomize.base.delegation.DefaultSnackbarDelegate
 import com.nextzy.library.base.mvvm.layer3Repository.database.realm.BaseRealmDatabase
 import com.nextzy.library.extension.view.hideKeyboard
 import io.reactivex.functions.Consumer

@@ -1,6 +1,6 @@
 package com.nextzy.tabcustomize.base.mvvm.dialog
 
-import com.nextzy.library.base.mvvm.layer1View.BaseMvvmBottomSheetFragment
+import com.nextzy.tabcustomize.base.mvvm.animation.AnimationHelperBottomSheetFragment
 
 
 /**
@@ -8,5 +8,5 @@ import com.nextzy.library.base.mvvm.layer1View.BaseMvvmBottomSheetFragment
 */
 
 abstract class CustomMvvmBottomSheetDialog
-    : BaseMvvmBottomSheetFragment(){
+    : AnimationHelperBottomSheetFragment(){
 }

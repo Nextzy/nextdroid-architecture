@@ -1,61 +1,31 @@
 package com.nextzy.tabcustomize.base.mvvm.animation
 
 import android.os.Bundle
-import android.support.transition.Transition
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
-import com.nextzy.library.base.mvvm.layer1View.BaseMvvmFragment
+import com.nextzy.library.base.mvvm.layer1View.BaseMvvmDialogFragment
 import com.nextzy.tabcustomize.base.delegation.DefaultSnackbarDelegate
 import com.nextzy.tabcustomize.base.delegation.DefaultSnackbarInterface
 
 /**
- * Created by「 The Khaeng 」on 18 Sep 2017 :)
+ * Created by「 The Khaeng 」on 08 Oct 2017 :)
  */
-
-abstract class AnimationHelperMvvmFragment
-    : BaseMvvmFragment(),
+abstract class AnimationHelperDialogFragment
+    : BaseMvvmDialogFragment(),
         DefaultSnackbarInterface {
 
     private lateinit var snackbarDelegate: DefaultSnackbarDelegate
 
-    private var isPendingIntroAnimation: Boolean = false
+    override
+    fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        snackbarDelegate.setSnackbarTargetView(view)
+    }
 
     override
     fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        snackbarDelegate = DefaultSnackbarDelegate(this)
-        if (savedInstanceState == null) {
-            isPendingIntroAnimation = true
-        }
+        snackbarDelegate = DefaultSnackbarDelegate(activity)
     }
-
-    override
-    fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
-        if (isPendingIntroAnimation) {
-            isPendingIntroAnimation = false
-            startIntroAnimation()
-        }
-    }
-
-    fun showFocusView(view: View) {
-        // TODO1: 7/11/2017 AD implement pulse animation
-    }
-
-
-    fun addEnterTransition(transition: Transition) {
-        sharedElementEnterTransition = transition
-    }
-
-    fun addExitTransition(transition: Transition) {
-        sharedElementReturnTransition = transition
-    }
-
-    /**
-     * Start intro animation.
-     */
-    protected fun startIntroAnimation() {}
 
 
     override
@@ -112,4 +82,6 @@ abstract class AnimationHelperMvvmFragment
     fun showSnackbarInfoDismiss(message: String) {
         snackbarDelegate.showSnackbarInfoDismiss(message)
     }
+
+
 }

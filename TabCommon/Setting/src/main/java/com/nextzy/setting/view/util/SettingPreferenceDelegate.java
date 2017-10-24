@@ -47,150 +47,63 @@ public class SettingPreferenceDelegate implements SettingPreferenceInterface{
 
     @Override
     public boolean persistString(String key, String value) {
-        if (shouldPersist()) {
-            // Shouldn't store null
-            if (TextUtils.equals(value, getPersistedString(key, null))) {
-                // It's already there, so the same as persisting
-                return true;
-            }
-
-            SharedPreferences.Editor editor = getSharedPreferences().edit();
-            editor.putString(key, value);
-            editor.apply();
-            return true;
-        }
-        return false;
+        return Setting.persistString(context, key, value, shouldPersist());
     }
 
     @Override
     public String getPersistedString(String key, String defaultValue) {
-        if (!shouldPersist()) {
-            return defaultValue;
-        }
-        return getSharedPreferences().getString(key, defaultValue);
+        return Setting.getPersistedString(context,key, defaultValue, shouldPersist());
     }
 
     @Override
     public boolean persistStringSet(String key, Set<String> values) {
-        if (shouldPersist()) {
-            // Shouldn't store null
-            if (values.equals(getPersistedStringSet(key, null))) {
-                // It's already there, so the same as persisting
-                return true;
-            }
-
-            SharedPreferences.Editor editor = getSharedPreferences().edit();
-            editor.putStringSet(key, values);
-            editor.apply();
-            return true;
-        }
-        return false;
+        return Setting.persistStringSet(context, key, values, shouldPersist());
     }
 
     @Override
     public Set<String> getPersistedStringSet(String key, Set<String> defaultValue) {
-        if (!shouldPersist()) {
-            return defaultValue;
-        }
-        return getSharedPreferences().getStringSet(key, defaultValue);
+        return Setting.getPersistedStringSet(context,key, defaultValue, shouldPersist());
     }
 
     @Override
     public boolean persistInt(String key, int value) {
-        if (shouldPersist()) {
-            if (value == getPersistedInt(key, ~value)) {
-                // It's already there, so the same as persisting
-                return true;
-            }
-
-            SharedPreferences.Editor editor = getSharedPreferences().edit();
-            editor.putInt(key, value);
-            editor.apply();
-            return true;
-        }
-        return false;
+        return Setting.persistInt(context,key, value, shouldPersist());
     }
 
     @Override
     public int getPersistedInt(String key, int defaultValue) {
-        if (!shouldPersist()) {
-            return defaultValue;
-        }
-        return getSharedPreferences().getInt(key, defaultValue);
+        return Setting.getPersistedInt(context,key, defaultValue, shouldPersist());
     }
-
 
     @Override
     public boolean persistFloat(String key, float value) {
-        if (shouldPersist()) {
-            if (value == getPersistedFloat(key, Float.NaN)) {
-                // It's already there, so the same as persisting
-                return true;
-            }
-
-            SharedPreferences.Editor editor = getSharedPreferences().edit();
-            editor.putFloat(key, value);
-            editor.apply();
-            return true;
-        }
-        return false;
+        return Setting.persistFloat(context,key, value, shouldPersist());
     }
 
     @Override
     public float getPersistedFloat(String key, float defaultReturnValue) {
-        if (!shouldPersist()) {
-            return defaultReturnValue;
-        }
-        return getSharedPreferences().getFloat(key, defaultReturnValue);
+        return Setting.getPersistedFloat(context,key, defaultReturnValue, shouldPersist());
     }
 
     @Override
     public boolean persistLong(String key, long value) {
-        if (shouldPersist()) {
-            if (value == getPersistedLong(key, ~value)) {
-                // It's already there, so the same as persisting
-                return true;
-            }
-
-            SharedPreferences.Editor editor = getSharedPreferences().edit();
-            editor.putLong(key, value);
-            editor.apply();
-            return true;
-        }
-        return false;
+        return Setting.persistLong(context,key, value, shouldPersist());
     }
 
     @Override
     public long getPersistedLong(String key, long defaultValue) {
-        if (!shouldPersist()) {
-            return defaultValue;
-        }
-        return getSharedPreferences().getLong(key, defaultValue);
+        return Setting.getPersistedLong(context,key, defaultValue, shouldPersist());
     }
 
     @Override
     public boolean persistedBoolean(String key, boolean value) {
-        if (shouldPersist()) {
-
-            if (value == getPersistedBoolean(key, !value)) {
-                // It's already there, so the same as persisting
-                return true;
-            }
-            SharedPreferences.Editor editor = getSharedPreferences().edit();
-            editor.putBoolean(key, value);
-            editor.apply();
-            return true;
-        }
-        return false;
+        return Setting.persistedBoolean(context,key, value, shouldPersist());
     }
 
 
     @Override
     public boolean getPersistedBoolean(String key, boolean defaultValue) {
-        if (!shouldPersist()) {
-            return defaultValue;
-        }
-        return getSharedPreferences().getBoolean(key, defaultValue);
+        return Setting.getPersistedBoolean(context,key, defaultValue, shouldPersist());
     }
 
 

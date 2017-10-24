@@ -11,7 +11,7 @@ import io.reactivex.disposables.Disposable
  * Created by「 The Khaeng 」on 24 Aug 2017 :)
  */
 
-abstract class BaseMvvmFragment : SettingHelperFragment() {
+abstract class BaseMvvmFragment : BaseFragment() {
 
     private val rxDelegation = RxDelegation()
 

@@ -1,4 +1,4 @@
-package com.nextzy.library.base.delegate
+package com.nextzy.tabcustomize.base.delegation
 
 import android.app.Activity
 import android.support.annotation.ColorRes
@@ -6,7 +6,6 @@ import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.view.View
-
 import com.danimahardhika.cafebar.CafeBar
 import com.danimahardhika.cafebar.CafeBarDuration
 import com.danimahardhika.cafebar.CafeBarTheme

@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable
  * Created by「 The Khaeng 」on 27 Aug 2017 :)
  */
 
-abstract class BaseMvvmActivity : SettingHelperActivity() {
+abstract class BaseMvvmActivity : BaseActivity() {
 
     private val rxDelegation = RxDelegation()
 
