@@ -111,7 +111,7 @@ abstract class BaseActivity
         Timber.d("onRestoreInstanceState: savedInstanceState=" + savedInstanceState)
         super.onRestoreInstanceState(savedInstanceState)
         helper.onRestoreInstanceState(savedInstanceState)
-        onRestoreInstanceStateBeforeView(savedInstanceState)
+        onBeforeRestoreInstanceStateView(savedInstanceState)
         helper.checkOrientation()
         onRestoreView(savedInstanceState)
     }
@@ -150,8 +150,8 @@ abstract class BaseActivity
     }
 
 
-    protected fun onRestoreInstanceStateBeforeView(savedInstanceState: Bundle) {
-        Timber.d("onRestoreInstanceStateBeforeView: savedInstanceState=" + savedInstanceState)
+    open fun onBeforeRestoreInstanceStateView(savedInstanceState: Bundle) {
+        Timber.d("onBeforeRestoreInstanceStateView: savedInstanceState=" + savedInstanceState)
     }
 
     open fun onRestoreView(savedInstanceState: Bundle) {

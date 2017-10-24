@@ -38,6 +38,11 @@ class KotlinMvvmCustomActivity : CustomMvvmActivity() {
     }
 
     override
+    fun onRestoreView(savedInstanceState: Bundle) {
+        super.onRestoreView(savedInstanceState)
+    }
+
+    override
     fun onRestoreArgument(bundle: Bundle) {
         super.onRestoreArgument(bundle)
     }
@@ -48,8 +53,8 @@ class KotlinMvvmCustomActivity : CustomMvvmActivity() {
     }
 
     override
-    fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
+    fun onBeforeRestoreInstanceStateView(savedInstanceState: Bundle) {
+        super.onBeforeRestoreInstanceStateView(savedInstanceState)
     }
 
 }
