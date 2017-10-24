@@ -23,7 +23,6 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/setting_margin_padding_large"
             android:visibility="gone"
-            tools:src="@mipmap/ic_launcher_round"
             tools:visibility="visible"/>
 
         <LinearLayout
