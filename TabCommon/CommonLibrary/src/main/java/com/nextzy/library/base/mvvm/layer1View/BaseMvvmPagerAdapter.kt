@@ -52,6 +52,16 @@ abstract class BaseMvvmPagerAdapter : FragmentStatePagerAdapter {
         }
     }
 
+    fun <VM : ViewModel> getViewModel(key: String, viewModelClass: Class<VM>): VM {
+        return if (fragment != null) {
+            ViewModelProviders.of(fragment?.get()!!)
+                    .get(key, viewModelClass)
+        } else {
+            ViewModelProviders.of(activity?.get()!!)
+                    .get(key, viewModelClass)
+        }
+    }
+
 
     fun <VM : ViewModel> getSharedViewModel(viewModelClass: Class<VM>): VM? {
         if (activity == null) return null

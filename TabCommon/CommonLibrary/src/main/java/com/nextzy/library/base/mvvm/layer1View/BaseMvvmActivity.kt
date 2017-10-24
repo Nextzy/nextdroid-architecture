@@ -34,6 +34,11 @@ abstract class BaseMvvmActivity : BaseActivity() {
             .of(this)
             .get(viewModelClass)
 
+    fun <VM : ViewModel> getViewModel(key:String, viewModelClass: Class<VM>): VM
+            = ViewModelProviders
+            .of(this)
+            .get(key,viewModelClass)
+
 
     fun addDisposable(d: Disposable) {
         rxDelegation.addDisposable(d)

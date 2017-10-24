@@ -58,11 +58,17 @@ abstract class BaseMvvmListAdapter<VH : BaseViewHolder<*>>
 
     fun <VM : ViewModel> getViewModel(viewModelClass: Class<VM>): VM {
         return if (fragment != null) {
-            ViewModelProviders.of(fragment?.get()!!)
-                    .get(viewModelClass)
+            ViewModelProviders.of(fragment?.get()!!) .get(viewModelClass)
         } else {
-            ViewModelProviders.of(activity?.get()!!)
-                    .get(viewModelClass)
+            ViewModelProviders.of(activity?.get()!!) .get(viewModelClass)
+        }
+    }
+
+    fun <VM : ViewModel> getViewModel(key: String, viewModelClass: Class<VM>): VM {
+        return if (fragment != null) {
+            ViewModelProviders.of(fragment?.get()!!) .get(key, viewModelClass)
+        } else {
+            ViewModelProviders.of(activity?.get()!!) .get(key, viewModelClass)
         }
     }
 
