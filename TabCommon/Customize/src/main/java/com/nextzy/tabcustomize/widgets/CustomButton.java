@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 
-import com.nextzy.library.base.delegate.CustomFontDelegate;
+import com.nextzy.tabcustomize.base.extension.FontSizeUtility;
 import com.thekhaeng.pushdownanim.PushDownAnim;
 
 
@@ -32,6 +32,7 @@ public class CustomButton extends AppCompatButton{
     }
 
     private void init( Context context, AttributeSet attrs ){
+        FontSizeUtility.calculateFontSize(this);
         if( isAnim ){
             setClickable( true );
             PushDownAnim.setOnTouchPushDownAnim( this )
@@ -41,9 +42,6 @@ public class CustomButton extends AppCompatButton{
 
 
     private void initWithAttrs( AttributeSet attrs, int defStyleAttr, int defStyleRes ){
-        CustomFontDelegate
-                .newInstance( this )
-                .injectProductSansFont( attrs, getContext() );
     }
 
 

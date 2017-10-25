@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ToggleButton;
 
-import com.nextzy.library.base.delegate.CustomFontDelegate;
+import com.nextzy.tabcustomize.base.extension.FontSizeUtility;
 
 
 public class CustomButtonToggle extends ToggleButton{
@@ -27,12 +27,10 @@ public class CustomButtonToggle extends ToggleButton{
     }
 
     private void init(Context context, AttributeSet attrs) {
+        FontSizeUtility.calculateFontSize(this);
     }
 
     private void initWithAttrs( AttributeSet attrs, int defStyleAttr, int defStyleRes ){
-        CustomFontDelegate
-                .newInstance( this )
-                .injectProductSansFont( attrs, getContext() );
     }
 
 }

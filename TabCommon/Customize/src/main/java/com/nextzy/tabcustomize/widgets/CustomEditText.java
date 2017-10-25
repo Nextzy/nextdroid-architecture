@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 
-import com.nextzy.library.base.delegate.CustomFontDelegate;
+import com.nextzy.tabcustomize.base.extension.FontSizeUtility;
 
 
 public class CustomEditText extends AppCompatEditText{
@@ -29,12 +29,10 @@ public class CustomEditText extends AppCompatEditText{
 
     @SuppressLint( "ClickableViewAccessibility" )
     private void init( Context context, AttributeSet attrs) {
+        FontSizeUtility.calculateFontSize(this);
     }
 
     private void initWithAttrs( AttributeSet attrs, int defStyleAttr, int defStyleRes ){
-        CustomFontDelegate
-                .newInstance( this )
-                .injectProductSansFont( attrs, getContext() );
     }
 
     public void setEditable(boolean isEdit) {

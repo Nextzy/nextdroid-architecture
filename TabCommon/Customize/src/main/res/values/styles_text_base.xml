@@ -1,6 +1,7 @@
 <resources>
 
     <style name="CustomTextView">
+        <item name="android:fontFamily">@font/font_application</item>
     </style>
 
     <style name="CustomTextView.Regular">

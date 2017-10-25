@@ -7,8 +7,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
-import com.nextzy.library.base.delegate.CustomFontDelegate;
 import com.nextzy.tabcustomize.R;
+import com.nextzy.tabcustomize.base.extension.FontSizeUtility;
 
 
 public class CustomTextView extends AppCompatTextView{
@@ -33,11 +33,10 @@ public class CustomTextView extends AppCompatTextView{
     }
 
     private void init( Context context, AttributeSet attrs ){
+        FontSizeUtility.calculateFontSize(this);
     }
 
     private void initWithAttrs( AttributeSet attrs, int defStyleAttr, int defStyleRes ){
-        CustomFontDelegate.newInstance( this )
-                .injectProductSansFont( attrs, getContext() );
         this.enableColor = getCurrentTextColor();
     }
 
