@@ -3,7 +3,6 @@ package com.nextzy.nextdroidapp
 import android.support.v4.app.FragmentManager
 
 import com.facebook.stetho.Stetho
-import th.co.thekhaeng.waterbottleminder.DebugTree
 
 import timber.log.Timber
 
