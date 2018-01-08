@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
  */
 
 fun Fragment.getFloatDimen(@DimenRes resId: Int): Float? {
-    return this.context.getFloatDimen(resId)
+    return this.context?.getFloatDimen(resId)
 }
 
 fun Fragment.delay(action: Action, delay: Long = DEFAULT_DELAY.toLong()) {

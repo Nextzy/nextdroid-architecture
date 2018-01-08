@@ -44,9 +44,7 @@ class CrashActivity : CustomMvvmActivity() {
     /* =========================== Private method =============================================== */
     private fun repeatShowErrorStackTrace() {
         val stackTrace: String? = CustomActivityOnCrash.getStackTraceFromIntent(intent)
-        if (stackTrace != null) {
-            Log.e(this.javaClass.simpleName, stackTrace)
-        }
+        stackTrace?.let{ Log.e(this.javaClass.simpleName, stackTrace) }
     }
 
 }

@@ -21,11 +21,11 @@ import com.nextzy.tabcustomize.dialog.listener.DialogDismissListener
 
 
 fun FragmentActivity.showLoading() = DialogManager.showLoadingDialog(this.supportFragmentManager)
-fun Fragment.showLoading() = DialogManager.showLoadingDialog(this.fragmentManager)
+fun Fragment.showLoading() = this.fragmentManager?.let { DialogManager.showLoadingDialog(it) }
 
 
 fun FragmentActivity.showDialog(dialog: DialogFragment) = DialogManager.showDialog(this.supportFragmentManager, dialog)
-fun Fragment.showDialog(dialog: DialogFragment) = DialogManager.showDialog(this.fragmentManager, dialog)
+fun Fragment.showDialog(dialog: DialogFragment) = this.fragmentManager?.let { DialogManager.showDialog(it, dialog) }
 
 
 fun FragmentActivity.hideLoading() = DialogManager.dismissDialog()
@@ -52,7 +52,7 @@ fun Fragment.showPositiveDialog(
         tag: String? = null,
         clickListener: DefaultDialogClickListener? = null,
         dismissListener: DialogDismissListener? = null)
-        = DialogManager.showDefaultDialog(this.fragmentManager, DefaultDialogFragment.POSITIVE, iconResId, title, body, button, data, tag, clickListener, dismissListener)
+        = this.fragmentManager?.let { DialogManager.showDefaultDialog(it, DefaultDialogFragment.POSITIVE, iconResId, title, body, button, data, tag, clickListener, dismissListener) }
 
 
 fun FragmentActivity.showNegativeRedDialog(
@@ -75,7 +75,7 @@ fun Fragment.showNegativeDialog(
         tag: String? = null,
         clickListener: DefaultDialogClickListener? = null,
         dismissListener: DialogDismissListener? = null)
-        = DialogManager.showDefaultDialog(this.fragmentManager, DefaultDialogFragment.NEGATIVE_RED, iconResId, title, body, button, data, tag, clickListener, dismissListener)
+        = this.fragmentManager?.let { DialogManager.showDefaultDialog(it, DefaultDialogFragment.NEGATIVE_RED, iconResId, title, body, button, data, tag, clickListener, dismissListener) }
 
 
 fun FragmentActivity.showNegativeTransparentDialog(
@@ -98,4 +98,4 @@ fun Fragment.showNegativeTransparentDialog(
         tag: String? = null,
         clickListener: DefaultDialogClickListener? = null,
         dismissListener: DialogDismissListener? = null)
-        = DialogManager.showDefaultDialog(this.fragmentManager, DefaultDialogFragment.NEGATIVE_TRANSPARENT, iconResId, title, body, button, data, tag, clickListener, dismissListener)
+        = this.fragmentManager?.let { DialogManager.showDefaultDialog(it, DefaultDialogFragment.NEGATIVE_TRANSPARENT, iconResId, title, body, button, data, tag, clickListener, dismissListener) }

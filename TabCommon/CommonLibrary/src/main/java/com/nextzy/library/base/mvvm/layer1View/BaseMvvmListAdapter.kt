@@ -20,7 +20,7 @@ import java.lang.ref.WeakReference
 abstract class BaseMvvmListAdapter<VH : BaseViewHolder<*>>
     : RecyclerView.Adapter<VH> {
 
-    protected val context: Context
+    protected val context: Context?
     protected var activity: WeakReference<FragmentActivity>? = null
     protected var fragment: WeakReference<Fragment>? = null
     protected var listener: OnClickHolderItemListener<VH>? = null

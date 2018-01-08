@@ -53,8 +53,8 @@ class ContributeDialogFragment : CustomMvvmDialogFragment() {
     private fun openWebBrowser(url: String) {
         val uri = Uri.parse(url)
         val intent = Intent(Intent.ACTION_VIEW, uri)
-        if (intent.resolveActivity(activity.packageManager) != null) {
-            activity.startActivity(intent)
+        if (intent.resolveActivity(activity?.packageManager) != null) {
+            activity?.startActivity(intent)
         }
     }
 

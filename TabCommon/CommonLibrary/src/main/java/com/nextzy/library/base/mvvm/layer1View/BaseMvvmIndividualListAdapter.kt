@@ -18,7 +18,7 @@ abstract class BaseMvvmIndividualListAdapter<VH : BaseViewHolder<*>, VM : BaseLi
     lateinit var viewModel: VM
 
     var itemList: MutableList<BaseItem>
-        get() = viewModel.getItemList() ?: mutableListOf()
+        get() = viewModel.getItemList()
         set(itemList) = setItemList(itemList, true)
 
 

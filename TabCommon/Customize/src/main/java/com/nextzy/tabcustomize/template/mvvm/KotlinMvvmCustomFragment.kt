@@ -21,7 +21,7 @@ class KotlinMvvmCustomFragment : CustomMvvmFragment() {
     }
 
 
-    private lateinit var viewModelShared: KotlinMvvmCustomViewModel
+    private var viewModelShared: KotlinMvvmCustomViewModel? = null
 
     override
     fun onSetupViewModel() {
@@ -58,7 +58,7 @@ class KotlinMvvmCustomFragment : CustomMvvmFragment() {
     }
 
     override
-    fun onSaveInstanceState(outState: Bundle?) {
+    fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
     }
 

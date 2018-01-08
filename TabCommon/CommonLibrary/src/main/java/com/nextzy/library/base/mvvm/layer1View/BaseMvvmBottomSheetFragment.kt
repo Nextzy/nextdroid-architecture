@@ -43,8 +43,8 @@ abstract class BaseMvvmBottomSheetFragment
     fun <VM : ViewModel> getViewModel(key: String, viewModelClass: Class<VM>): VM
             = ViewModelProviders.of(this).get(key, viewModelClass)
 
-    fun <VM : ViewModel> getSharedViewModel(viewModelClass: Class<VM>): VM
-            = ViewModelProviders.of(activity).get(viewModelClass)
+    fun <VM : ViewModel> getSharedViewModel(viewModelClass: Class<VM>): VM?
+            = activity?.let { ViewModelProviders.of(it).get(viewModelClass) }
 
 
     override
@@ -163,10 +163,10 @@ abstract class BaseMvvmBottomSheetFragment
     }
 
     override
-    fun onSaveInstanceState(outState: Bundle?) {
+    fun onSaveInstanceState(outState: Bundle) {
         Timber.d("saveInstanceState: oustState=" + outState)
         super.onSaveInstanceState(outState)
-        outState?.putInt(KEY_REQUEST_CODE, requestCode)
+        outState.putInt(KEY_REQUEST_CODE, requestCode)
     }
 
     open fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -192,12 +192,12 @@ abstract class BaseMvvmBottomSheetFragment
     }
 
     private fun withResult(resultCode: Int, data: Bundle?) {
-        val i = activity.intent
-        if (data != null) i.putExtras(data)
+        val i = activity?.intent
+        if (data != null) i?.putExtras(data)
         setResultCode(resultCode)
         setResultData(data)
         if (targetFragment != null) {
-            targetFragment.onActivityResult(targetRequestCode, resultCode, i)
+            targetFragment?.onActivityResult(targetRequestCode, resultCode, i)
         }
     }
 

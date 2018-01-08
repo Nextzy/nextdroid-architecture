@@ -33,11 +33,11 @@ fun View.longToast(resId: Int) = context.longToast(resId)
 
 fun View.longToast(text: CharSequence) = context.longToast(text)
 
-fun Fragment.toast(resId: Int) = activity.toast(resId)
+fun Fragment.toast(resId: Int) = activity?.toast(resId)
 
-fun Fragment.toast(text: CharSequence) = activity.toast(text)
+fun Fragment.toast(text: CharSequence) = activity?.toast(text)
 
-fun Fragment.longToast(resId: Int) = activity.longToast(resId)
+fun Fragment.longToast(resId: Int) = activity?.longToast(resId)
 
-fun Fragment.longToast(text: CharSequence) = activity.longToast(text)
+fun Fragment.longToast(text: CharSequence) = activity?.longToast(text)
 

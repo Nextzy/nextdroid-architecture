@@ -9,7 +9,7 @@ import com.nextzy.nextwork.engine.AbsentLiveData
  * Created by「 The Khaeng 」on 02 Oct 2017 :)
  */
 
-fun <T> LiveData<Boolean>?.fetchSwitchMap(func: Function<Boolean, LiveData<T>>): LiveData<T> {
+fun <T> LiveData<Boolean>.fetchSwitchMap(func: Function<Boolean, LiveData<T>>): LiveData<T> {
     return Transformations.switchMap<Boolean, T>(
             this,
             { forceFetch ->

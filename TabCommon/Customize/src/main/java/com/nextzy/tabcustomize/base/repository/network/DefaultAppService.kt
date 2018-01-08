@@ -26,7 +26,7 @@ abstract class DefaultAppService<T>(apiClass: Class<T>)
     }
 
     override
-    fun getDefaultTimeout(): Long {
+    fun getOverrideClientTimeout(): Long {
         return 10000
     }
 

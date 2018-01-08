@@ -33,8 +33,8 @@ abstract class BaseMvvmFragment : BaseFragment() {
             = ViewModelProviders.of(this).get(key, viewModelClass)
 
 
-    fun <VM : ViewModel> getSharedViewModel(viewModelClass: Class<VM>): VM
-            = ViewModelProviders.of(activity).get(viewModelClass)
+    fun <VM : ViewModel> getSharedViewModel(viewModelClass: Class<VM>): VM?
+            = activity?.let { ViewModelProviders.of(it).get(viewModelClass) }
 
 
     override

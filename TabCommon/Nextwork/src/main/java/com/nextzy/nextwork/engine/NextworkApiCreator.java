@@ -36,7 +36,7 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public abstract class NextworkApiCreator<T>{
     private static final String TAG = NextworkApiCreator.class.getSimpleName();
-    private static final int SIXTY_SECOND = 60000;
+    private static final int NO_OVERRIDE = -1;
 
     private Class<T> apiClass;
     private T mockApi;
@@ -143,8 +143,8 @@ public abstract class NextworkApiCreator<T>{
         return CookieJar.NO_COOKIES;
     }
 
-    protected long getDefaultTimeout(){
-        return SIXTY_SECOND;
+    protected long getOverrideClientTimeout(){
+        return NO_OVERRIDE;
     }
 
     protected CertificatePinner getDefaultCertificatePinner(){
@@ -211,15 +211,20 @@ public abstract class NextworkApiCreator<T>{
                 builder.addInterceptor( interceptor );
             }
         }
+
+        if( getOverrideClientTimeout() != NO_OVERRIDE ){
+            builder
+                    .readTimeout( getOverrideClientTimeout(), TimeUnit.MILLISECONDS )
+                    .writeTimeout( getOverrideClientTimeout(), TimeUnit.MILLISECONDS )
+                    .connectTimeout( getOverrideClientTimeout(), TimeUnit.MILLISECONDS );
+        }
+
         return builder
                 .addInterceptor( getDefaultInterceptor() )
                 .addInterceptor( getOnTopInterceptor() )
                 .addNetworkInterceptor( getDefaultHttpLoggingInterceptor( isLogger() ) )
                 .certificatePinner( getDefaultCertificatePinner() )
                 .cookieJar( getDefaultCookieJar() )
-                .readTimeout( getDefaultTimeout(), TimeUnit.MILLISECONDS )
-                .writeTimeout( getDefaultTimeout(), TimeUnit.MILLISECONDS )
-                .connectTimeout( getDefaultTimeout(), TimeUnit.MILLISECONDS )
                 .build();
     }
 

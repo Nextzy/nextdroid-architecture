@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import com.nextzy.library.base.delegate.RxDelegation
+import com.nextzy.library.extension.notnull
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import java.lang.ClassCastException
@@ -67,7 +68,7 @@ abstract class BaseDialogFragment
     }
 
     override
-    fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
         dialog.setCanceledOnTouchOutside(true)
@@ -76,11 +77,11 @@ abstract class BaseDialogFragment
             setResultCode(Activity.RESULT_CANCELED)
             dismiss()
         }
-        return inflater?.inflate(setupLayoutView(), container, false)
+        return inflater.inflate(setupLayoutView(), container, false)
     }
 
     override
-    fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onBindView(view)
         onSetupView()
@@ -124,7 +125,7 @@ abstract class BaseDialogFragment
     }
 
     override
-    fun onSaveInstanceState(outState: Bundle?) {
+    fun onSaveInstanceState(outState: Bundle) {
         Timber.d("saveInstanceState: oustState=" + outState)
         super.onSaveInstanceState(outState)
         outState?.putInt(KEY_REQUEST_CODE, requestCode)
@@ -153,14 +154,13 @@ abstract class BaseDialogFragment
         dismiss()
     }
 
+    @Suppress("NAME_SHADOWING")
     private fun withResult(resultCode: Int, data: Bundle?) {
-        val i = activity.intent
-        if (data != null) i.putExtras(data)
+        val i = activity?.intent
+        Pair(i, data).notnull { i, data -> i.putExtras(data) }
         setResultCode(resultCode)
         setResultData(data)
-        if (targetFragment != null) {
-            targetFragment.onActivityResult(targetRequestCode, resultCode, i)
-        }
+        targetFragment?.onActivityResult(targetRequestCode, resultCode, i)
     }
 
     open fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -173,7 +173,7 @@ abstract class BaseDialogFragment
 
     abstract fun setupLayoutView(): Int
 
-    open fun onBindView(view: View?){ }
+    open fun onBindView(view: View?) {}
 
     open fun onSetupInstance() {}
 

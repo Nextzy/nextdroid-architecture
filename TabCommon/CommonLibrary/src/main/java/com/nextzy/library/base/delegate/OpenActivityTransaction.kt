@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
 import android.support.v4.util.Pair
 import android.view.View
+import com.nextzy.library.extension.notnull
 
 /**
  * Created by「 The Khaeng 」on 31 Aug 2017 :)
@@ -63,67 +64,73 @@ class OpenActivityTransaction(
     }
 
     fun open(activity: Activity?, targetClass: Class<*>) {
-        val intent = Intent(activity, targetClass)
-        bundle?.let { intent.putExtras(it) }
-        if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
-            intent.putExtra(KEY_FINISH, isFinish || isFinishAll)
+        activity?.apply {
+            val intent = Intent(activity, targetClass)
+            bundle?.let { intent.putExtras(it) }
+            if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
+                intent.putExtra(KEY_FINISH, isFinish || isFinishAll)
+            }
+
+            var options: ActivityOptionsCompat? = null
+            sharedElement?.let {
+                options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        this,
+                        *sharedElement!!)
+            }
+
+            if (requestCode == NO_ASSIGN) {
+                startActivity(intent, options?.toBundle())
+            } else {
+                startActivityForResult(intent, requestCode, options?.toBundle())
+            }
+
+            if (isFinish && !isFinishAll) finish()
+            if (isFinishAll) ActivityCompat.finishAffinity(this)
+
+            if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
+                overridePendingTransition(enterAnimId, exitAnimId)
+            }
+
+            sharedElement = null
+            bundle = null
         }
-
-        var options: ActivityOptionsCompat? = null
-        sharedElement?.let {
-            options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    activity,
-                    *sharedElement!!)
-        }
-
-        if (requestCode == NO_ASSIGN) {
-            activity?.startActivity(intent, options?.toBundle())
-        } else {
-            activity?.startActivityForResult(intent, requestCode, options?.toBundle())
-        }
-
-        if (isFinish && !isFinishAll) activity?.finish()
-        if (isFinishAll) ActivityCompat.finishAffinity(activity)
-
-        if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
-            activity?.overridePendingTransition(enterAnimId, exitAnimId)
-        }
-
-        sharedElement = null
-        bundle = null
     }
 
 
     fun open(fragment: Fragment?, targetClass: Class<*>) {
-        val intent = Intent(fragment?.context, targetClass)
-        bundle?.let{ intent.putExtras(it) }
-        if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
-            intent.putExtra(KEY_FINISH, isFinish || isFinishAll)
+        fragment?.apply {
+            val intent = Intent(context, targetClass)
+            bundle?.let { intent.putExtras(it) }
+            if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
+                intent.putExtra(KEY_FINISH, isFinish || isFinishAll)
+            }
+
+            var options: ActivityOptionsCompat? = null
+
+            kotlin.Pair(sharedElement, activity).notnull { sharedElement, activity ->
+                options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        activity,
+                        *sharedElement)
+
+            }
+
+            if (requestCode == NO_ASSIGN) {
+                startActivity(intent, options?.toBundle())
+            } else {
+                startActivityForResult(intent, requestCode, options?.toBundle())
+            }
+
+            if (isFinish && !isFinishAll) fragment.activity?.finish()
+            if (isFinishAll) fragment.activity?.apply { ActivityCompat.finishAffinity(this) }
+
+            if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
+                activity?.overridePendingTransition(enterAnimId, exitAnimId)
+            }
+
+
+            sharedElement = null
+            bundle = null
         }
-
-        var options: ActivityOptionsCompat? = null
-        sharedElement?.let {
-            options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    fragment?.activity,
-                    *sharedElement!!)
-        }
-
-        if (requestCode == NO_ASSIGN) {
-            fragment?.startActivity(intent, options?.toBundle())
-        } else {
-            fragment?.startActivityForResult(intent, requestCode, options?.toBundle())
-        }
-
-        if (isFinish && !isFinishAll) fragment?.activity?.finish()
-        if (isFinishAll) ActivityCompat.finishAffinity(fragment?.activity)
-
-        if (enterAnimId != NO_ASSIGN || exitAnimId != NO_ASSIGN) {
-            fragment?.activity?.overridePendingTransition(enterAnimId, exitAnimId)
-        }
-
-
-        sharedElement = null
-        bundle = null
     }
 
 }

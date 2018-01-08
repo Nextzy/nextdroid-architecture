@@ -60,7 +60,7 @@ class KotlinCustomMvvmBottomSheetDialog
     }
 
     override
-    fun onSaveInstanceState(outState: Bundle?) {
+    fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
     }
 

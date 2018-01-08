@@ -30,10 +30,6 @@ android {
 
 }
 
-androidExtensions {
-    experimental = true
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
@@ -55,9 +51,9 @@ dependencies {
     api "com.android.support:design:$ver.androidSupport"
     api "com.android.support:cardview-v7:$ver.androidSupport"
     api "com.android.support:palette-v7:$ver.androidSupport"
-    api "android.arch.lifecycle:runtime:$ver.lifecycleArch"
-    api "android.arch.lifecycle:extensions:$ver.lifecycleArch"
-    annotationProcessor "android.arch.lifecycle:compiler:$ver.lifecycleArch"
+    api "android.arch.lifecycle:runtime:$ver.lifecycleArchRuntime"
+    api "android.arch.lifecycle:extensions:$ver.lifecycleArchExtension"
+    annotationProcessor "android.arch.lifecycle:compiler:$ver.lifecycleArchCompiler"
 
     //========================= Other ============================================================//
     api 'cat.ereza:customactivityoncrash:2.1.0'

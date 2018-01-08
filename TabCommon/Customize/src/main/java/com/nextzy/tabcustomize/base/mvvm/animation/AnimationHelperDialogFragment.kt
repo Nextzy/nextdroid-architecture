@@ -13,74 +13,74 @@ abstract class AnimationHelperDialogFragment
     : BaseMvvmDialogFragment(),
         DefaultSnackbarInterface {
 
-    private lateinit var snackbarDelegate: DefaultSnackbarDelegate
+    private var snackbarDelegate: DefaultSnackbarDelegate? = null
 
     override
-    fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        snackbarDelegate.setSnackbarTargetView(view)
+        snackbarDelegate?.setSnackbarTargetView(view)
     }
 
     override
     fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        snackbarDelegate = DefaultSnackbarDelegate(activity)
+        snackbarDelegate = activity?.let { DefaultSnackbarDelegate(it) }
     }
 
 
     override
     fun setSnackbarTargetView(target: View?) {
-        snackbarDelegate.setSnackbarTargetView(target)
+        snackbarDelegate?.setSnackbarTargetView(target)
     }
 
     override
     fun showSnackbarCustom(colorId: Int, iconId: Int, message: String, duration: Int) {
-        snackbarDelegate.showSnackbarCustom(colorId, iconId, message, duration)
+        snackbarDelegate?.showSnackbarCustom(colorId, iconId, message, duration)
     }
 
     override
     fun showSnackbarCustomDismiss(colorId: Int, iconId: Int, message: String) {
-        snackbarDelegate.showSnackbarCustomDismiss(colorId, iconId, message)
+        snackbarDelegate?.showSnackbarCustomDismiss(colorId, iconId, message)
     }
 
     override
     fun showSnackbarSuccess(message: String, duration: Int) {
-        snackbarDelegate.showSnackbarSuccess(message, duration)
+        snackbarDelegate?.showSnackbarSuccess(message, duration)
     }
 
     override
     fun showSnackbarWarning(message: String, duration: Int) {
-        snackbarDelegate.showSnackbarWarning(message, duration)
+        snackbarDelegate?.showSnackbarWarning(message, duration)
     }
 
     override
     fun showSnackbarError(message: String, duration: Int) {
-        snackbarDelegate.showSnackbarError(message, duration)
+        snackbarDelegate?.showSnackbarError(message, duration)
     }
 
     override
     fun showSnackbarInfo(message: String, duration: Int) {
-        snackbarDelegate.showSnackbarInfo(message, duration)
+        snackbarDelegate?.showSnackbarInfo(message, duration)
     }
 
     override
     fun showSnackbarSuccessDismiss(message: String) {
-        snackbarDelegate.showSnackbarSuccessDismiss(message)
+        snackbarDelegate?.showSnackbarSuccessDismiss(message)
     }
 
     override
     fun showSnackbarWarningDismiss(message: String) {
-        snackbarDelegate.showSnackbarWarningDismiss(message)
+        snackbarDelegate?.showSnackbarWarningDismiss(message)
     }
 
     override
     fun showSnackbarErrorDismiss(message: String) {
-        snackbarDelegate.showSnackbarErrorDismiss(message)
+        snackbarDelegate?.showSnackbarErrorDismiss(message)
     }
 
     override
     fun showSnackbarInfoDismiss(message: String) {
-        snackbarDelegate.showSnackbarInfoDismiss(message)
+        snackbarDelegate?.showSnackbarInfoDismiss(message)
     }
 
 

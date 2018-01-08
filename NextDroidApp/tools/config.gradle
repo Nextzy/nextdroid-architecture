@@ -4,35 +4,38 @@ ext.config = [
         versionMinor     : 0,
         versionBugFix     : 0,
         versionClassifier: "",
-        compileSdkVersion: 26,
-        minimumSdkVersion: 18,
-        targetSdkVersion : 26,
-        buildToolsVersion: "26.0.2"
+        compileSdkVersion: 27,
+        minimumSdkVersion: 19,
+        targetSdkVersion : 27,
+        buildToolsVersion: "27.0.2"
 ]
 
 def config = ext.config
 
 ext.ver = [
-        androidSupport : "26.1.0",
+        androidSupport : "27.0.2",
         firebase : "11.4.0",
         hamcrest : "1.3",
         powermock : "1.6.5",
         timber : "4.5.1",
         hawk : "2.0.1",
         dexter:"4.1.0",
-        retrofit:"2.2.0",
-        okhttp3Logging:"3.6.0",
+        retrofit:"2.3.0",
+        okhttp3Logging:"3.9.0",
         rxAndroidVersion:"2.0.1",
-        rxJavaVersion:"2.1.0",
+        rxJavaVersion:"2.1.3",
         lombok:"1.16.16",
-        lifecycleArch   : "1.0.0-alpha9-1",
+        lifecycleArchRuntime   : "1.0.3",
+        lifecycleArchExtension   : "1.0.0",
+        lifecycleArchCompiler   : "1.0.0",
 ]
-def ver = ext.ver;
 
-// MinimumSdkVersion -> 1,000,000,
-// Major -> 10,000,
-// Minor -> 100,
-// Bugfix -> 1.
+def ver = ext.ver
+
+// MinimumSdkVersion -> 1,000,000
+// Major -> 10,000
+// Minor -> 100
+// Bugfix -> 1
 // Ex 15.24.1.3.72 == 1,003,072
 ext.buildVersionCode = {
     return config.minimumSdkVersion * 10000000 + config.versionMajor * 10000 + config.versionMinor * 100 + config.versionBugFix
@@ -43,5 +46,5 @@ ext.buildVersionName = {
     if (config.versionClassifier != null && !config.versionClassifier.isEmpty()) {
         versionName = versionName + "-" + config.versionClassifier
     }
-    return versionName;
+    return versionName
 }

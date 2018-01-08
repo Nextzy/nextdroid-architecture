@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.nextzy.library.base.delegate.*
 import com.nextzy.library.base.mvvm.exception.NotSetLayoutException
 import com.nextzy.library.base.utils.android.ScreenOrientationHelper
+import com.nextzy.library.extension.notnull
 import timber.log.Timber
 
 /**
@@ -18,7 +19,7 @@ abstract class BaseFragment
     : Fragment(),
       ActivityHelper,
       FragmentHelper,
-      ScreenOrientationHelper.ScreenOrientationChangeListener{
+      ScreenOrientationHelper.ScreenOrientationChangeListener {
 
     private val helper = ScreenOrientationHelper()
     private lateinit var activityOpener: ActivityHelperDelegate
@@ -29,8 +30,10 @@ abstract class BaseFragment
     fun onCreate(savedInstanceState: Bundle?) {
         Timber.d("onCreate: savedInstanceState=" + savedInstanceState)
         activityOpener = ActivityHelperDelegate(this)
-        fragmentDelegate = FragmentHelperDelegate(activity)
-        fragmentDelegate.setCanCommit(false)
+        activity?.let{
+            fragmentDelegate = FragmentHelperDelegate(it)
+            fragmentDelegate.setCanCommit(false)
+        }
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             val bundle = arguments
@@ -44,28 +47,30 @@ abstract class BaseFragment
         }
     }
 
+    @Suppress("NAME_SHADOWING")
     override
     fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        helper.setActivity(activity)
-        helper.onCreate(savedInstanceState)
-        helper.setScreenOrientationChangeListener(this)
-        if (savedInstanceState != null) {
+        Pair(activity, savedInstanceState).notnull{
+            activity, savedInstanceState ->
+            helper.setActivity(activity)
+            helper.onCreate(savedInstanceState)
+            helper.setScreenOrientationChangeListener(this)
             helper.onRestoreInstanceState(savedInstanceState)
+            helper.checkOrientation()
         }
-        helper.checkOrientation()
     }
 
     override
-    fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Timber.d("onCreateView: savedInstanceState=" + savedInstanceState)
         val layoutResId = setupLayoutView()
         if (setupLayoutView() == 0) throw NotSetLayoutException()
-        return inflater?.inflate(layoutResId, container, false)
+        return inflater.inflate(layoutResId, container, false)
     }
 
     override
-    fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.d("onViewCreated: savedInstanceState=" + savedInstanceState)
         super.onViewCreated(view, savedInstanceState)
         Timber.d("onBindView")
@@ -117,7 +122,7 @@ abstract class BaseFragment
 
 
     override
-    fun onSaveInstanceState(outState: Bundle?) {
+    fun onSaveInstanceState(outState: Bundle) {
         Timber.d("saveInstanceState: oustState=" + outState)
         super.onSaveInstanceState(outState)
         helper.onSaveInstanceState(outState)
@@ -174,7 +179,6 @@ abstract class BaseFragment
     open fun onSetupView() {}
 
     open fun onPrepareInstance() {}
-
 
 
     /* ============================ Open Activity ======================================== */

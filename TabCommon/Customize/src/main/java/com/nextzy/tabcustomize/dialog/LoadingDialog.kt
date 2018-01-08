@@ -22,17 +22,17 @@ class LoadingDialog : DialogFragment() {
 
 
     override
-    fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
         dialog.setCanceledOnTouchOutside(false)
         isCancelable = false
-        return inflater?.inflate(R.layout.dialog_loading, container)
+        return inflater.inflate(R.layout.dialog_loading, container)
     }
 
 
     override
-    fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindView(view)
         setupView()

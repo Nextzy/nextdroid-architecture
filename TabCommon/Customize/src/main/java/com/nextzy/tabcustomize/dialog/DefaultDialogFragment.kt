@@ -131,12 +131,14 @@ class DefaultDialogFragment : CustomMvvmDialogFragment() {
     override
     fun onRestoreArgument(bundle: Bundle) {
         super.onRestoreArgument(bundle)
-        type = arguments.getLong(KEY_TYPE)
-        title = arguments.getInt(KEY_TITLE)
-        body = arguments.getInt(KEY_BODY)
-        iconResId = arguments.getInt(KEY_ICON)
-        button = arguments.getInt(KEY_BUTTON)
-        data = arguments.getBundle(KEY_DATA)
+        arguments?.apply{
+            type = getLong(KEY_TYPE)
+            title = getInt(KEY_TITLE)
+            body = getInt(KEY_BODY)
+            iconResId = getInt(KEY_ICON)
+            button = getInt(KEY_BUTTON)
+            data = getBundle(KEY_DATA)
+        }
     }
 
     override
@@ -145,7 +147,7 @@ class DefaultDialogFragment : CustomMvvmDialogFragment() {
     }
 
     override
-    fun onSaveInstanceState(outState: Bundle?) {
+    fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
     }
 

@@ -15,9 +15,9 @@ import java.lang.ref.WeakReference
 class FragmentHelperDelegate(
         fragmentActivity: FragmentActivity)
     : FragmentHelper, LifecycleObserver {
-    private val lifecycle: Lifecycle
+    private val lifecycle: Lifecycle = fragmentActivity.lifecycle
     private var containerLayoutRes = -1
-    private var fragmentActivity: WeakReference<FragmentActivity>
+    private var fragmentActivity: WeakReference<FragmentActivity> = WeakReference(fragmentActivity)
     private var isCanCommit = false
 
     private val view: FragmentActivity
@@ -37,8 +37,6 @@ class FragmentHelperDelegate(
     fun getCurrentFragment(): Fragment? = visibleFragment
 
     init {
-        this.fragmentActivity = WeakReference(fragmentActivity)
-        lifecycle = fragmentActivity.lifecycle
         lifecycle.addObserver(this)
     }
 
